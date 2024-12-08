@@ -1,0 +1,268 @@
+/* 변수 설정 */
+:root {
+	--color-mray: #c6c6c6;
+	--color-gray: #e0dddc;
+	--page-w: 1200px;
+	--inner-w: 1000px;
+} 
+
+/* 전체 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* 헤더 스타일 */
+header {
+    background: #f4f4f4;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* 중앙 정렬 컨테이너 */
+.center-container { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 20px;
+}
+
+/* 폼 컨테이너 */
+.form-container {
+    width: 400px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 입력 필드와 버튼이 있는 컨테이너 수정 */
+.input-with-btn {
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;  /* 너비 100%로 설정 */
+}
+
+.input-with-btn input {
+    width: 100%;  /* 너비 100%로 변경 */
+    padding: 12px;
+    padding-right: 40px; /* 아이콘을 위한 여백 확보 */
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box; /* 패딩을 너비에 포함 */
+    transition: border-color 0.3s ease;
+}
+
+.input-with-btn input:focus {
+    outline: none;
+    border-color: var(--color-gray);
+    box-shadow: 0 0 0 2px rgba(115, 70, 243, 0.1);
+}
+
+.input-with-btn button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 6px 12px;
+    background: var(--color-gray);
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.input-with-btn button:hover {
+    background: #c0bdbd; /* 더 진한 보라색 */
+}
+
+/* 유효성 검사 메시지 */
+.validation-message {
+    font-size: 12px;
+    color: #ff4444;
+    margin-top: 5px;
+}
+
+/* 회원가입 버튼 스타일 */
+#signup-btn {
+    width: 100%;
+    padding: 14px; 
+    background: var(--color-gray);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#signup-btn:hover {
+    background: #c0bdbd;
+    transform: translateY(-1px);
+}
+
+#signup-btn:active {
+    transform: translateY(0);
+}
+
+/* 로딩 애니메이션 */
+.loader {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Datepicker 스타일 커스터마이징 */
+.ui-datepicker {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 300px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.ui-datepicker-header {
+    background: var(--color-gray);
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.ui-datepicker-title {
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+    cursor: pointer;
+    top: 8px;
+}
+
+.ui-datepicker-prev:hover, .ui-datepicker-next:hover {
+    background: none;
+    border: none;
+}
+
+.ui-datepicker-calendar {
+    width: 100%;
+}
+
+.ui-datepicker th {
+    color: #666;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.ui-datepicker td {
+    padding: 2px;
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    background: none;
+    color: #333;
+}
+
+.ui-datepicker td a:hover {
+    background: #f5f5f5;
+}
+
+.ui-datepicker td a.ui-state-active {
+    background: var(--color-gray);
+    color: #fff;
+}
+
+.ui-datepicker td a.ui-state-highlight {
+    background: #f0f0f0;
+    color: #333;
+}
+
+/* 달력 헤더의 이전/다음 버튼 */
+.ui-datepicker .ui-datepicker-prev,
+.ui-datepicker .ui-datepicker-next {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    top: 8px;
+}
+
+.ui-datepicker .ui-datepicker-prev {
+    left: 5px;
+}
+
+.ui-datepicker .ui-datepicker-next {
+    right: 5px;
+}
+
+.ui-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* 달력 아이콘 위치 조정 */
+.calendar-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+/* Datepicker 입력 필드 스타일 */
+#birth_date {
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* 비밀번호 토글 아이콘 스타일 */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+/* 달력 아이콘 스타일 */
+.calendar-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
