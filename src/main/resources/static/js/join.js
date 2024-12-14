@@ -60,7 +60,7 @@ function showResultMessage(elementId, message, isSuccess) {
 // 통합된 중복 체크 함수
 async function checkDuplicate(type) {
     const value = $(`#${type}`).val();
-    const fieldName = type === 'id' ? '아이디' : '닉네임';
+    const fieldName = type === 'id' ? '아이디' : type === 'nick' ? '닉네임' : '';
     
     if (!value) {
         showResultMessage(type, `${fieldName}를 입력해주세요.`, false);
@@ -69,8 +69,8 @@ async function checkDuplicate(type) {
 
     try {
         const response = await $.ajax({
-            url: `./api/user/getBy${type.charAt(0).toUpperCase() + type.slice(1)}`,
-            type: 'get',
+            url: `./api/user/findBy${type.charAt(0).toUpperCase() + type.slice(1)}`,
+            type: 'post',
             data: { 
                 [type]: value 
             }
@@ -140,6 +140,13 @@ $(document).ready(function() {
         $(this).val(id.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));
         $(this).val(pw.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));
     });
+
+    // 비밀번호 입력 필드에 포커스가 있을 때 비밀번호 보이기
+    $('#pw').on('focus', function() {
+        $(this).attr('type', 'text'); // 비밀번호를 텍스트로 변경
+    }).on('blur', function() {
+        $(this).attr('type', 'password'); // 포커스가 벗어나면 다시 비밀번호로 변경
+    });
     
     // 비밓번호 특수 문자 타이핑 쳤을때 확인
     $('#pw, #pwcheck').on('keyup', function() {
@@ -166,7 +173,7 @@ $(document).ready(function() {
     });
     
     // 회원 가입 처리 수정
-    $('#signup-btn').on('click', async function(e) {
+    $('#next-btn').on('click', async function(e) {
         e.preventDefault(); // 이벤트 기본 동작 중단을 먼저 실행
         
         try {
@@ -186,19 +193,18 @@ $(document).ready(function() {
                 pw: $('#pw').val(),
                 pwcheck: $('#pwcheck').val(),
                 address: $('#address').val(),
-                number: $('#number').val(),
-                email: $('#email').val(),
-                birth_date: birthDate 
+                detail_address: $('#detail_address').val(),
+                birth_date: birthDate
             };
 
             // 필수 입력값 확인
-            if (!validateInput(userData.id, '아이디') ||
+            if (
+                !validateInput(userData.id, '아이디') ||
                 !validateInput(userData.nick, '닉네임') ||
                 !validateInput(userData.pw, '비밀번호') ||
-                !validateInput(userData.address, '주소') ||
-                !validateInput(userData.number, '전화번호') ||
-                !validateInput(userData.email, '이메일') ||
-                !validateInput(userData.birth_date, '생년월일')) {
+                !validateInput(userData.address || userData.detail_address, '주소') ||
+                !validateInput(userData.birth_date, '생년월일')
+            ) {
                 return false;
             }
 
@@ -221,31 +227,16 @@ $(document).ready(function() {
             }
 
             // 주소 확인
-            if (!userData.address) {
+            if (!userData.address || !userData.detail_address) {
                 alert('주소를 입력해주세요.');
                 $('#address').focus();
-                return false;
-            }
-
-            // 전화번호 확인
-            if (!userData.number) {
-                alert('전화번호를 입력해주세요.');
-                $('#number').focus();
-                return false;
-            }
-
-            // 이메일 확인
-            if (!userData.email) {
-                alert('이메일을 입력해주세요.');
-                $('#email').focus();
                 return false;
             }
 
             // 회원가입 진행
             const result = await saveUserToDB(userData);
             if (result === 'ok') {
-                alert("회원가입이 완료되었습니다.");
-                window.location.href = './login';
+                window.location.href = './phone';
             }
             
         } catch (error) {
@@ -326,57 +317,43 @@ $(document).ready(function() {
         $('#birth_date').datepicker('show');
     });
 
-     // 비밀번호 입력 필드에 포커스가 있을 때 비밀번호 보이기
-     $('#pw').on('focus', function() {
-        $(this).attr('type', 'text'); // 비밀번호를 텍스트로 변경
-    }).on('blur', function() {
-        $(this).attr('type', 'password'); // 포커스가 벗어나면 다시 비밀번호로 변경
+    // 프로필 이미지 클릭 시 파일 입력 창 열기
+    $('#profile-img').on('click', function() {
+        $('#file').click();
     });
 
-     // 전화번호 입력 형식 설정
-     $('#number').on('input', function() {
-        let value = $(this).val().replace(/\D/g, ''); // 숫자 이외의 문자 제거
-    
-        if (value.length > 11) {
-            value = value.substr(0, 11); // 최대 11자리로 제한
-        }
-    
-        if (value.length >= 7) {
-            value = value.substr(0, 3) + '-' + value.substr(3, 4) + '-' + value.substr(7); // 하이픈 추가
-        } else if (value.length >= 4) {
-            value = value.substr(0, 3) + '-' + value.substr(3); // 하이픈 추가
-        }
-    
-        $(this).val(value); // 입력 필드에 값 설정
-    });
+    // 프로필 이미지에 마우스 오버 시 커서 변경
+    $('#profile-img').css('cursor', 'pointer');
+
 });
 
 // saveUserToDB 함수 수정
 function saveUserToDB(userData) {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: './api/user/create',
-            type: 'post',                               
-            data: {
-                id: userData.id,
-                pw: userData.pw,
-                nick: userData.nick,
-                address: userData.address,
-                number: userData.number,
-                email: userData.email,
-                birth_date: userData.birth_date
-            },
-            success: function(response) {
-                resolve(response);
-            },
-            error: function(error) {
-                console.error('Error:', error);
-                alert('서버 오류: ' + error.responseText);
-                reject(error);
+    return new Promise(async (resolve, reject) => {
+        try {
+            // 회원 입력에서 선택된 이미지 파일 가져오기
+            const fileInput = document.getElementById('file');
+            if (fileInput && fileInput.files[0]) {
+                // Firebase 초기화
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                const storage = firebase.storage();
+
+                // 이미지 업로드
+                const base64 = await firebaseUtil.getBase64(fileInput.files[0]);
+                const downloadUrl = await firebaseUtil.uploadUserImage(storage, base64, userData.id);
+                userData.img_url = downloadUrl;
             }
-        });
+            
+            // 회원가입 데이터를 세션스토리지에 저장
+            sessionStorage.setItem('signupData', JSON.stringify(userData));
+            resolve('ok');
+        } catch (error) {
+            console.error('Error:', error);
+            reject(error);
+        }
     });
 }
-
 
 

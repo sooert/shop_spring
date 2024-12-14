@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ItemMapper">
+
+	<!-- 상품 조회 -->
+	<select id="findByCode" parameterType="String" resultType="Item">
+		SELECT * FROM item WHERE item_code = #{item_code}
+	</select>
+
+	<!-- 상품 총 개수 -->
+	<select id="totalCount" resultType="Integer">
+		SELECT COUNT(*) FROM item
+	</select>
+
+	<!-- 상품 목록 -->
+	<select id="findAll" parameterType="HashMap" resultType="Item">
+		SELECT * FROM item AS i
+		INNER JOIN user AS u
+		ON i.user_idx = u.user_idx
+		ORDER BY i.item_idx DESC
+		LIMIT #{start}, #{count}
+	</select>
+
+	<!-- 상품 수정 -->
+	<update id="update" parameterType="Item">
+		update `item` set 
+			name = #{name}, 
+			content = #{content}, 
+			item_img_url = #{item_img_url}, 
+			price = #{price}, 
+			discount = #{discount}, 
+			point = #{point} 
+		where item_idx = #{item_idx}
+	</update>
+
+   <!-- 상품 생성  -->
+	<insert id="create" parameterType="Item">
+		insert into `item`
+		(
+			item_idx,
+			item_code,
+			user_idx,
+			name,
+			content,
+			item_img_url,
+			maker,
+			price,
+			discount,
+			point,
+			created_date
+		)
+		values
+		(	
+			#{item_idx},	
+			#{item_code},
+			#{name},
+			#{content},
+			#{item_img_url},
+			#{maker},
+			#{price},
+			#{discount},
+			#{point},
+			sysdate()
+		)
+	
+	</insert>
+
+
+
+
+</mapper>
+

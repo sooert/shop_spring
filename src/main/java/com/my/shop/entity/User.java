@@ -8,6 +8,7 @@ public class User {
 	private String pw = null;
 	private String nick = null;
 	private String address = null;
+	private String detail_address = null;
 	private String number = null;
 	private String email = null;
 	private String birth_date = null;
@@ -71,6 +72,14 @@ public class User {
 
 	public String getNumber() {
 		return number;
+	}
+
+	public String getDetail_address() {
+		return detail_address;
+	}
+
+	public void setDetail_address(String detail_address) {
+		this.detail_address = detail_address;
 	}
 
 	public void setNumber(String number) {

@@ -109,4 +109,22 @@ header h1 {
     transform: translateY(0);
 }
 
+#join-btn, #find-id-btn, #find-pw-btn {
+    width: 26%;
+    margin-top: 8px;
+    margin-left: 19px;
+    padding: 10px;
+    background: white;
+    border: none;
+    color: #ababab;
+    font-size: 14px;
+    font-weight: bold;
+}
 
+#join-btn:hover, #find-id-btn:hover, #find-pw-btn:hover {
+    color: #d3d3d3;
+}
+
+#join-btn:active, #find-id-btn:active, #find-pw-btn:active {
+    transform: translateY(0);
+}

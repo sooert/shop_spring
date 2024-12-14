@@ -1,0 +1,203 @@
+/* 기본 스타일 */
+:root {
+  --color-hover: #c6c6c6;
+  --color-gray: #e0dddc;
+  --text-light: #fff;
+  --text-dark: #333;
+  --gray-light: #f4f4f4;
+  --spacing-unit: 20px;
+  --container-width: 1200px;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* 기본 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans KR', Arial, sans-serif;
+  line-height: 1.6;
+  height: 100%;
+}
+
+/* 푸터 스타일링 */
+.footer {
+    background-color: var(--color-gray);
+    color: var(--text-light);
+    padding: calc(var(--spacing-unit) * 2) 0;
+    margin-top: var(--spacing-unit);
+}
+
+/* 접근성 유틸리티 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* 제일 위로가는 버튼 */
+#scrollToTop {
+	display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #a5a5a5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 998; /* 다른 요소 위에 표시되도록 */
+}
+
+#scrollToTop:hover {
+    background-color:var(--color-hover); /* 호버 시 색상 변경 */
+}
+
+.active{
+	background-color:var(--color-gray);  
+	color:white;
+}
+
+/* 상품 상세 페이지 스타일 */
+.detail-container1{
+    width:1050px;
+    height:auto;
+    margin:0 auto;
+    display: flex;
+    padding-top:20px;
+    align-items:stretch; /* 자식 요소가 부모 높이를 따르도록 */
+}
+ 
+ 
+.detail-container1 > div.content-div{
+    flex:9;
+    height: 100%;
+    box-sizing:border-box;
+    padding:16px;
+}
+ /* mini-img 클래스 스타일 추가 */
+.mini-img{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:8px;
+    margin-right:8px;
+    cursor:pointer;
+    border:1px solid #dedede;
+}
+ 
+.detail-container1 > aside{
+    flex:5;
+    height: auto; /* 콘텐츠에 맞게 자동으로 높이 조절 */
+    background: #fff;
+    padding-bottom:30px;
+    box-sizing:border-box;
+}
+ 
+ 
+.track-box{
+    width:90%;
+    background: #fff;
+    border:1px solid #dedede;
+    border-radius:10px;
+    margin-left:10%;
+    position: sticky;
+    top: 200px;
+    padding:15px;
+    box-sizing:border-box;
+}
+ 
+.track-box .title{
+    font-size:20px;
+    font-weight:700;
+}
+ 
+.track-box .sub-title{
+    margin-top:10px;
+}
+ 
+.track-box textarea{
+    width:100%;
+    height:200px;
+    resize:none;
+    border:1px solid #dedede;
+    background:#f4f4f4;
+    border-radius:8px;
+    margin-top:8px;
+    padding:8px;
+    font-size:14px;
+    color:#777;
+    outline-color:var(--color-main);
+}
+ 
+.track-box button{
+    width:100%;
+    margin-top:8px;
+    padding:8px;
+    background:var(--color-main);
+    color:white;
+    font-weight:700;
+    border:none;
+    outline:none;
+    border-radius:8px;
+}
+ 
+.track-box button:hover{
+    background: #0d47ed;
+}
+ 
+.content-div .title{
+    color:#000;
+    font-size:30px;
+    font-weight:700;
+    width:90%;
+}
+ 
+.content-div .mini-title{
+    margin-top:10px;
+    color:#585858;
+    font-size:15px;
+    display:flex;
+    justify-content:space-between;
+}
+ 
+.img{
+    width:100%;
+    height:400px;
+    object-fit:cover;
+    border-radius:10px;
+    margin-top:20px;
+}
+ 
+.mini-img{
+    width:100px;
+    height:100px;
+    object-fit:cover;
+    border-radius:8px;
+    margin-right:8px;
+    cursor:pointer;
+    border:1px solid #dedede;
+}
+ 
+.section-title{
+    font-size:18px;
+    font-weight:700;
+    color:#000;
+    margin-top:50px;
+}
+ 
+.section-text{
+    color:#999;
+    font-size:14px;
+    margin-top:20px;
+}

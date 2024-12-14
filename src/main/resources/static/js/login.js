@@ -42,4 +42,22 @@ $(document).ready(function() {
 		var loginUrl = "./api/user/login";  // 기본 URL 설정
 		performLogin(loginUrl, id, pw);
 	});
+
+	// 회원가입 버튼 클릭 이벤트
+	$("#join-btn").on("click", function(e) {
+		e.preventDefault();
+		location.href = "./join";
+	});
+
+	// 아이디찾기 버튼 클릭 이벤트
+	$("#find-id-btn").on("click", function(e) {
+		e.preventDefault();
+		location.href = "./find-id";
+	});
+
+	// 비밀번호찾기 버튼 클릭 이벤트
+	$("#find-pw-btn").on("click", function(e) {
+		e.preventDefault();
+		location.href = "./find-pw";
+	});
 });

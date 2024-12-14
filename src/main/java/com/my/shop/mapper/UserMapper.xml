@@ -1,40 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserMapper">
+	
+	<!-- 유저 탈퇴 -->
+	<delete id="delete" parameterType="String">
+		DELETE FROM `user`
+		WHERE user_code = #{user_code}
+	</delete>
+
+	<!-- 유저 정보 수정 -->
+	<update id="update" parameterType="User">
+		UPDATE `user`
+		SET
+			img_url = #{img_url},
+			nick = #{nick}, 
+			address = #{address},
+			detail_address = #{detail_address},
+			number = #{number},
+			birth_date = #{birth_date}
+		WHERE user_code = #{user_code}
+	</update>
+
+	<!-- 유저 아이디&비밀번호 찾기 -->
+	<select id="findByIdAndPw" parameterType="User" resultType="User">
+		SELECT 
+			*
+		FROM `user`
+		WHERE id = #{id} AND pw = MD5(#{pw})
+	</select>
 
    <!-- 회원 추가  -->
 	<insert id="create" parameterType="User">
-		insert into `user`
+		INSERT INTO `user`
 		(
-			user_idx,
 			user_code,
-            img_url,
+			img_url,
 			id,
 			pw,
 			nick,
 			address,
-            number,
-            email,
+			detail_address,
+			number,
 			birth_date,
 			created_date
 		)
 		values
 		(	
-			#{user_idx},	
 			#{user_code},
-            #{img_url},
+			#{img_url},
 			#{id},
 			MD5(#{pw}),
 			#{nick},
 			#{address},
+			#{detail_address},
 			#{number},
-			#{email},
 			#{birth_date},
 			sysdate()
 		)
 	
 	</insert>
 
+	<!-- 아이디 찾기 -->
+	<select id="findById" parameterType="String" resultType="User">
+		SELECT 
+			*
+		FROM `user`
+		WHERE id = #{id}
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="findByPw" parameterType="String" resultType="User">
+		SELECT 
+			*
+		FROM `user`
+		WHERE pw = MD5(#{pw})
+	</select>
+
+	<!-- 닉네임 찾기 -->
+	<select id="findByNick" parameterType="String" resultType="User">
+		SELECT 
+			*
+		FROM `user`
+			WHERE nick = #{nick}
+	</select>
+
+	<!-- 전화번호 찾기 -->
+	<select id="findByNumber" parameterType="String" resultType="User">
+		SELECT 
+			*
+		FROM `user`
+			WHERE number = #{number}
+	</select>
+
+	<!-- 유저 img_url 업데이트 -->
+	<update id="createImgUrl" parameterType="User">
+		UPDATE `user`
+		SET 
+			img_url = #{img_url}
+		WHERE id = #{id}
+	</update>
 
 
 

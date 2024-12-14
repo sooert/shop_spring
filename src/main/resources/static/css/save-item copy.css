@@ -99,7 +99,7 @@ header h1 {
 }
 
 /* 회원가입 버튼 스타일 */
-#next-btn, #signup-btn {
+#save-btn {
     width: 100%;
     padding: 14px; 
     background: var(--color-gray);
@@ -116,12 +116,12 @@ header h1 {
     transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-#next-btn:hover, #signup-btn:hover {
+#save-btn:hover {
     background: #c0bdbd;
     transform: translateY(-1px);
 }
 
-#next-btn:active, #signup-btn:active {
+#save-btn:active {
     transform: translateY(0);
 }
 
@@ -233,50 +233,6 @@ header h1 {
     height: 16px;
 }
 
-/* 달력 아이콘 위치 조정 */
-.calendar-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #666;
-}
-
-/* Datepicker 입력 필드 스타일 */
-#birth_date {
-    background-color: #fff;
-    cursor: pointer;
-}
-
-/* 비밀번호 토글 아이콘 스타일 */
-.password-toggle {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #666;
-}
-
-/* 달력 아이콘 스타일 */
-.calendar-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #666;
-}
-
-/* 이메일 도메인 드롭다운 스타일 추가 */
-.domain-dropdown {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
 .domain-option {
     padding: 8px 12px;
     cursor: pointer;
@@ -286,75 +242,66 @@ header h1 {
 .domain-option:hover {
     background-color: #f5f5f5;
 }
-    
-/* 프로필 이미지 스타일 */
-#profile-img {
-    display: block;
-    width: 100px;
-    height: 100px;
-    margin-left: 140px;
-    margin-bottom: 30px;
-    border-radius: 50%;
-    object-fit: cover;
-}
 
-/* 전화번호 인증 관련 스타일 추가 */
-/* .timer {
-    color: #f01200;
-    margin-left: 10px;
-    font-size: 14px;
-}
-
-.input-with-btn {
-    gap: 10px;
+/* 입력 필드와 버튼이 있는 컨테이너 */
+.img-with-btn {
+    position: relative;
     margin-bottom: 15px;
 }
 
-.phone-auth,
-.phone-auth-check {
-    padding: 8px 15px;
-    background-color: #006bea;
+.img-with-btn input {
+    width: calc(100% - 24px);
+    padding: 12px;
+    border: 1px solid var(--color-gray);
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.img-with-btn input:focus {
+    outline: none;
+    border-color: var(--color-gray);
+    box-shadow: 0 0 0 2px rgba(115, 70, 243, 0.1);
+}
+
+.img-with-btn button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 6px 12px;
+    background: var(--color-gray);
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.phone-auth:hover,
-.phone-auth-check:hover {
-    background-color: #0056b3;
-} */
-
-/* 전화번호 인증 코드 스타일 */
-/* #phone-auth-code {
-    width: 150px;
-    padding: 8px;
-    border: 1px solid #ddd;
     border-radius: 4px;
-} */
-
-.profile-upload {
-    text-align: center;
-    margin-bottom: 20px;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
-.profile-upload img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border: 2px solid #ddd;
+.img-with-btn button:hover {
+    background: #c0bdbd; /* 더 진한 회색 */
 }
 
-.profile-upload input[type="file"] {
-    display: block;
-    margin: 10px auto;
-}
-
-.upload-hint {
-    color: #666;
-    font-size: 0.9em;
+/* 유효성 검사 메시지 */
+.validation-message {
+    font-size: 12px;
+    color: #ff4444;
     margin-top: 5px;
+}
+
+/* 상품 설명 입력 필드 스타일 수정 */
+.content-with-btn textarea {
+    width: 100%; 
+    height: 230px;
+    padding: 12px;
+    padding-right: 40px;
+    margin-bottom: 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    vertical-align: top;
+    resize: none;
 }
