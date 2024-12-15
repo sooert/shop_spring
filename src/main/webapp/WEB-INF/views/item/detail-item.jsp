@@ -15,45 +15,98 @@
     <link rel="stylesheet" href="../css/header.css">
 </head>
 <style>
-    .detail-item-img{
-		width: 100px;
-		height: 100px;
-		object-fit: cover;
-		border:1px solid #f2f2f2;
-		border-radius: 5px;
-	}
+    
 </style>
 <body>
     <%@ include file="../include/header.jsp" %>
 
     <button id="scrollToTop"><i class="fa-solid fa-chevron-up"></i></button>
         
-    <div class="detail-container1">
-		<div class="inner" style="display: flex;">
-
-			<div class="detail-item-img-container" style="width: 50%;">
-				<section>
-					<img id="main-item-img" style="border:1px solid #f2f2f2;width: 100%;height: 400px;object-fit: cover;" 
-						src="${item.item_img_url}" alt="상품이미지"/>
-				</section>
-
-				<section style="display: flex;gap: 10px;margin-top: 10px;">	
-					<c:forEach items="${itemImgs}" var="itemImg">
-						<img class="detail-item-img" src="${itemImg.item_img_url}" alt="상품이미지"/>
-					</c:forEach>
-				</section>
-			</div>
-
-			<div class="detail-item-info-container" style="width: 50%;">
-				456
-			</div>
-		</div>
-	</div>
-
-    <footer class="footer">
-        <div class="container">
-            <p style="text-align: center;">&copy; 웹 쇼핑몰 포토폴리오</p>
+    <div class="product-container">
+        <!-- 상품 이미지 섹션 -->
+        <div class="product-image">
+          <img src="../img/default_profile.png" alt="상품 이미지" class="main-image">
+          <div class="thumbnail-container">
+            <img src="../img/default_profile.png" alt="Thumbnail 1" class="thumbnail">
+            <img src="../img/default_profile.png" alt="Thumbnail 2" class="thumbnail">
+            <img src="../img/default_profile.png" alt="Thumbnail 3" class="thumbnail">
+          </div>
         </div>
-    </footer>
+    
+        <!-- 상품 정보 섹션 -->
+        <div class="product-details">
+          <h1 class="product-title">니트</h1>
+          <p class="product-discount">33% 할인</p>
+          <p class="original-price">42,000원</p>
+          <p class="discounted-price">28,000원</p>
+    
+          <!-- 할인 정보 -->
+          <div class="user-benefit">
+            <h2>성준님만을 위한 혜택</h2>
+            <p>내일 혜택가: <strong>28,000원</strong></p>
+            <ul>
+              <li>오늘 추가 10% 상품 할인</li>
+              <li>적립금 최대 6% 적립</li>
+            </ul>
+          </div>
+    
+          <!-- 옵션 선택 -->
+          <div class="product-options">
+            <label for="color">COLOR:</label>
+            <select id="color">
+              <option value="black">black</option>
+              <option value="white">white</option>
+              <option value="gray">gray</option>
+              <option value="red">red</option>
+              <option value="blue">blue</option>
+            </select>
+    
+            <label for="size">SIZE:</label>
+            <select id="size">
+              <option value="s">S</option>
+              <option value="m">M</option>
+              <option value="l">L</option>
+            </select>
+          </div>
+    
+          <!-- 구매 버튼 -->
+          <div class="purchase-buttons">
+            <button class="gift-button">선물하기</button>
+            <button class="buy-button">구매하기</button>
+            <button class="cart-button">장바구니</button>
+          </div>
+    
+          <!-- 추가 정보 -->
+          <div class="additional-info">
+            <p>택배비: 3,300원 (주문 시 결제)</p>
+            <p>50,000원 이상 구매 시 무료배송</p>
+          </div>
+        </div>
+    </div>
+    
+    <div class="item-description-container">
+        <div class="item-description">
+            <button class="item-description-button" style="background-color: #b6b6b6;">상세 설명</button>
+            <button class="item-description-button">상품 사이즈</button>
+            <button class="item-description-button">리뷰</button>
+        </div>
+            
+            <p id="item-text">판매자가 작성한 상품 상세 설명입니다.</p>
+
+        <div class="description-container">
+            <h1 class="product-title">상품 상세 설명</h1>
+            <p>여기에 상품에 대한 자세한 설명이 들어갑니다.</p>
+            <h2>특징</h2>
+            <ul>
+                <li>특징 1</li>
+                <li>특징 2</li>
+                <li>특징 3</li>
+            </ul>
+            <h2>사용 방법</h2>
+            <p>상품 사용 방법에 대한 설명이 들어갑니다.</p>
+        </div>
+    </div>
+
+    </div>
 </body>
 </html>

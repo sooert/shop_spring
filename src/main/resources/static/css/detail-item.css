@@ -11,193 +11,268 @@
   --transition: all 0.3s ease;
 }
 
-/* 기본 리셋 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* 반응형 디자인 추가 */
+@media (max-width: 768px) {
+    .product-container {
+        flex-direction: column; /* 세로 방향으로 배치 */
+        height: auto; /* 높이 자동 조정 */
+    }
+
+    .product-image, .product-details {
+        width: 100%; /* 전체 너비 사용 */
+        padding: 10px; /* 패딩 조정 */
+    }
+
+    .thumbnail-container {
+        flex-direction: row; /* 썸네일 가로 방향으로 배치 */
+        justify-content: center; /* 중앙 정렬 */
+    }
+
+    .thumbnail {
+        width: 50px; /* 썸네일 크기 조정 */
+        height: 50px; /* 썸네일 크기 조정 */
+    }
+
+    .item-description {
+        flex-direction: column; /* 세로 방향으로 배치 */
+    }
+
+    .item-description-button {
+        width: 100%; /* 버튼 전체 너비 사용 */
+        margin-bottom: 10px; /* 버튼 간격 조정 */
+    }
+
+    .description-container {
+        margin-left: 0; /* 왼쪽 여백 제거 */
+        width: 100%; /* 전체 너비 사용 */
+    }
 }
 
+/* styles.css */
 body {
-  font-family: 'Noto Sans KR', Arial, sans-serif;
-  line-height: 1.6;
-  height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
 }
 
-/* 푸터 스타일링 */
-.footer {
-    background-color: var(--color-gray);
-    color: var(--text-light);
-    padding: calc(var(--spacing-unit) * 2) 0;
-    margin-top: var(--spacing-unit);
-}
-
-/* 접근성 유틸리티 */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
+/* 상품 컨테이너 */
+.product-container {
+    display: flex;
+    height: 1000px;
+    max-width: 1000px;
+    margin: 7% auto;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
 }
-
-/* 제일 위로가는 버튼 */
-#scrollToTop {
-	display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    background-color: #a5a5a5;
-    color: white;
+  
+.product-image {
+    flex: 1;
+    padding: 20px;
+}
+  
+.main-image {
+    width: 100%;
+    border-radius: 8px;
+}
+  
+.thumbnail-container {
+    display: flex;
+    margin-top: 10px;
+}
+  
+.thumbnail {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.thumbnail:hover {
+    border-color: #0078d7;
+}
+  
+.product-details {
+    flex: 1;
+    padding: 20px;
+}
+  
+.product-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+  
+.product-discount {
+    color: #d9534f;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+  
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+}
+  
+.discounted-price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0078d7;
+    margin-bottom: 20px;
+}
+  
+.user-benefit h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+  
+.user-benefit p {
+    font-size: 16px;
+    color: #333;
+}
+  
+.user-benefit ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+  
+.user-benefit li {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #555;
+}
+  
+.product-options {
+    margin: 20px 0;
+}
+  
+.product-options label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+  
+.product-options select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+  
+.purchase-buttons {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+  
+.purchase-buttons button {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    z-index: 998; /* 다른 요소 위에 표시되도록 */
+}
+  
+.gift-button {
+    background-color:var(--color-gray);
+    color: #fff;
+}
+  
+.buy-button {
+  background-color: var(--color-gray);
+  color: #fff;
 }
 
-#scrollToTop:hover {
-    background-color:var(--color-hover); /* 호버 시 색상 변경 */
+.cart-button {
+    background-color: var(--color-gray);
+    color: #fff;
 }
-
-.active{
-	background-color:var(--color-gray);  
-	color:white;
+  
+.purchase-buttons button:hover {
+    background-color: var(--color-hover);
+    opacity: 0.9;
 }
-
-/* 상품 상세 페이지 스타일 */
-.detail-container1{
-    width:1050px;
-    height:auto;
-    margin:0 auto;
+  
+.additional-info {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+}
+/* 상품 설명 버튼 */
+.item-description {
+    width: 68%;
     display: flex;
-    padding-top:20px;
-    align-items:stretch; /* 자식 요소가 부모 높이를 따르도록 */
+    justify-content: space-between; 
+    border-bottom: 1px solid #b6b6b6;
+    margin-top: -77px;
+    margin-left: 16%;
 }
- 
- 
-.detail-container1 > div.content-div{
-    flex:9;
-    height: 100%;
-    box-sizing:border-box;
-    padding:16px;
+
+.item-description-button {
+    width: 34%;
+    background-color: var(--color-gray);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
 }
- /* mini-img 클래스 스타일 추가 */
-.mini-img{
-    width:100px;
-    height:100px;
-    object-fit:cover;
-    border-radius:8px;
-    margin-right:8px;
-    cursor:pointer;
-    border:1px solid #dedede;
+
+#item-text {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 16px;
+    text-align: center;
+    color: #555;
 }
- 
-.detail-container1 > aside{
-    flex:5;
-    height: auto; /* 콘텐츠에 맞게 자동으로 높이 조절 */
-    background: #fff;
-    padding-bottom:30px;
-    box-sizing:border-box;
+
+/* 상품 설명 컨테이너 */
+.description-container {
+    margin-left: 16%;
+    width: 68%;
+    height: 100vh;
+    background-color: var(--color-gray);
+    border-radius: 8px;
+    padding: 20px;
 }
- 
- 
-.track-box{
-    width:90%;
-    background: #fff;
-    border:1px solid #dedede;
-    border-radius:10px;
-    margin-left:10%;
-    position: sticky;
-    top: 200px;
-    padding:15px;
-    box-sizing:border-box;
+
+.description-container.active {
+    display: block;
 }
- 
-.track-box .title{
-    font-size:20px;
-    font-weight:700;
+
+.description-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 4px;
 }
- 
-.track-box .sub-title{
-    margin-top:10px;
+
+.description-container p {
+    font-size: 16px;
+    margin-bottom: 10px;
 }
- 
-.track-box textarea{
-    width:100%;
-    height:200px;
-    resize:none;
-    border:1px solid #dedede;
-    background:#f4f4f4;
-    border-radius:8px;
-    margin-top:8px;
-    padding:8px;
-    font-size:14px;
-    color:#777;
-    outline-color:var(--color-main);
+
+.description-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
 }
- 
-.track-box button{
-    width:100%;
-    margin-top:8px;
-    padding:8px;
-    background:var(--color-main);
-    color:white;
-    font-weight:700;
-    border:none;
-    outline:none;
-    border-radius:8px;
+
+.description-container li {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #555;
 }
- 
-.track-box button:hover{
-    background: #0d47ed;
+
+/* 상품 설명 컨테이너 */
+.description-container h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
- 
-.content-div .title{
-    color:#000;
-    font-size:30px;
-    font-weight:700;
-    width:90%;
-}
- 
-.content-div .mini-title{
-    margin-top:10px;
-    color:#585858;
-    font-size:15px;
-    display:flex;
-    justify-content:space-between;
-}
- 
-.img{
-    width:100%;
-    height:400px;
-    object-fit:cover;
-    border-radius:10px;
-    margin-top:20px;
-}
- 
-.mini-img{
-    width:100px;
-    height:100px;
-    object-fit:cover;
-    border-radius:8px;
-    margin-right:8px;
-    cursor:pointer;
-    border:1px solid #dedede;
-}
- 
-.section-title{
-    font-size:18px;
-    font-weight:700;
-    color:#000;
-    margin-top:50px;
-}
- 
-.section-text{
-    color:#999;
-    font-size:14px;
-    margin-top:20px;
-}
+
+

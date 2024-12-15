@@ -32,6 +32,7 @@ public class ItemController {
 	// 상품 생성
 	@PostMapping("create")
 	public String create(@RequestParam(value = "name") String name, 
+                         @RequestParam(value = "category") String category,
                          @RequestParam(value = "content") String content,
                          @RequestParam(value = "item_img_url") String item_img_url,
                          @RequestParam(value = "detail_img_urls[]") List<String> detail_img_urls,
@@ -51,6 +52,7 @@ public class ItemController {
 		item.setItem_code(itemCode);
 		item.setUser_idx(user_idx);
 		item.setName(name);
+		item.setCategory(category);
 		item.setContent(content);
 		item.setItem_img_url(item_img_url);
 		item.setPrice(price);

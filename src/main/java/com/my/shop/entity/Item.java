@@ -6,6 +6,7 @@ public class Item {
     private String item_code = null;
     private int user_idx = 0;
     private String name = null;
+    private String category = null;
     private String content = null;
     private String item_img_url = null;
     private String maker = null;
@@ -37,6 +38,14 @@ public class Item {
 
     public void setUser_idx(int user_idx) {
         this.user_idx = user_idx;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getName() {

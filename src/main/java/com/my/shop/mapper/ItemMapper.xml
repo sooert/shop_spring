@@ -37,10 +37,10 @@
 	<insert id="create" parameterType="Item">
 		insert into `item`
 		(
-			item_idx,
 			item_code,
 			user_idx,
 			name,
+			category,
 			content,
 			item_img_url,
 			maker,
@@ -50,10 +50,11 @@
 			created_date
 		)
 		values
-		(	
-			#{item_idx},	
+		(		
 			#{item_code},
+			#{user_idx},
 			#{name},
+			#{category},
 			#{content},
 			#{item_img_url},
 			#{maker},

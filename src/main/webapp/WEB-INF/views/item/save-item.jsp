@@ -31,6 +31,15 @@
 			<textarea  id="content"  placeholder="상세히 적어주세요."></textarea>
 		</div>
 
+        <div class="form-box">
+			<div class="title">상품 카테고리<font style="color:red;">*</font></div>
+			<div class="content">상품 소테고리를 선택해주세요.</div>
+			<select id="category" placeholder="상세히 적어주세요.">
+				<option value="1">의류</option>
+				<option value="2">식품</option>
+				<option value="3">전자제품</option>
+			</select>
+		</div>
 
 		<div class="form-box">
 			<div class="title">가격<font style="color:red;">*</font></div>
