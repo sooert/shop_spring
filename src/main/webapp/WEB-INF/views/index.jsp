@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>웹 쇼핑몰</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="./js/index.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/style.css">
@@ -26,58 +28,14 @@
         </section>
 
         <section class="products">
-            <div class="container">
-                <div class="product">
+            <div class="item-container">
+                <!-- 상품 목록 불러오는 곳  -->
+                <!-- <div class="product">
                     <img src="https://via.placeholder.com/300" alt="상품 이미지">
                     <h3>상품명 1</h3>
                     <p>가격: 29,000원</p>
                     <button class="btn-purchase">구매하기</button>
-                </div>
-                <div class="product">
-                    <img src="https://via.placeholder.com/300" alt="상품 이미지">
-                    <h3>상품명 2</h3>
-                    <p>가격: 35,000원</p>
-                    <button class="btn-purchase">구매하기</button>
-                </div>
-                <div class="product">
-                    <img src="https://via.placeholder.com/300" alt="상품 이미지">
-                    <h3>상품명 3</h3>
-                    <p>가격: 42,000원</p>
-                    <button class="btn-purchase">구매하기</button>
-                </div>
-                <div class="product">
-                    <img src="https://via.placeholder.com/300" alt="상품 이미지">
-                    <h3>상품명 4</h3>
-                    <p>가격: 42,000원</p>
-                    <button class="btn-purchase">구매하기</button>
-                </div>
-            </div>
-
-            <div class="container">
-                <div class="product">
-                    <img src="https://via.placeholder.com/300" alt="상품 이미지">
-                    <h3>상품명 1</h3>
-                    <p>가격: 29,000원</p>
-                    <button class="btn-purchase">구매하기</button>
-                </div>
-                <div class="product">
-                    <img src="https://via.placeholder.com/300" alt="상품 이미지">
-                    <h3>상품명 2</h3>
-                    <p>가격: 35,000원</p>
-                    <button class="btn-purchase">구매하기</button>
-                </div>
-                <div class="product">
-                    <img src="https://via.placeholder.com/300" alt="상품 이미지">
-                    <h3>상품명 3</h3>
-                    <p>가격: 42,000원</p>
-                    <button class="btn-purchase">구매하기</button>
-                </div>
-                <div class="product">
-                    <img src="https://via.placeholder.com/300" alt="상품 이미지">
-                    <h3>상품명 4</h3>
-                    <p>가격: 42,000원</p>
-                    <button class="btn-purchase">구매하기</button>
-                </div>
+                </div> -->
             </div>
         </section>
     </main>

@@ -11,7 +11,10 @@ $(document).ready(function() {
 		$.ajax({
 			url: url,
 			type: "POST",
-			data: { id: id, pw: pw },
+			data: { 
+				id: id, 
+				pw: pw 
+			},
 			success: function(result) {
 				if(!result || result == '') {
 					alert("아이디 또는 비밀번호가 올바르지 않습니다.");

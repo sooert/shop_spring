@@ -25,25 +25,64 @@ public class ViewController {
 		return viewName;
 	}
 
-	// 마이페이지 페이지 이동
-	// @GetMapping("my-page")
-	// public String mypage(HttpSession session, Model model) {
-	// 	User me = (User) session.getAttribute("me");
-	// 	if (me == null) {
-	// 		return "redirect:/login";
-	// 	}
-
-	// 	User u = userService.findById(me.getId());
-	// 	model.addAttribute("user", u);
-	// 	return getViewName(session, "my-page");
-	// }
+	//////////////////////////// 마이페이지 관리  ////////////////////////////////
 
 	// 마이페이지 페이지 이동
-	@GetMapping("my-page")
-	public String mypage() {
+	@GetMapping("basics")
+	public String basics() {
 
-		return "my-page";
+		return "my-page/basics";
 	}
+
+	// 내정보 페이지 이동
+	@GetMapping("my")
+	public String my(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "redirect:/login";
+		}
+		return "my-page/my";
+	}
+
+	// 전화번호 변경 페이지 이동
+	@GetMapping("call")
+	public String call(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "redirect:/login";
+		}
+		return "my-page/call";
+	}
+
+	// 구매 내역 페이지 이동
+	@GetMapping("buys")
+	public String buys() {
+
+		return "my-page/buys";
+	}
+
+	// 판매 내역 페이지 이동
+	@GetMapping("sells")
+	public String sells() {
+
+		return "my-page/sells";
+	}
+
+	// 리뷰 페이지 이동
+	@GetMapping("reviews")
+	public String review() {
+
+		return "my-page/reviews";
+	}
+
+	// 좋아요 페이지 이동
+	@GetMapping("loves")
+	public String love() {
+
+		return "my-page/loves";
+	}
+
+	//////////////////////////// 메인 & 로그인 ////////////////////////////////
 
 	// 메인 페이지
 	@GetMapping("index")
@@ -57,46 +96,70 @@ public class ViewController {
 		return "login";
 	}
 
+	//////////////////////////// 상품등록 ////////////////////////////////
+
 	// 상품 등록 페이지
-	@GetMapping("item/save-item")
-	public String saveItem() {
+	@GetMapping("save-item")
+	public String saveItem(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "redirect:/login";
+		}
 		return "item/save-item";
 	}
 
 	// 상품 상세 페이지
-	@GetMapping("item/detail-item")
+	// 비회원도 상품 볼수있음 
+	@GetMapping("detail-item")
 	public String itemDetail() {
 		return "item/detail-item";
 	}
 
+	//////////////////////////// 구매 & 장바구니 ////////////////////////////////
+
 	// 구매 페이지
+	// 비회원도 구매 가능 (단, 로그인 시도 요청)
 	@GetMapping("buy")
 	public String buy() {
-		return "buy";
+		return "item/buy";
 	}
 
 	// 장바구니 페이지
+	// 비회원도 장바구니 이동 가능
 	@GetMapping("cart")
 	public String cart() {
-		return "cart";
+		return "item/cart";
 	}
 
-	///////// 회원가입 //////////
+	//////////////////////////// 회원가입 ////////////////////////////////
 
 	// 회원가입 페이지
 	@GetMapping("join")
 	public String join() {
-		return "join";
+		return "join/join";
 	}
 
 	// 전화번호 인증 페이지
 	@GetMapping("phone")
 	public String phone() {
-		return "phone";
+		return "join/phone";
+	}
+	
+	// 아이디 찾기 페이지
+	@GetMapping("find-id")
+	public String findId() {
+		return "find/find-id";
 	}
 
-	
+	// 비밀번호 찾기 페이지
+	@GetMapping("find-pw")
+	public String findPw() {
+		return "find/find-pw";
+	}
 
-	
-
+	// 비밀번호 변경 페이지
+	@GetMapping("new-pw")
+	public String newPw() {
+		return "find/new-pw";
+	}
 }

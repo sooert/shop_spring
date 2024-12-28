@@ -9,7 +9,7 @@ public class Item {
     private String category = null;
     private String content = null;
     private String item_img_url = null;
-    private String maker = null;
+    private String company = null;
     private int price = 0;
     private double discount = 0;
     private double point = 0;
@@ -72,12 +72,12 @@ public class Item {
         this.item_img_url = item_img_url;
     }
 
-    public String getMaker() {
-        return maker;
+    public String getCompany() {
+        return company;
     }
 
-    public void setMaker(String maker) {
-        this.maker = maker;
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public int getPrice() {

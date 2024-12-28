@@ -3,12 +3,11 @@
 
 <!-- jQuery 로드 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="./js/header.js"></script>
+<script src="./js/include/header.js"></script>
 
 <!-- CSS 파일 로드 순서 수정 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="./css/header.css">
-
 
 <header class="header">
     <div class="container">
@@ -40,7 +39,7 @@
 
     <!-- 팝업 내용 -->
     <div class="overlay">
-        <div class="popup">
+        <div class="popup"> 
             <button class="close-btn">&times;</button>
             <div class="popup-content">
                 <div class="popup-admin">

@@ -24,6 +24,8 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	
+	
+	
 	// JSP(뷰)를 보여주기 위한 세팅
 	implementation 'javax.servlet:jstl'
 	implementation "org.apache.tomcat.embed:tomcat-embed-jasper"
@@ -36,6 +38,9 @@ dependencies {
 	
 	/* random */
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
+	
+	// 문자(SMS) 보내기
+	implementation 'net.nurigo:sdk:4.2.7'
 }
 
 tasks.named('test') {

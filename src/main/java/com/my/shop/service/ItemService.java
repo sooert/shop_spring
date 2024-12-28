@@ -1,6 +1,5 @@
 package com.my.shop.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +19,19 @@ public class ItemService {
         itemDao.create(item);
     }
 
-    // 상품 조회
-    public Item findByCode(String item_code) {
-        return itemDao.findByCode(item_code);
-    }
-
-    // 상품 총 개수
-    public int totalCount() {
-        return itemDao.totalCount();
-    }
-
     // 상품 목록
-    public List<Item> findAll(HashMap<String, Object> params) {
-        return itemDao.findAll(params);
+    public List<Item> findAll() {
+        return itemDao.findAll(); 
     }
 
     // 상품 수정
     public void update(Item item) {
         itemDao.update(item);
     }
+
+    // 상품 상세 조회
+    public Item detailItem(String item_code) {
+        return itemDao.detailItem(item_code);
+    }
+
 }

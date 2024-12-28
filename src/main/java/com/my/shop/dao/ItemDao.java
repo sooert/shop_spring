@@ -1,6 +1,5 @@
 package com.my.shop.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -12,7 +11,7 @@ import com.my.shop.entity.Item;
 @Repository
 public class ItemDao {
 
-    @Autowired
+    @Autowired 
     SqlSession sqlSession;
 
     // 상품 생성
@@ -20,23 +19,19 @@ public class ItemDao {
         sqlSession.insert("ItemMapper.create", item);
     }
 
-    // 상품 조회
-    public Item findByCode(String item_code) {
-        return sqlSession.selectOne("ItemMapper.findByCode", item_code);
-    }
-
-    // 상품 총 개수
-    public int totalCount() {
-        return sqlSession.selectOne("ItemMapper.totalCount");
-    }
-
     // 상품 목록
-    public List<Item> findAll(HashMap<String, Object> params) {
-        return sqlSession.selectList("ItemMapper.findAll", params);
+    public List<Item> findAll() {
+        return sqlSession.selectList("ItemMapper.findAll");
     }
 
     // 상품 수정
     public void update(Item item) {
         sqlSession.update("ItemMapper.update", item);
     }
+
+    // 상품 상세 조회
+    public Item detailItem(String item_code) {
+        return sqlSession.selectOne("ItemMapper.detail-item", item_code);
+    }
+
 }

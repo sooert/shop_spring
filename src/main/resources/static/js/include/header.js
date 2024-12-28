@@ -9,19 +9,19 @@ $(document).ready(function () {
 
     // 상품 등록 버튼
     $('#register-btn').on('click', function () {
-        window.location.href = './item/save-item';
+        window.location.href = './save-item';
     });
-
+ 
     // 장바구니 버튼
     $('#cart-btn, .go-cart').on('click', function () {
         window.location.href = './cart';
     });
 
     // 마이페이지 버튼
-    $('.go-my-page').on('click', function () {
-        window.location.href = './my-page';
+    $('.go-my-page, .info-left-box').on('click', function () {
+        window.location.href = './basics';
     }); 
-
+ 
 	// 로그인 버튼과 팝업창 로그인
 	$('#login-btn, .name-box').on('click', function () {
 	    window.location.href = './login';

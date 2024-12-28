@@ -8,6 +8,7 @@ const firebaseConfig = {
     measurementId: "G-ZDKCZ2PVN5"
 };
 
+// 프로필 이미지 업로드
 var firebaseUtil = {
     getBase64: async function(file) {
         return new Promise(function(resolve, reject) {
@@ -34,6 +35,34 @@ var firebaseUtil = {
                 ref.putString(imageData, 'base64', {contentType: 'image/png'})
                     .then(function(snapshot) {
                         return snapshot.ref.getDownloadURL();
+                    })
+                    .then(function(url) {
+                        console.log("Firebase 업로드 성공:", url);
+                        resolve(url);
+                    })
+                    .catch(function(err) {
+                        console.error("Firebase 업로드 실패:", err);
+                        reject(err);
+                    });
+            } catch (error) {
+                console.error("Firebase 업로드 중 오류:", error);
+                reject(error);
+            }
+        });
+    },
+    uploadItemImage: async function(storage, base64) {
+        return new Promise(function(resolve, reject) {
+            try {
+                const userFolder = 'temp_' + Date.now();
+                const timestamp = Date.now();
+                var ref = storage.ref('items').child(userFolder).child(timestamp + ".png");
+                
+                // base64 데이터에서 실제 이미지 데이터만 추출
+                const imageData = base64.split(',')[1];
+                
+                ref.putString(imageData, 'base64', {contentType: 'image/png'})
+                    .then(function(snapshot) {
+                        return snapshot.ref.getDownloadURL(); 
                     })
                     .then(function(url) {
                         console.log("Firebase 업로드 성공:", url);
@@ -93,4 +122,15 @@ $(document).ready(function() {
         });
     }
 });
+
+
+
+
+
+
+
+
+
+
+
 

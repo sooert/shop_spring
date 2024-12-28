@@ -2,23 +2,15 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ItemMapper">
 
-	<!-- 상품 조회 -->
-	<select id="findByCode" parameterType="String" resultType="Item">
-		SELECT * FROM item WHERE item_code = #{item_code}
-	</select>
-
-	<!-- 상품 총 개수 -->
-	<select id="totalCount" resultType="Integer">
-		SELECT COUNT(*) FROM item
+	<!-- 상품 상세 조회 -->
+	<select id="detail-item" parameterType="String" resultType="Item">
+		SELECT * FROM item 
+		WHERE item_code = #{item_code}
 	</select>
 
 	<!-- 상품 목록 -->
-	<select id="findAll" parameterType="HashMap" resultType="Item">
-		SELECT * FROM item AS i
-		INNER JOIN user AS u
-		ON i.user_idx = u.user_idx
-		ORDER BY i.item_idx DESC
-		LIMIT #{start}, #{count}
+	<select id="findAll" resultType="Item">
+		SELECT * FROM item
 	</select>
 
 	<!-- 상품 수정 -->
@@ -34,8 +26,8 @@
 	</update>
 
    <!-- 상품 생성  -->
-	<insert id="create" parameterType="Item">
-		insert into `item`
+	<insert id="create" parameterType="Item" useGeneratedKeys="true" keyProperty="item_idx">
+		INSERT INTO item
 		(
 			item_code,
 			user_idx,
@@ -43,27 +35,26 @@
 			category,
 			content,
 			item_img_url,
-			maker,
+			company,
 			price,
 			discount,
 			point,
 			created_date
 		)
-		values
-		(		
+		VALUES
+		(
 			#{item_code},
 			#{user_idx},
 			#{name},
 			#{category},
 			#{content},
 			#{item_img_url},
-			#{maker},
+			#{company},
 			#{price},
 			#{discount},
 			#{point},
-			sysdate()
+			NOW()
 		)
-	
 	</insert>
 
 

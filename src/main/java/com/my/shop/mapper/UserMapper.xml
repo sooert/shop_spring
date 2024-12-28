@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserMapper">
-	
+
+	<!-- 유저 전화번호 업데이트 -->
+	<update id="updateNumber" parameterType="User">
+		UPDATE `user`
+		SET 
+			number = #{number}
+		WHERE user_code = #{user_code}
+	</update>
+
+	<!-- 유저 새로운 이미지 업데이트 -->
+	<update id="updateImgUrl" parameterType="User">
+		UPDATE `user`
+		SET 
+			img_url = #{img_url}
+		WHERE user_code = #{user_code}
+	</update>
+
+	<!-- 유저 정보 업데이트 -->
+	<update id="update" parameterType="User">
+		UPDATE `user`
+		SET 
+			pw = MD5(#{pw}),
+			nick = #{nick},
+			birth_date = #{birth_date},
+			email = #{email},
+			address = #{address},
+			detail_address = #{detail_address}
+		WHERE user_code = #{user_code}
+	</update>
+
 	<!-- 유저 탈퇴 -->
 	<delete id="delete" parameterType="String">
 		DELETE FROM `user`
 		WHERE user_code = #{user_code}
 	</delete>
-
-	<!-- 유저 정보 수정 -->
-	<update id="update" parameterType="User">
-		UPDATE `user`
-		SET
-			img_url = #{img_url},
-			nick = #{nick}, 
-			address = #{address},
-			detail_address = #{detail_address},
-			number = #{number},
-			birth_date = #{birth_date}
-		WHERE user_code = #{user_code}
-	</update>
-
-	<!-- 유저 아이디&비밀번호 찾기 -->
-	<select id="findByIdAndPw" parameterType="User" resultType="User">
-		SELECT 
-			*
-		FROM `user`
-		WHERE id = #{id} AND pw = MD5(#{pw})
-	</select>
 
    <!-- 회원 추가  -->
 	<insert id="create" parameterType="User">
@@ -42,6 +50,7 @@
 			detail_address,
 			number,
 			birth_date,
+			email,
 			created_date
 		)
 		values
@@ -55,10 +64,19 @@
 			#{detail_address},
 			#{number},
 			#{birth_date},
+			#{email},
 			sysdate()
 		)
 	
 	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" parameterType="User" resultType="User">
+		SELECT 
+			*
+		FROM `user`
+		WHERE id = #{id} AND pw = MD5(#{pw})
+	</select>
 
 	<!-- 아이디 찾기 -->
 	<select id="findById" parameterType="String" resultType="User">
@@ -69,11 +87,15 @@
 	</select>
 
 	<!-- 비밀번호 찾기 -->
-	<select id="findByPw" parameterType="String" resultType="User">
-		SELECT 
-			*
-		FROM `user`
-		WHERE pw = MD5(#{pw})
+	<select id="findByPw" parameterType="String" resultType="boolean">
+		SELECT CASE 
+			WHEN EXISTS (
+				SELECT 1 
+				FROM `user` 
+				WHERE pw = MD5(#{pw})
+			) THEN true 
+			ELSE false 
+		END
 	</select>
 
 	<!-- 닉네임 찾기 -->
@@ -92,15 +114,40 @@
 			WHERE number = #{number}
 	</select>
 
-	<!-- 유저 img_url 업데이트 -->
-	<update id="createImgUrl" parameterType="User">
+	<!-- 이메일 & 전화번호로 아이디 찾기 -->
+	<select id="findIdByEP" parameterType="map" resultType="User">
+		SELECT 
+			*
+		FROM `user`
+		WHERE number = #{number} AND email = #{email}
+	</select>
+
+	<!-- 아이디 & 이메일 & 전화번호로 아이디 찾기 -->
+	<select id="findIdByEPN" parameterType="map" resultType="User">
+		SELECT 
+			*
+		FROM `user`
+		WHERE id = #{id} AND email = #{email} AND number = #{number}
+	</select>
+
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePw" parameterType="User">
 		UPDATE `user`
-		SET 
-			img_url = #{img_url}
+		SET pw = MD5(#{pw})
 		WHERE id = #{id}
 	</update>
 
-
+	<!-- 기존 비밀번호 체크 -->
+	<select id="checkOldPw" parameterType="map" resultType="boolean">
+		SELECT CASE 
+			WHEN EXISTS (
+				SELECT 1 
+				FROM `user` 
+				WHERE id = #{id} 
+				AND pw = MD5(#{pw})
+			) THEN true 
+			ELSE false 
+		END
+	</select>
 
 </mapper>
-

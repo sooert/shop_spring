@@ -91,7 +91,7 @@ header h1 {
     background: #c0bdbd; /* 더 진한 보라색 */
 }
 
-/* 유효성 검사 메시지 */ 
+/* 유효성 검사 메시지 */
 .validation-message {
     font-size: 12px;
     color: #ff4444;
@@ -99,7 +99,7 @@ header h1 {
 }
 
 /* 회원가입 버튼 스타일 */
-#next-btn, #signup-btn {
+#find-id-btn {
     width: 100%;
     padding: 14px; 
     background: var(--color-gray);
@@ -116,12 +116,12 @@ header h1 {
     transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-#next-btn:hover, #signup-btn:hover {
+#find-id-btn:hover {
     background: #c0bdbd;
     transform: translateY(-1px);
 }
 
-#next-btn:active, #signup-btn:active {
+#find-id-btn:active {
     transform: translateY(0);
 }
 
@@ -138,147 +138,6 @@ header h1 {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-/* Datepicker 스타일 커스터마이징 */
-/* 달력 아이콘 위치 조정 */
-.calendar-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #666;
-}
-
-/* Datepicker 입력 필드 스타일 */
-#birth_date {
-    background-color: #fff;
-    cursor: pointer;
-}
-
-.ui-datepicker {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    width: 253px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    font-size: 14px;
-}
-
-.ui-datepicker-header {
-    background: var(--color-gray);
-    border: none;
-    border-radius: 6px;
-    padding: 6px;
-    margin-bottom: 8px;
-}
-
-.ui-datepicker-title {
-    color: #333;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.ui-datepicker-prev, .ui-datepicker-next {
-    cursor: pointer;
-    top: 8px;
-}
-
-.ui-datepicker-prev:hover, .ui-datepicker-next:hover {
-    background: none;
-    border: none;
-}
-
-.ui-datepicker-calendar {
-    width: 100%;
-}
-
-.ui-datepicker th {
-    color: #666;
-    font-size: 12px;
-    padding: 5px;
-}
-
-.ui-datepicker td {
-    padding: 2px;
-}
-
-.ui-datepicker td span, .ui-datepicker td a {
-    text-align: center;
-    padding: 8px;
-    border-radius: 4px;
-    border: none;
-    background: none;
-    color: #333;
-}
-
-.ui-datepicker td a:hover {
-    background: #f5f5f5;
-}
-
-.ui-datepicker td a.ui-state-active {
-    background: var(--color-gray);
-    color: #fff;
-}
-
-.ui-datepicker td a.ui-state-highlight {
-    background: #f0f0f0;
-    color: #333;
-}
-
-/* 달력 헤더의 이전/다음 버튼 */
-.ui-datepicker .ui-datepicker-prev,
-.ui-datepicker .ui-datepicker-next {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    top: 8px;
-}
-
-.ui-datepicker .ui-datepicker-prev {
-    left: 5px;
-}
-
-.ui-datepicker .ui-datepicker-next {
-    right: 5px;
-}
-
-.ui-icon {
-    width: 16px;
-    height: 16px;
-}
-
-/* 비밀번호 토글 아이콘 스타일 */
-.password-toggle {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #666;
-}
-
-/* 달력 아이콘 스타일 */
-.calendar-icon {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #666;
-}
-    
-/* 프로필 이미지 스타일 */
-#profile-img {
-    display: block;
-    width: 100px;
-    height: 100px;
-    margin-left: 140px;
-    margin-bottom: 30px;
-    border-radius: 50%;
-    object-fit: cover;
 }
 
 /* 전화번호 인증 관련 스타일 추가 */
@@ -316,25 +175,30 @@ header h1 {
     border: 1px solid #ddd;
     border-radius: 4px;
     text-align: center;
-}
+} 
 
-.profile-upload {
+#back-btn {
     text-align: center;
-    margin-bottom: 20px;
+    font-size: 10px;
+    color: white;
+    height:35px;
+    margin-top:12px;
+    width:21%;
+    padding : 10px;
+    border : none;
+    background:var(--color-gray);
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-.profile-upload img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border: 2px solid #ddd;
+#back-btn:hover {
+    background: #c0bdbd;
+    transform: translateY(-1px);
 }
 
-.profile-upload input[type="file"] {
-    display: block;
-    margin: 10px auto;
+/* 유효성 검사 메시지 */
+.number-check-result {
+    font-size: 12px;
+    margin-top: 5px;
 }
-
-

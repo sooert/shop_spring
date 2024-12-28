@@ -16,9 +16,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     
     <!-- 나머지 스크립트들 -->
-    <script src="./js/join.js"></script>
-    <script src="./js/util.js"></script>
-    <script src="./js/async.js"></script>
+    <script src="./js/join/join.js"></script>
+    <script src="./js/join/util.js"></script>
 
     <!-- 파이어베이스 관련 스크립트들 -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -79,7 +78,11 @@
 					<input id="birth_date" name="birth_date" type="text" 
 						   placeholder="생년월일 (YYYY-MM-DD)" 
 						   required readonly/>
-					<i class="fa-regular fa-calendar calendar-icon"></i>
+				</div>
+
+				<!-- 이메일 입력 -->
+				<div class="input-with-btn">
+					<input id="email" name="email" type="email" placeholder="이메일" required/>
 				</div>
 
 				<!-- 주소 입력 -->

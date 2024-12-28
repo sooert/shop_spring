@@ -70,7 +70,7 @@ async function checkDuplicate(type) {
     try {
         const response = await $.ajax({
             url: `./api/user/findBy${type.charAt(0).toUpperCase() + type.slice(1)}`,
-            type: 'post',
+            type: 'GET',
             data: { 
                 [type]: value 
             }
@@ -111,7 +111,7 @@ function isValidDate(dateString) {
            date.getMonth() === month &&
            date.getDate() === day;
 }
-
+ 
 $(document).ready(function() {
 
     // Datepicker 설정
@@ -194,7 +194,8 @@ $(document).ready(function() {
                 pwcheck: $('#pwcheck').val(),
                 address: $('#address').val(),
                 detail_address: $('#detail_address').val(),
-                birth_date: birthDate
+                birth_date: birthDate,
+                email: $('#email').val()
             };
 
             // 필수 입력값 확인
@@ -203,7 +204,8 @@ $(document).ready(function() {
                 !validateInput(userData.nick, '닉네임') ||
                 !validateInput(userData.pw, '비밀번호') ||
                 !validateInput(userData.address || userData.detail_address, '주소') ||
-                !validateInput(userData.birth_date, '생년월일')
+                !validateInput(userData.birth_date, '생년월일') ||
+                !validateInput(userData.email, '이메일')
             ) {
                 return false;
             }
@@ -230,6 +232,13 @@ $(document).ready(function() {
             if (!userData.address || !userData.detail_address) {
                 alert('주소를 입력해주세요.');
                 $('#address').focus();
+                return false;
+            }
+
+            // 이메일 확인
+            if (!userData.email) {
+                alert('이메일을 입력해주세요.');
+                $('#email').focus();
                 return false;
             }
 
@@ -292,7 +301,7 @@ $(document).ready(function() {
         $('#id-result-txt').text('중복 확인이 필요합니다.').css('color', 'orange');
     });
 
-    // 닉네임 입력 필드 변경 감지
+    // 닉네임 입력 필드 변경 감지 
     $('#nick').on('input', function() {
         isNickVerified = false;
         $('#nick-result-txt').text('중복 확인이 필요합니다.').css('color', 'orange');
@@ -310,11 +319,6 @@ $(document).ready(function() {
                 }
             }
         }
-    });
-
-    // 달력 아이콘 클릭 이벤트
-    $('.calendar-icon').on('click', function() {
-        $('#birth_date').datepicker('show');
     });
 
     // 프로필 이미지 클릭 시 파일 입력 창 열기

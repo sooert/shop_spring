@@ -55,6 +55,25 @@ body {
     background-color: #f9f9f9;
 }
 
+/* 제일 위로가는 버튼 */
+#scrollToTop {
+	display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #a5a5a5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 998; /* 다른 요소 위에 표시되도록 */
+}
+
+#scrollToTop:hover {
+    background-color:var(--color-hover); /* 호버 시 색상 변경 */
+}
+
 /* 상품 컨테이너 */
 .product-container {
     display: flex;
@@ -66,22 +85,26 @@ body {
     border-radius: 8px;
     overflow: hidden;
 }
-  
+
+/* 상품 이미지 */
 .product-image {
     flex: 1;
     padding: 20px;
 }
-  
+
+/* 메인 이미지 */
 .main-image {
     width: 100%;
     border-radius: 8px;
 }
   
+/* 썸네일 컨테이너 */
 .thumbnail-container {
     display: flex;
     margin-top: 10px;
 }
-  
+
+/* 썸네일 */
 .thumbnail {
     width: 60px;
     height: 60px;
@@ -90,72 +113,85 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
-  
+
+/* 썸네일 호버 */
 .thumbnail:hover {
-    border-color: #0078d7;
+    border-color: var(--color-hover);
 }
-  
+
+/* 상품 상세 */
 .product-details {
     flex: 1;
     padding: 20px;
 }
-  
+
+/* 상품 제목 */
 .product-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
 }
-  
+
+/* 상품 할인 */
 .product-discount {
     color: #d9534f;
     font-size: 18px;
     margin-bottom: 5px;
 }
-  
+
+/* 상품 원래 가격 */
 .original-price {
     text-decoration: line-through;
     color: #888;
 }
-  
+
+/* 상품 할인 가격 */
 .discounted-price {
     font-size: 22px;
     font-weight: bold;
     color: #0078d7;
     margin-bottom: 20px;
 }
-  
+
+/* 상품 혜택 */
 .user-benefit h2 {
     font-size: 18px;
     margin-bottom: 10px;
 }
-  
+
+/* 상품 혜택 설명 */
 .user-benefit p {
     font-size: 16px;
     color: #333;
 }
-  
+
+/* 상품 혜택 리스트 */
 .user-benefit ul {
     list-style: none;
     padding: 0;
     margin: 10px 0;
 }
-  
+
+/* 상품 혜택 리스트 아이템 */
 .user-benefit li {
     font-size: 14px;
     margin: 5px 0;
     color: #555;
 }
-  
+
+/* 상품 옵션 */
 .product-options {
     margin: 20px 0;
 }
-  
+
+/* 상품 옵션 라벨 */
 .product-options label {
     font-size: 14px;
     display: block;
     margin-bottom: 5px;
 }
-  
+
+/* 상품 옵션 선택 */
 .product-options select {
     width: 100%;
     padding: 10px;
@@ -163,13 +199,15 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-  
+
+/* 구매 버튼 */
 .purchase-buttons {
     display: flex;
     gap: 10px;
     margin: 20px 0;
 }
-  
+
+/* 구매 버튼 버튼 */
 .purchase-buttons button {
     flex: 1;
     padding: 10px;
@@ -178,27 +216,32 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
-  
-.gift-button {
+
+/* 구매 버튼 버튼 호버 */
+.love-button {
     background-color:var(--color-gray);
     color: #fff;
 }
-  
+
+/* 구매 버튼 버튼 */
 .buy-button {
   background-color: var(--color-gray);
   color: #fff;
 }
 
+/* 장바구니 버튼 */
 .cart-button {
     background-color: var(--color-gray);
     color: #fff;
 }
-  
+
+/* 구매 버튼 버튼 호버 */
 .purchase-buttons button:hover {
     background-color: var(--color-hover);
     opacity: 0.9;
 }
-  
+
+/* 추가 정보 */
 .additional-info {
   margin-top: 20px;
   font-size: 14px;
@@ -214,6 +257,7 @@ body {
     margin-left: 16%;
 }
 
+/* 상품 설명 버튼 */
 .item-description-button {
     width: 34%;
     background-color: var(--color-gray);
@@ -223,6 +267,12 @@ body {
     cursor: pointer;
 }
 
+/* 상품 설명 버튼 호버 */
+.item-description-button:hover {
+    background-color: var(--color-hover);
+}
+
+/* 상품 설명 텍스트 */
 #item-text {
     margin-top: 2%;
     margin-bottom: 2%;
@@ -241,34 +291,39 @@ body {
     padding: 20px;
 }
 
+/* 상품 설명 컨테이너 활성 */
 .description-container.active {
     display: block;
 }
 
+/* 상품 설명 컨테이너 헤더 */
 .description-container h1 {
     font-size: 24px;
     font-weight: bold;
     margin-top: 4px;
 }
 
+/* 상품 설명 컨테이너 텍스트 */
 .description-container p {
     font-size: 16px;
     margin-bottom: 10px;
 }
 
+/* 상품 설명 컨테이너 리스트 */
 .description-container ul {
     list-style: none;
     padding: 0;
     margin: 10px 0;
 }
 
+/* 상품 설명 컨테이너 리스트 아이템 */
 .description-container li {
     font-size: 14px;
     margin: 5px 0;
     color: #555;
 }
 
-/* 상품 설명 컨테이너 */
+/* 상품 설명 컨테이너 헤더 */
 .description-container h2 {
     font-size: 18px;
     font-weight: bold;

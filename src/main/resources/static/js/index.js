@@ -31,8 +31,42 @@ function scrolltop() {
 
  $(document).ready(function() {
 
-    /*오른쪽 하단에 제일 위로가는 버튼*/
-    scrolltop();
+   /*오른쪽 하단에 제일 위로가는 버튼*/
+   scrolltop();
 
-    
+   // 상품 목록 불러오기
+   getItems();
+
  });
+
+ function getItems(){ 
+   $.ajax({
+       url:"./api/item/findAll",
+       method:"GET", 
+       success:function(response){ 
+           var items = response;
+           console.log(items);
+           $.each(items, function(index, item){
+              var discount_price = item.price * (1-item.discount);
+              $('.item-container').append(`
+                  <div class="product" style="cursor:pointer;" onclick="location.href='./detail-item?item_code=${item.item_code}'">
+                        <img src="${item.item_img_url}" class="product-image"/>
+                        <div class="product-info">
+                           <span class="product-discount" style="color:red;">${item.discount*100}%</span>
+                           <span class="product-discount-price">${discount_price.toLocaleString()} 원</span>
+                        </div>
+                        <div class="product-company">
+                           <span style="color:#999;font-size:13px;">${item.company}</span>
+                        </div>
+                        <div class="product-detail" style="margin-top:-5px; margin-bottom:-6px;">
+                           <span style="color:#999;font-size:13px;">${item.content}</span>
+                        </div>
+                  </div>
+              `);
+           });
+           
+       }
+   });
+}
+
+
