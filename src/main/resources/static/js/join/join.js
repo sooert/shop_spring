@@ -113,7 +113,7 @@ function isValidDate(dateString) {
 }
  
 $(document).ready(function() {
-
+ 
     // Datepicker 설정
     $('#birth_date').datepicker({
         dateFormat: 'yy-mm-dd',     // 날짜 형식
@@ -177,10 +177,8 @@ $(document).ready(function() {
         e.preventDefault(); // 이벤트 기본 동작 중단을 먼저 실행
         
         try {
-            // birth_date 값을 가져올 때 하이픈(-) 포함된 형식으로 가져오기
-            const birthDate = $('#birth_date').val();
-            
             // 생년월일 유효성 검사 추가
+            const birthDate = $('#birth_date').val();
             if (!isValidDate(birthDate)) {
                 alert('올바른 생년월일 형식이 아닙니다. (YYYY-MM-DD)');
                 $('#birth_date').focus();
@@ -189,6 +187,7 @@ $(document).ready(function() {
 
             const userData = {
                 id: $('#id').val(),
+                name: $('#name').val(),
                 nick: $('#nick').val(), 
                 pw: $('#pw').val(),
                 pwcheck: $('#pwcheck').val(),
@@ -201,6 +200,7 @@ $(document).ready(function() {
             // 필수 입력값 확인
             if (
                 !validateInput(userData.id, '아이디') ||
+                !validateInput(userData.name, '이름') ||
                 !validateInput(userData.nick, '닉네임') ||
                 !validateInput(userData.pw, '비밀번호') ||
                 !validateInput(userData.address || userData.detail_address, '주소') ||

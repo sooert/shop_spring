@@ -4,7 +4,7 @@ $(document).ready(function () {
 	
     // 홈 버튼
 	$('.go-home, .htop-left').on('click', function () {
-	    window.location.href = './index';
+	    window.location.href = './index'; 
 	});
 
     // 상품 등록 버튼
@@ -18,9 +18,19 @@ $(document).ready(function () {
     });
 
     // 마이페이지 버튼
-    $('.go-my-page, .info-left-box').on('click', function () {
+    $('.go-my-page, .info-my-box').on('click', function () {
         window.location.href = './basics';
     }); 
+
+    // 찜 버튼
+    $('.go-like').on('click', function () {
+        window.location.href = './loves';
+    });
+
+    // 찜 버튼(비회원)
+    $('.go-like-noUser').on('click', function () {
+        window.location.href = './nouser-lovers';
+    });
  
 	// 로그인 버튼과 팝업창 로그인
 	$('#login-btn, .name-box').on('click', function () {

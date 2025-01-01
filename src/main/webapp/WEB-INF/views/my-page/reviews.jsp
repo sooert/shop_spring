@@ -39,9 +39,8 @@
                     <li><button id="sell" onclick="location.href='./sells'">👤 판매 내역</button></li>
 
                     <li><button id="review" onclick="location.href='./reviews'" 
-                        style="background-color: var(--color-hover);">✏️ 리뷰</button></li>
-                        
-                    <li><button id="love" onclick="location.href='./loves'">💖 좋아요</button></li>
+                        style="background-color: var(--color-hover);">✏️ 리뷰</button>
+                    </li>
                 </ul>
             </ul>
         </div>

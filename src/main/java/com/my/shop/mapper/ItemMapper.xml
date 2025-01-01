@@ -39,6 +39,8 @@
 			price,
 			discount,
 			point,
+			buy_count,
+			like_count,
 			created_date
 		)
 		VALUES
@@ -53,12 +55,13 @@
 			#{price},
 			#{discount},
 			#{point},
+			0,
+			0,
 			NOW()
 		)
 	</insert>
 
 
-
-
 </mapper>
+
 

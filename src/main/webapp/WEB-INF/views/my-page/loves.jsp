@@ -32,15 +32,9 @@
             <ul class="menu">
                 <ul class="menu">
                     <li><button id="home" onclick="location.href='./index'">🏠 홈</button></li>
-                    <li><button id="my" onclick="location.href='./my'">✔ 내정보 관리</button>
-                        <button id="call" style="display: none;">📞 전화번호 변경</button>
-                    </li>
-                    <li><button id="buy" onclick="location.href='./buys'">📊 구매 내역</button></li>
-                    <li><button id="sell" onclick="location.href='./sells'">👤 판매 내역</button></li>
-                    <li><button id="review" onclick="location.href='./reviews'">✏️ 리뷰</button></li>
-
                     <li><button id="love" onclick="location.href='./loves'" 
-                        style="background-color: var(--color-hover);">💖 좋아요</button></li>
+                        style="background-color: var(--color-hover);">💖 찜</button>
+                    </li>
                 </ul>
             </ul>
         </div>
@@ -49,7 +43,9 @@
         <div class="content" id="content-area">
             <h2>좋아요 관리</h2>
             <p>좋아요 관리할 수 있습니다.</p>
-
+            <div class="loves-list">
+                <!-- 좋아요 목록 조회 -->
+            </div>  
         </div>
 
        <!-- 우측 사이드바 -->

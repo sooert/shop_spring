@@ -77,12 +77,22 @@ public class UserController {
 		session.invalidate();
 	}
 
+	// 로그인 체크
+	@GetMapping("loginCheck")
+	public String loginCheck(HttpSession session) {
+		if (session.getAttribute("me") != null) {
+			return "success";
+		}
+		return "not-login";
+	}
+	
 	///////////////////////////// 회원 생성할때 필요한 메서드 /////////////////////////////////
 
 	// 회원 생성
 	@PostMapping("create")
 	public String create(@RequestParam(value = "id") String id, 
 						 @RequestParam(value = "pw") String pw,
+						 @RequestParam(value = "name") String name,
 						 @RequestParam(value = "nick") String nick, 
 						 @RequestParam(value = "address") String address,
 						 @RequestParam(value = "detail_address") String detail_address,
@@ -97,6 +107,7 @@ public class UserController {
 			User user = new User();
 			user.setId(id);
 			user.setPw(pw);
+			user.setName(name);
 			user.setNick(nick);
 			user.setAddress(address);
 			user.setDetail_address(detail_address);
@@ -140,12 +151,13 @@ public class UserController {
 
 	///////////////////////////// 아이디 & 비밀번호 찾기 필요한 메서드 /////////////////////////////////
 
-	// 이메일 & 전화번호로 아이디 찾기
-	@GetMapping("findIdByEP")
-	public User findIdByEP(@RequestParam(value = "number") String number, 
-						   @RequestParam(value = "email") String email) {
+	// 이름 & 이메일 & 전화번호로 아이디 찾기
+	@GetMapping("findIdByEPN")
+	public User findIdByEPN(@RequestParam(value = "name") String name, 
+						   @RequestParam(value = "email") String email, 
+						   @RequestParam(value = "number") String number) {
 		try {
-			User user = userService.findIdByEP(number, email);
+			User user = userService.findIdByEPN(name, email, number);
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,13 +165,13 @@ public class UserController {
 		}
 	}
 
-	// 아이디 & 이메일 & 전화번호로 아이디 찾기
-	@GetMapping("findIdByEPN")
-	public User findIdByEPN(@RequestParam(value = "id") String id, 
-							 @RequestParam(value = "email") String email, 
+	// 아이디 & 이름 & 전화번호로 아이디 찾기
+	@GetMapping("findIdByIN")
+	public User findIdByIN(@RequestParam(value = "id") String id, 
+							 @RequestParam(value = "name") String name, 
 							 @RequestParam(value = "number") String number) {
 		try {
-			User user = userService.findIdByEPN(id, email, number);
+			User user = userService.findIdByIN(id, name, number);
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();

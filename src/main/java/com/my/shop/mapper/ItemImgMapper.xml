@@ -7,7 +7,7 @@
 		SELECT * FROM `item_img` WHERE item_idx = #{item_idx}
 	</select>
 
-   <!-- 회원 추가  -->
+   <!-- 상품 이미지 추가  -->
 	<insert id="create" parameterType="ItemImg">
 		insert into `item_img`
 		(	

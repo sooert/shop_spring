@@ -123,12 +123,15 @@ $(document).ready(function() {
             return;
         }
 
+        const name = sessionStorage.getItem('userName');
+
         $.ajax({
             url: "./api/user/updatePw",
             type: "POST",
             data: {
                 id: sessionStorage.getItem('resetPasswordId'),
-                newPw: $('#pw').val()
+                newPw: $('#pw').val(),
+                name: name
             },
             success: function(response) {
                 if(response === 'ok') {
@@ -163,12 +166,12 @@ function checkAuthStatus() {
     // 사용자 정보 확인
     let isValid = false;
     $.ajax({
-        url: "./api/user/findIdByEPN",
+        url: "./api/user/findIdByIN",
         type: "GET",
         async: false, // 동기 처리
         data: {
             id: resetPasswordId,
-            email: sessionStorage.getItem('userEmail'),
+            name: sessionStorage.getItem('userName'),
             number: sessionStorage.getItem('userNumber')
         },
         success: function(response) {

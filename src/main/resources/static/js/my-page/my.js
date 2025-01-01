@@ -45,14 +45,20 @@ $(document).ready(function() {
         const result = validatePassword(value); // 비밀번호 유효성 검사
         if (result === "ok") {
             showResultMessage('pw', '사용 가능한 비밀번호입니다.', true);
-        } else {
-            showResultMessage('pw', '사용 불가능한 비밀번호입니다.', false);
-         }
+        } else if (result === "empty") {
+            showResultMessage('pw', '비밀번호를 입력해주세요.', false);
+        } else if (result === "short") {
+            showResultMessage('pw', '비밀번호는 8자 이상이어야 합니다.', false);
+        } else if (result === "invalid") {
+            showResultMessage('pw', '영문, 숫자, 특수문자를 조합하여 입력해주세요.', false);
+        }
+        $('#pw-result-txt').css('display', 'block');
     });
 
     // 닉네임 유효성 검사
     $('#nick').on('input', function() {
         checkNick('nick');
+        $('#nick-result-txt').css('display', 'block'); // 결과 텍스트 표시
     });
     
     //주소창 검색

@@ -24,8 +24,8 @@
     <div class="menu">
         <h3></h3>
         <ul>
-            <li><a href="#">장바구니</a></li>
-            <li><a href="#">주문내역</a></li>
+            <li><a href="#">장바구니 - 구현 중</a></li>
+            <li><a href="#">주문내역 - 구현 미정</a></li>
         </ul>
         <!-- <h3>상품</h3>
         <ul>

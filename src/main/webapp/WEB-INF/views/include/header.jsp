@@ -53,7 +53,7 @@
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <div class="info-left-box">
+                            <div class="info-my-box">
                                 <div class="profile-img-box">
                                     <img class="profile-img" src="${sessionScope.me.img_url}" />   
                                  </div>
@@ -89,7 +89,7 @@
                      <c:if test="${empty sessionScope.me}">
                         <ul class="menu-list">
                             <li class="menu-item go-home">홈</li>
-                            <li class="menu-item go-board">문의사항</li>
+                            <li class="menu-item go-like-noUser">찜</li>
                         </ul>
                      </c:if>
 
@@ -98,6 +98,7 @@
                         <ul class="menu-list">
                             <li class="menu-item go-home">홈</li>
                             <li class="menu-item go-my-page">마이페이지</li>
+                            <li class="menu-item go-like">찜</li>
                             <li class="menu-item go-cart">장바구니</li>
                             <li class="menu-item go-board">문의사항</li>
                         </ul>

@@ -56,21 +56,22 @@ public class UserDao {
 
     ///////////////////////////// 아이디 & 비밀번호 찾기  /////////////////////////////////
 
-    // 이메일 & 전화번호로 아이디 찾기
-    public User findIdByEP(String number, String email) {
+    // 이름 & 이메일 & 전화번호로 아이디 찾기
+    public User findIdByEPN(String name, String email, String number) {
         Map<String, String> params = new HashMap<>();
-        params.put("number", number);
-        params.put("email", email);
-        return sqlSession.selectOne("UserMapper.findIdByEP", params);
-    }
-
-    // 아이디 & 이메일 & 전화번호로 아이디 찾기
-    public User findIdByEPN(String id, String email, String number) {
-        Map<String, String> params = new HashMap<>();
-        params.put("id", id);
+        params.put("name", name);
         params.put("email", email);
         params.put("number", number);
         return sqlSession.selectOne("UserMapper.findIdByEPN", params);
+    }
+
+    // 아이디 & 이름 & 전화번호로 아이디 찾기
+    public User findIdByIN(String id, String name, String number) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        params.put("name", name);
+        params.put("number", number);
+        return sqlSession.selectOne("UserMapper.findIdByIN", params);
     }
 
     // 비밀번호 업데이트

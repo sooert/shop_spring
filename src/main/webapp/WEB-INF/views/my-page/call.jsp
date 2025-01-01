@@ -40,7 +40,6 @@
                 <li><button id="buy" onclick="location.href='./buys'">📊 구매 내역</button></li>
                 <li><button id="sell" onclick="location.href='./sells'">👤 판매 내역</button></li>
                 <li><button id="review" onclick="location.href='./reviews'">✏️ 리뷰</button></li>
-                <li><button id="love" onclick="location.href='./loves'">💖 좋아요</button></li>
             </ul>
         </div>
 

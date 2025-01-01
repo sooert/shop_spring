@@ -55,17 +55,17 @@ public class UserService {
 	///////////////////////////// 아이디 & 비밀번호 찾기 필요한 메서드 /////////////////////////////////
 
 
-	// 이메일 & 전화번호로 아이디 찾기
-	public User findIdByEP(String number, String email) {
-		return userDao.findIdByEP(number, email);
+	// 이름 & 이메일 & 전화번호로 아이디 찾기
+	public User findIdByEPN(String name, String email, String number) {
+		return userDao.findIdByEPN(name, email, number);
 	}
 
-	// 아이디 & 이메일 & 전화번호로 아이디 찾기
-	public User findIdByEPN(String id, String email, String number) {
-		return userDao.findIdByEPN(id, email, number);
+	// 아이디 & 이름 & 전화번호로 아이디 찾기
+	public User findIdByIN(String id, String name, String number) {
+		return userDao.findIdByIN(id, name, number);
 	}
 
-	// 비밀번호 업데이트
+	// 비밀번호 업데이트 
 	public void updatePw(User user) {
 		userDao.updatePw(user);
 	}

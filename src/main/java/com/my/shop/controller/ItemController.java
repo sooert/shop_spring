@@ -1,6 +1,8 @@
 package com.my.shop.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,24 +16,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.my.shop.entity.Item;
 import com.my.shop.entity.ItemImg;
+import com.my.shop.entity.ItemLike;
 import com.my.shop.entity.User;
+import com.my.shop.entity.Buy;
 import com.my.shop.service.ItemImgService;
 import com.my.shop.service.ItemService;
+import com.my.shop.service.ItemLikeService;
+import com.my.shop.service.UserService;
+import com.my.shop.service.BuyService;
 
 @RestController
 @RequestMapping("api/item")
 public class ItemController {
 
 	@Autowired
+	UserService userService;
+
+	@Autowired
 	ItemService itemService;
 
 	@Autowired
 	ItemImgService itemImgService;
+	
+	@Autowired
+	ItemLikeService itemLikeService;
+
+	@Autowired
+	BuyService buyService;
 
 	///////////////////////////// 상품 등록 ///////////////////////////
 
 	// 상품 생성
-	@PostMapping("create")
+	@PostMapping("/api/item/create")
 	public String create(@RequestParam(value = "name") String name, 
                          @RequestParam(value = "category") String category,
                          @RequestParam(value = "content") String content,
@@ -106,6 +122,8 @@ public class ItemController {
 		return "ok";
 	}
 
+	///////////////////////////// 상품 이미지 조회 ///////////////////////////
+	
 	// 상품 이미지 조회
 	@GetMapping("imgs")
 	public List<ItemImg> imgs(@RequestParam(value = "item_idx") int item_idx) {
@@ -154,4 +172,157 @@ public class ItemController {
 		}
 		return item;
 	}
+
+	///////////////////////////// 상품 좋아요 ///////////////////////////
+
+	// 상품 좋아요 생성
+	@PostMapping("likeCreate")
+	public String likeCreate(@RequestParam(value = "item_code") String item_code, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		itemLikeService.itemLikeCreate(item_code, me.getNick());
+		return "ok";
+	}
+
+	// 상품 좋아요 증가
+	@PostMapping("likePlus")
+	public String likePlus(@RequestParam(value = "item_code") String item_code, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		itemLikeService.itemLikePlus(item_code, me.getNick());
+		return "ok";
+	}
+
+	// 상품 좋아요 조회
+	@GetMapping("likes")
+	public ItemLike likes(@RequestParam(value = "item_code") String item_code, 
+							HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return null;
+		}
+		return itemLikeService.itemLikeRead(item_code);
+	}
+
+	// 상품 좋아요 감소
+	@PostMapping("likeMinus")
+	public String likeMinus(@RequestParam(value = "item_code") String item_code, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		try {
+			// 좋아요 카운트 감소
+			itemLikeService.itemLikeMinus(item_code, me.getNick());
+			// 좋아요 기록 삭제
+			itemLikeService.itemLikeDelete(item_code, me.getNick());
+			return "ok";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+
+
+
+	///////////////////////////// 상품 구매 생성 ///////////////////////////
+
+	// 상품 구매 생성
+	@PostMapping("buyAdd")
+	public String buyAdd(
+		@RequestParam(value = "item_code") String item_code,
+		@RequestParam(value = "quantity") int quantity,
+		@RequestParam(value = "color") String color,
+		@RequestParam(value = "size") String size,
+		@RequestParam(value = "buy_code") String buy_code,
+		HttpSession session) {
+		
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		int user_idx = me.getUser_idx();
+		
+		try {
+			Buy buy = new Buy();
+			buy.setBuy_code(buy_code);
+			buy.setItem_code(item_code);
+			buy.setUser_idx(user_idx);
+			buy.setQuantity(quantity);
+			buy.setColor(color);
+			buy.setSize(size);
+			buyService.buyAdd(buy);
+			return "ok";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+
+	///////////////////////////// 구매 횟수 증가 ///////////////////////////	
+
+	// 구매 횟수 증가
+	@PostMapping("buyCountUpdate")
+	public String buyCountUpdate(@RequestParam(value = "item_code") String item_code, 
+								 @RequestParam(value = "quantity") int quantity,
+								 HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("item_code", item_code);
+		map.put("quantity", quantity);
+		buyService.buyCountUpdate(map);
+		return "ok";
+	}
+
+	///////////////////////////// 상품별 구매 횟수 조회 ///////////////////////////
+
+	// 상품별 구매 횟수 조회
+	@GetMapping("getBuyCount")
+	public int getBuyCount(@RequestParam(value = "item_code") String item_code) {
+		return buyService.getItemBuyCount(item_code);
+	}
+
+	///////////////////////////// 상품 구매 전체 조회 ///////////////////////////
+
+	// 상품 구매 전체 조회
+	@GetMapping("buyCount")
+	public int buyCount(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return 0;
+		}
+		return buyService.buyCount();
+	}
+
+	///////////////////////////// 회원 구매 목록 상세 조회 ///////////////////////////	
+	
+	// 회원 구매 목록 상세 조회
+	@GetMapping("buyListDetail")
+	public List<Map<String, Object>> buyListDetail(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return null;
+		}
+		return buyService.buyListDetail(me.getUser_idx());
+	}
+
+	// 사용자별 찜 목록 조회
+	@GetMapping("findLikes")
+	public List<Map<String, Object>> findLikes(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return null;
+		}
+		return itemLikeService.findByUserNick(me.getNick());
+	}
+
+
+
 }

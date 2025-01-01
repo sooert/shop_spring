@@ -46,7 +46,6 @@
                 <li><button id="buy" onclick="location.href='./buys'">📊 구매 내역</button></li>
                 <li><button id="sell" onclick="location.href='./sells'">👤 판매 내역</button></li>
                 <li><button id="review" onclick="location.href='./reviews'">✏️ 리뷰</button></li>
-                <li><button id="love" onclick="location.href='./loves'">💖 좋아요</button></li>
             </ul>
         </div>
 
@@ -66,13 +65,20 @@
             <div class="input-with-btn">
                 <input id="newPw" name="pw" type="password" placeholder="새 비밀번호를 입력해주세요." required/>
             </div>
-            <div id="pw-result-txt" class="validation-message"></div> 
+            <div id="pw-result-txt" class="validation-message" style="display: none;"></div> 
+            
+            <!-- 이름 확인만 가능 -->
+            <div class="input-with-btn">
+                <input id="name" name="name" type="text" placeholder="이름 : ${sessionScope.me.name}" 
+                    style="cursor: not-allowed; background-color: var(--color-gray); font-weight: bold;" disabled/>
+            </div>
+
 
             <!-- 닉네임 입력 -->
             <div class="input-with-btn">
                 <input id="nick" name="nickname" type="text" class="nickcheck" placeholder="닉네임을 입력해주세요." required/>
             </div>
-            <div id="nick-result-txt" class="validation-message"></div> 
+            <div id="nick-result-txt" class="validation-message" style="display: none;"></div> 
 
             <!-- 생년월일 입력 -->
 			<div class="input-with-btn">

@@ -16,20 +16,20 @@ $(document).ready(function(){
         }
     });
 
-    //firebase 초기화
+    // Firebase 초기화 부분 수정
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
     }
 
-    //firebaseItemUtil 초기화
-    var firebaseItemUtil = {}; // firebaseItemUtil 정의
-    firebaseItemUtil.getBase64 = firebaseUtil.getBase64; // firebaseUtil에서 메서드 가져오기
-    firebaseItemUtil.uploadItemImage = firebaseUtil.uploadItemImage; // firebaseUtil에서 메서드 가져오기
-    firebaseItemUtil.storage = storage; // firebase storage 추가
-
-    //스토리지 초기화
+    //스토리지 초기화 - 순서 변경
     var storage = firebase.storage();
-    
+
+    //firebaseItemUtil 초기화
+    var firebaseItemUtil = {}; 
+    firebaseItemUtil.getBase64 = firebaseUtil.getBase64;
+    firebaseItemUtil.uploadItemImage = firebaseUtil.uploadItemImage;
+    firebaseItemUtil.storage = storage;
+
     const maxImgCnt = 8;
    
     var selectedMainImgBase64 = '';
@@ -132,53 +132,61 @@ $(document).ready(function(){
 
         $('#loader').css('display','inline-block');
 
-        //이미지 업로드
-        var item_img_url = await firebaseItemUtil.uploadItemImage(storage, selectedMainImgBase64);
+        try {
+            //이미지 업로드
+            var item_img_url = await firebaseItemUtil.uploadItemImage(storage, selectedMainImgBase64);
 
+            //상세 이미지 업로드
+            var detail_img_urls = [];
 
-        //상세 이미지 업로드
-        var detail_img_urls = [];
+            for(var i = 0; i < $('.img-box').length; i++){
+                var base64 = $('.img-box').eq(i).find('img').attr('src');
+                var url = await firebaseItemUtil.uploadItemImage(storage, base64);
+                detail_img_urls.push(url);
+            }
 
-        for(var i = 0; i < $('.img-box').length; i++){
-            var base64 = $('.img-box').eq(i).find('img').attr('src');
-            var url = await firebaseItemUtil.uploadItemImage(storage, base64);
-            detail_img_urls.push(url);
-        }
+            // detail_img_urls가 비어있지 않은지 확인
+            if (detail_img_urls.length === 0) {
+                alert('상세 이미지를 등록해주세요.');
+                return;
+            }
 
-        // detail_img_urls가 비어있지 않은지 확인
-        if (detail_img_urls.length === 0) {
-            alert('상세 이미지를 등록해주세요.');
-            return;
-        }
-
-        console.log(detail_img_urls);
-
-        $.ajax({
-            url: './api/item/create',
-            type: 'post',
-            data: {
+            const itemData = {
                 name: name,
                 category: category,
                 content: content,
-                price: price,
-                discount: discount / 100,
+                price: parseInt(price),
+                discount: parseFloat(discount) / 100,
                 company: company,
                 item_img_url: item_img_url,
                 detail_img_urls: detail_img_urls
-            },
-            success: function(data){ 
-                console.log(data);
-                if(data == 'ok'){
-                    alert('상품 등록이 완료되었습니다.');
-                    location.href = './index';
-                } else {
-                    alert('상품 등록에 실패하였습니다.');
+            };
+
+            $.ajax({
+                url: './api/item/create',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(itemData),
+                success: function(data){ 
+                    $('#loader').css('display', 'none');
+                    if(data === 'ok'){
+                        alert('상품 등록이 완료되었습니다.');
+                        location.href = './index';
+                    } else {
+                        alert('상품 등록에 실패하였습니다.');
+                    }
+                },
+                error: function(e){
+                    $('#loader').css('display', 'none');
+                    console.error(e);
+                    alert('상품 등록 중 오류가 발생했습니다.');
                 }
-            },
-            error: function(e){
-                console.log(e);
-            }
-        });
+            });
+        } catch(error) {
+            $('#loader').css('display', 'none');
+            console.error(error);
+            alert('이미지 업로드 중 오류가 발생했습니다.');
+        }
     });
 
 });

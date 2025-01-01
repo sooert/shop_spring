@@ -43,7 +43,7 @@ function validateNumber(number) {
           minutes = minutes < 10 ? "0" + minutes : minutes;
           seconds = seconds < 10 ? "0" + seconds : seconds;
   
-          display.text(minutes + ":" + seconds);
+          display.text(minutes + ":" + seconds); 
   
           if (--timer < 0) {
               clearInterval(interval);
@@ -84,11 +84,12 @@ function validateNumber(number) {
   
     // 인증번호 요청
     $(".number").click(function() {
+        const name = $("#name").val();
         const number = $("#number").val().replace(/-/g, '');
         const email = $("#email").val();
 
-        if (!number || !email) {
-            alert("전화번호와 이메일을 모두 입력해주세요.");
+        if (!name || !number || !email) {
+            alert("이름, 전화번호, 이메일을 모두 입력해주세요.");
             return;
         }
 
@@ -98,9 +99,10 @@ function validateNumber(number) {
         }
 
         $.ajax({
-            url: "./api/user/findIdByEP",
+            url: "./api/user/findIdByEPN",
             type: "GET",
             data: { 
+                name: name,
                 number: number,
                 email: email
             },

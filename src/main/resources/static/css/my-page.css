@@ -136,6 +136,14 @@ body {
     box-sizing: border-box;
 }
 
+.input-with-btn input:focus {
+    outline: none;
+    border-color: var(--color-gray);
+    box-shadow: 0 0 0 2px rgba(115, 70, 243, 0.1);
+}
+
+
+
 /* 버튼 스타일 */
 .input-with-btn button {
     background-color: var(--color-gray);
@@ -320,6 +328,7 @@ body {
     background-color: var(--color-hover);
 }
 
+
 /* 전화번호 인증 코드 스타일 */
 #number-auth-code {
     width: 222px;
@@ -327,6 +336,13 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     text-align: left;
+}
+
+#number:focus,
+#number-auth-code:focus{
+    outline: none;
+    border-color: var(--color-gray);
+    box-shadow: 0 0 0 2px rgba(115, 70, 243, 0.1);
 }
 
 /* 버튼 스타일 */
@@ -443,4 +459,65 @@ body {
 .validation-message {
     font-size: 12px;
     margin-bottom: 15px;
+}
+
+/* 구매 내역 스타일 */
+.purchase-item {
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 7px 10px 5px rgba(0, 0, 0, 0.1);
+    cursor: default;
+}
+
+.purchase-item p{
+    color: #b0b0b0;
+}
+
+/* 찜 목록 */
+.loves-list {
+    padding: 20px;
+}
+
+.love-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    gap: 20px;
+}
+
+.love-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h3 {
+    margin: 0 0 10px 0;
+}
+
+.item-info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.cancel-like {
+    padding: 8px 15px;
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-like:hover {
+    background-color: #cc0000;
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BuyMapper">
+
+   <!-- 상품 생성  -->
+	<insert id="buyAdd" parameterType="Buy">
+		INSERT INTO buy (
+			buy_code,
+			item_code,
+			user_idx,
+			quantity,
+			color,
+			size,
+			date
+		) VALUES (
+			#{buy_code},
+			#{item_code},
+			#{user_idx},
+			#{quantity},
+			#{color},
+			#{size},
+			NOW()
+		)
+	</insert>
+
+		<!-- 구매 횟수 전체 조회 -->
+	<select id="buyCount" resultType="int">
+			SELECT COUNT(*) FROM buy
+	</select>
+
+	<!-- 구매 횟수 증가 -->
+	<update id="buyCountUpdate" parameterType="map">
+		UPDATE item 
+		SET buy_count = buy_count + #{quantity}
+		WHERE item_code = #{item_code}
+	</update>
+
+	<!-- 회원 구매 목록 상세 조회 -->
+	<select id="buyListDetail" parameterType="int" resultType="map">
+		SELECT 
+			b.buy_idx,
+			b.buy_code,
+			b.color,
+			b.size,
+			b.quantity,
+			b.date,
+			i.item_code,
+			i.name as item_name,
+			i.price,
+			i.discount,
+			i.item_img_url,
+			(i.price * (1-i.discount) * b.quantity) as total_price
+		FROM buy b
+		JOIN item i ON b.item_code = i.item_code
+		WHERE b.user_idx = #{user_idx}
+		ORDER BY b.date DESC
+	</select>
+
+	<!-- 상품별 구매 횟수 조회 -->
+	<select id="getItemBuyCount" resultType="int" parameterType="string">
+		SELECT COUNT(*) 
+		FROM buy 
+		WHERE item_code = #{item_code}
+	</select>
+
+
+</mapper>
+
+

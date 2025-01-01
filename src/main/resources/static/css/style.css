@@ -78,13 +78,23 @@ body {
   border-radius: 12px;
   box-shadow: var(--shadow);
   padding: 15px;
-  transition: var(--transition);
   overflow: hidden;
   text-align: start;
+  position: relative;
+  min-height: 380px;
+  user-select: none;
 }
 
-.product:hover {
-  transform: translateY(-5px);
+.product-detail {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 2.6em;
+  line-height: 1.3;
 }
 
 .product img {
@@ -93,16 +103,19 @@ body {
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
-  transform: scale(1);
-  transition: var(--transition);
-}
-
-.product:hover img {
-  transform: scale(1.05);
+  user-select: auto;
 }
 
 .product h3 {
   margin: 0.5rem 0;
+}
+
+.buy-count {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  font-size: 13px;
+  color: #999;
 }
 
 /* 푸터 스타일링 */
@@ -125,28 +138,57 @@ body {
   border: 0;
 }
 
-/* 제일 위로가는 버튼 */
+/* 스크롤 버튼 */
 #scrollToTop {
-	display: none;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    background-color: #a5a5a5;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 998; /* 다른 요소 위에 표시되도록 */
-}
-
-#scrollToTop:hover {
-    background-color:var(--color-hover); /* 호버 시 색상 변경 */
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 16px;
+  background-color: var(--color-gray);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 998;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
 }
 
 .active{
 	background-color:var(--color-gray);  
 	color:white;
+}
+
+/* 하트 버튼 스타일 추가 */
+.love-button {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.love-button i {
+  color: #ff4b4b;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.love-button:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 1);
 }
 
 /* 반응형 디자인 */
@@ -185,5 +227,10 @@ body {
     max-width: 400px;
   }
 }
-  
+
+
+
+
+
+
   

@@ -21,14 +21,14 @@
 		<div class="form-container">
 			<form id="find-pw-form">
 
-				<!-- 아이디 입력 -->
+				<!-- 아이디 입력 --> 
 				<div class="input-with-btn">
 					<input id="id" name="id" type="text" placeholder="아이디" required autocomplete="username"/>
 				</div>
 
-				<!-- 이메일 입력 -->
+				<!-- 이름 입력 -->
 				<div class="input-with-btn">
-					<input id="email" name="email" type="text" placeholder="이메일" required autocomplete="email"/>
+					<input id="name" name="name" type="text" placeholder="이름" required/>
 				</div>
 				
 				<!-- 전화번호 입력 -->

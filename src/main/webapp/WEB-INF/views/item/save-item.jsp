@@ -39,14 +39,14 @@
 			<div class="title">카테고리<font style="color:red;">*</font></div>
 			<div class="content">카테고리를 선택해주세요.</div>
 			<select id="category">
-				<option value="1">상의</option>
-				<option value="2">하의</option>
-				<option value="3">신발</option>
-				<option value="4">아우터</option>
-				<option value="5">악세사리</option>
-				<option value="6">아우터</option>
-				<option value="7">원피스</option>
-				<option value="8">기타</option>
+				<option value="상의">상의</option>
+				<option value="하의">하의</option>
+				<option value="신발">신발</option>
+				<option value="아우터">아우터</option>
+				<option value="악세사리">악세사리</option>
+				<option value="아우터">아우터</option>
+				<option value="원피스">원피스</option>
+				<option value="기타">기타</option>
 			</select>
 		</div>
 

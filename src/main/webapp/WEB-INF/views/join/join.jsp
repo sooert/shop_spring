@@ -65,7 +65,12 @@
 						required autocomplete="new-password"/>
 				</div>
 				<div id="pw-result-txt" class="validation-message" style="margin-bottom: 15px;"></div>
-				
+
+				<!-- 이름 입력 -->
+				<div class="input-with-btn">
+					<input id="name" name="name" type="text" placeholder="이름을 입력해주세요" required/>
+				</div>
+
 				<!-- 닉네임 입력 -->
 				<div class="input-with-btn">
 					<input id="nick" name="nickname" type="text" placeholder="닉네임" required/>

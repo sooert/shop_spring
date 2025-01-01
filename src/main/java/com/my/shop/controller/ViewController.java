@@ -2,28 +2,13 @@ package com.my.shop.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.my.shop.entity.User;
-import com.my.shop.service.UserService;
 
 @Controller
 public class ViewController {
-
-	@Autowired
-	UserService userService;
-
-	// 로그인 여부 확인 후 페이지 이동
-	private String getViewName(HttpSession session, String viewName) {
-		User me = (User) session.getAttribute("me");
-		if (me == null) {
-			return "redirect:/login";
-		}
-		return viewName;
-	}
 
 	//////////////////////////// 마이페이지 관리  ////////////////////////////////
 

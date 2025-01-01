@@ -39,6 +39,7 @@ function scrolltop() {
 
  });
 
+ // 상품 목록 불러오기
  function getItems(){ 
    $.ajax({
        url:"./api/item/findAll",
@@ -49,8 +50,11 @@ function scrolltop() {
            $.each(items, function(index, item){
               var discount_price = item.price * (1-item.discount);
               $('.item-container').append(`
-                  <div class="product" style="cursor:pointer;" onclick="location.href='./detail-item?item_code=${item.item_code}'">
-                        <img src="${item.item_img_url}" class="product-image"/>
+                  <div class="product" style="cursor:pointer;">
+                        <button class="love-button">
+                           <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <img src="${item.item_img_url}" class="product-image" onclick="location.href='./detail-item?item_code=${item.item_code}'" />
                         <div class="product-info">
                            <span class="product-discount" style="color:red;">${item.discount*100}%</span>
                            <span class="product-discount-price">${discount_price.toLocaleString()} 원</span>
@@ -58,15 +62,49 @@ function scrolltop() {
                         <div class="product-company">
                            <span style="color:#999;font-size:13px;">${item.company}</span>
                         </div>
-                        <div class="product-detail" style="margin-top:-5px; margin-bottom:-6px;">
+                        <div class="product-detail">
                            <span style="color:#999;font-size:13px;">${item.content}</span>
+                        </div>
+                        <div class="buy-count" data-item-code="${item.item_code}" 
+                           style="display: ${item.buy_count > 0 ? 'block' : 'none'}">${item.buy_count}개 구매중
                         </div>
                   </div>
               `);
            });
-           
        }
    });
 }
+
+///////////////////////////// 구매 횟수  //////////////////////////////////////////
+
+// 구매 횟수 업데이트 함수 추가
+function updateBuyCount(itemCode) {
+    $.ajax({
+        url: `./api/item/getBuyCount`,
+        method: "GET",
+        data: { 
+         item_code: itemCode 
+      },
+        success: function(count) {
+            const buyCountElement = $(`.buy-count[data-item-code="${itemCode}"]`);
+            if (count > 0) {
+                buyCountElement.text(`${count}개 구매중`);
+                buyCountElement.show();
+            } else {
+                buyCountElement.hide();
+            }
+        }
+    });
+}
+
+// 주기적으로 구매 횟수 업데이트 (선택사항)
+setInterval(function() {
+    $('.buy-count').each(function() {
+        const itemCode = $(this).data('item-code');
+        updateBuyCount(itemCode);
+    });
+}, 30000); // 30초마다 업데이트
+
+////////////////////////////// 찜 버튼 ////////////////////////////////////
 
 

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
+<body> 
     <%@ include file="include/header.jsp" %>
 
     <button id="scrollToTop"><i class="fa-solid fa-chevron-up"></i></button>
@@ -27,10 +27,13 @@
             </div>
         </section>
 
-        <section class="products">
+        <section class="products"> 
             <div class="item-container">
                 <!-- 상품 목록 불러오는 곳  -->
                 <!-- <div class="product">
+                    <button class="love-button">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
                     <img src="https://via.placeholder.com/300" alt="상품 이미지">
                     <h3>상품명 1</h3>
                     <p>가격: 29,000원</p>

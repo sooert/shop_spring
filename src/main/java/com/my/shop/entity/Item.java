@@ -13,6 +13,8 @@ public class Item {
     private int price = 0;
     private double discount = 0;
     private double point = 0;
+    private int buy_count = 0;
+    private int like_count = 0;
     private String created_date = null;   
 
 
@@ -102,6 +104,22 @@ public class Item {
 
     public void setPoint(double point) {
         this.point = point;
+    }
+
+    public int getBuy_count() {
+        return buy_count;
+    }
+
+    public void setBuy_count(int buy_count) {
+        this.buy_count = buy_count;
+    }
+
+    public int getLike_count() {
+        return like_count;
+    }
+
+    public void setLike_count(int like_count) {
+        this.like_count = like_count;
     }
 
     public String getCreated_date() {

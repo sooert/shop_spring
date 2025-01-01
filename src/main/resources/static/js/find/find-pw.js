@@ -4,7 +4,7 @@ function validateNumber(number) {
     return regex.test(number);
   }
   
-  // 인증번호 발송
+  // 인증번호 발송 
   function sendMessage() {
     const tel = $("#number").val();
     const numbercode = Math.floor(100000 + Math.random() * 900000);
@@ -87,15 +87,15 @@ $(document).ready(function() {
   $(".number").click(function() {
     const id = $("#id").val();
     const number = $("#number").val().replace(/-/g, '');
-    const email = $("#email").val();
+    const name = $("#name").val();
 
       if (!id) {
           alert("아이디를 입력해주세요.");
           return;
       }
 
-      if (!number || !email) {
-          alert("전화번호와 이메일을 모두 입력해주세요.");
+      if (!number || !name) {
+          alert("전화번호와 이름을 모두 입력해주세요.");
           return;
       }
 
@@ -105,11 +105,11 @@ $(document).ready(function() {
       }
 
       $.ajax({
-          url: "./api/user/findIdByEPN",
+          url: "./api/user/findIdByIN",
           type: "GET",
           data: { 
               id: id,
-              email: email,
+              name: name,
               number: number
           },
           success: function(response) {
@@ -153,15 +153,15 @@ $(document).ready(function() {
       }
 
       const id = $("#id").val();
-      const email = $("#email").val();
+      const name = $("#name").val();
       const number = $("#number").val().replace(/-/g, '');
 
       $.ajax({
-        url: "./api/user/findIdByEPN",
+        url: "./api/user/findIdByIN",
         type: "GET", 
         data: {
           id: id,
-          email: email,
+          name: name,
           number: number
         },
         success: function(response) {
@@ -170,7 +170,7 @@ $(document).ready(function() {
             sessionStorage.clear();
             sessionStorage.setItem('resetPasswordId', response.id);
             sessionStorage.setItem('isNumberVerified', 'true');
-            sessionStorage.setItem('userEmail', email);
+            sessionStorage.setItem('userName', name);
             sessionStorage.setItem('userNumber', number);
             
             alert("비밀번호 변경 페이지로 이동합니다.");

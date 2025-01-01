@@ -1,182 +1,125 @@
 /* 기본 스타일 */
 :root {
-  --color-hover: #c6c6c6;
-  --color-gray: #e0dddc;
-  --text-light: #fff;
-  --text-dark: #333;
-  --gray-light: #f4f4f4;
-  --spacing-unit: 20px;
-  --container-width: 1200px;
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
+	--color-hover: #c6c6c6;
+	--color-gray: #e0dddc;
+    --background-color: #f9f9f9;
+    --text-light: #fff;
+    --text-dark: #333;
+    --gray-light: #f4f4f4;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
 }
 
-/* 반응형 디자인 추가 */
-@media (max-width: 768px) {
-    .product-container {
-        flex-direction: column; /* 세로 방향으로 배치 */
-        height: auto; /* 높이 자동 조정 */
-    }
-
-    .product-image, .product-details {
-        width: 100%; /* 전체 너비 사용 */
-        padding: 10px; /* 패딩 조정 */
-    }
-
-    .thumbnail-container {
-        flex-direction: row; /* 썸네일 가로 방향으로 배치 */
-        justify-content: center; /* 중앙 정렬 */
-    }
-
-    .thumbnail {
-        width: 50px; /* 썸네일 크기 조정 */
-        height: 50px; /* 썸네일 크기 조정 */
-    }
-
-    .item-description {
-        flex-direction: column; /* 세로 방향으로 배치 */
-    }
-
-    .item-description-button {
-        width: 100%; /* 버튼 전체 너비 사용 */
-        margin-bottom: 10px; /* 버튼 간격 조정 */
-    }
-
-    .description-container {
-        margin-left: 0; /* 왼쪽 여백 제거 */
-        width: 100%; /* 전체 너비 사용 */
-    }
-}
-
-/* styles.css */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: var(--background-color);
 }
 
-/* 제일 위로가는 버튼 */
+/* 스크롤 버튼 */
 #scrollToTop {
-	display: none;
+    display: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
-    padding: 10px 15px;
-    background-color: #a5a5a5;
+    padding: 15px 17px;
+    background-color: var(--color-gray);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 50%;
     cursor: pointer;
-    z-index: 998; /* 다른 요소 위에 표시되도록 */
-}
-
-#scrollToTop:hover {
-    background-color:var(--color-hover); /* 호버 시 색상 변경 */
+    z-index: 998;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
 }
 
 /* 상품 컨테이너 */
 .product-container {
     display: flex;
-    height: 1000px;
     max-width: 1000px;
-    margin: 7% auto;
+    margin: 40px auto 40px;
+    padding: 20px;
     background: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
+    gap: 40px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
 }
 
-/* 상품 이미지 */
+/* 상품 이미지 영역 */
 .product-image {
     flex: 1;
-    padding: 20px;
+    max-width: 500px;
 }
 
-/* 메인 이미지 */
 .main-image {
     width: 100%;
-    border-radius: 8px;
-}
-  
-/* 썸네일 컨테이너 */
-.thumbnail-container {
-    display: flex;
-    margin-top: 10px;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 10px;
 }
 
-/* 썸네일 */
+.thumbnail-container {
+    display: flex;
+    gap: 10px;
+}
+
 .thumbnail {
-    width: 60px;
-    height: 60px;
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    width: 80px;
+    height: 80px;
+    border: 1px solid var(--color-gray);
+    border-radius: 12px;
     cursor: pointer;
 }
 
-/* 썸네일 호버 */
-.thumbnail:hover {
-    border-color: var(--color-hover);
-}
-
-/* 상품 상세 */
+/* 상품 상세 정보 */
 .product-details {
     flex: 1;
-    padding: 20px;
 }
 
-/* 상품 제목 */
 .product-title {
     font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-/* 상품 할인 */
-.product-discount {
-    color: #d9534f;
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-/* 상품 원래 가격 */
-.original-price {
-    text-decoration: line-through;
-    color: #888;
-}
-
-/* 상품 할인 가격 */
-.discounted-price {
-    font-size: 22px;
-    font-weight: bold;
-    color: #0078d7;
     margin-bottom: 20px;
 }
 
-/* 상품 혜택 */
-.user-benefit h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+.price-info {
+    margin-bottom: 20px;
 }
 
-/* 상품 혜택 설명 */
-.user-benefit p {
-    font-size: 16px;
-    color: #333;
+.product-discount {
+    color: #ff4646;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-/* 상품 혜택 리스트 */
+.original-price {
+    color: #888;
+    text-decoration: line-through;
+    margin: 5px 0;
+}
+
+.discounted-price {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--text-dark);
+}
+
+/* 혜택 정보 */
+.user-benefit {
+    background-color: #f8f8f8;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
 .user-benefit ul {
     list-style: none;
-    padding: 0;
+    padding-left: 0;
     margin: 10px 0;
 }
 
-/* 상품 혜택 리스트 아이템 */
 .user-benefit li {
-    font-size: 14px;
-    margin: 5px 0;
-    color: #555;
+    margin-bottom: 5px;
 }
 
 /* 상품 옵션 */
@@ -184,150 +127,343 @@ body {
     margin: 20px 0;
 }
 
-/* 상품 옵션 라벨 */
-.product-options label {
-    font-size: 14px;
-    display: block;
-    margin-bottom: 5px;
+.option-group {
+    margin-bottom: 15px;
 }
 
-/* 상품 옵션 선택 */
-.product-options select {
+.option-group select {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid var(--color-gray);
+    border-radius: 4px;
 }
 
-/* 구매 버튼 */
+/* 구매 버튼 영역 */
 .purchase-buttons {
     display: flex;
     gap: 10px;
     margin: 20px 0;
 }
 
-/* 구매 버튼 버튼 */
 .purchase-buttons button {
     flex: 1;
-    padding: 10px;
-    font-size: 16px;
+    padding: 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
 }
 
-/* 구매 버튼 버튼 호버 */
 .love-button {
-    background-color:var(--color-gray);
-    color: #fff;
+    background-color: #f8f8f8;
+    box-shadow: var(--shadow);
+    color: var(--text-dark);
 }
 
-/* 구매 버튼 버튼 */
 .buy-button {
-  background-color: var(--color-gray);
-  color: #fff;
+    background-color: var(--color-gray);
+    box-shadow: var(--shadow);
+    color: white;
 }
 
-/* 장바구니 버튼 */
 .cart-button {
     background-color: var(--color-gray);
-    color: #fff;
+    box-shadow: var(--shadow);
+    color: white;
 }
 
-/* 구매 버튼 버튼 호버 */
-.purchase-buttons button:hover {
+.buy-button:hover, .cart-button:hover {
     background-color: var(--color-hover);
-    opacity: 0.9;
+    transition: var(--transition);
 }
 
-/* 추가 정보 */
-.additional-info {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #777;
-}
-/* 상품 설명 버튼 */
-.item-description {
-    width: 68%;
+/* 상품 설명 탭 */
+.description-tabs {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-between; 
-    border-bottom: 1px solid #b6b6b6;
-    margin-top: -77px;
-    margin-left: 16%;
+    border-bottom: 1px solid var(--color-gray);
 }
 
-/* 상품 설명 버튼 */
-.item-description-button {
-    width: 34%;
-    background-color: var(--color-gray);
-    color: #fff;
+.tab-button {
+    padding: 15px 30px;
     border: none;
-    padding: 10px 20px;
+    background: none;
     cursor: pointer;
 }
 
-/* 상품 설명 버튼 호버 */
-.item-description-button:hover {
-    background-color: var(--color-hover);
-}
-
-/* 상품 설명 텍스트 */
-#item-text {
-    margin-top: 2%;
-    margin-bottom: 2%;
-    font-size: 16px;
-    text-align: center;
-    color: #555;
-}
-
-/* 상품 설명 컨테이너 */
-.description-container {
-    margin-left: 16%;
-    width: 68%;
-    height: 100vh;
-    background-color: var(--color-gray);
-    border-radius: 8px;
-    padding: 20px;
-}
-
-/* 상품 설명 컨테이너 활성 */
-.description-container.active {
-    display: block;
-}
-
-/* 상품 설명 컨테이너 헤더 */
-.description-container h1 {
-    font-size: 24px;
+.tab-button.active {
+    border-bottom: 2px solid var(--text-dark);
     font-weight: bold;
-    margin-top: 4px;
 }
 
-/* 상품 설명 컨테이너 텍스트 */
-.description-container p {
-    font-size: 16px;
-    margin-bottom: 10px;
+/* 상품 설명 컨텐츠 */
+.item-description-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-shadow: var(--shadow);
 }
 
-/* 상품 설명 컨테이너 리스트 */
-.description-container ul {
+.description-notice {
+    color: #666;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .product-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .product-image {
+        max-width: 100%;
+    }
+
+    .purchase-buttons {
+        flex-direction: column;
+    }
+}
+
+/* 특징 리스트 스타일 수정 */
+.features ul {
     list-style: none;
-    padding: 0;
+    padding-left: 0;
     margin: 10px 0;
 }
 
-/* 상품 설명 컨테이너 리스트 아이템 */
-.description-container li {
-    font-size: 14px;
-    margin: 5px 0;
-    color: #555;
+.features li {
+    margin-bottom: 8px;
 }
 
-/* 상품 설명 컨테이너 헤더 */
-.description-container h2 {
-    font-size: 18px;
-    font-weight: bold;
+/* 이미지 팝업 스타일 */
+.image-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-image {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.close-popup {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.prev-image, .next-image {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-gray);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+.prev-image {
+    left: 30px;
+}
+
+.next-image {
+    right: 30px;
+}
+
+.prev-image:hover, .next-image:hover {
+    background: var(--color-hover);
+    transition: var(--transition);
+}
+
+/* 메인 이미지와 썸네일에 커서 포인터 추가 */
+.main-image,
+.thumbnail {
+    cursor: pointer;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .prev-image,
+    .next-image {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .close-popup {
+        font-size: 30px;
+        top: 15px;
+        right: 20px;
+    }
+}
+
+/* 뒤로가기 버튼 스타일 */
+.go-back-button {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 12px 15px;
+    background-color: var(--color-gray);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    transition: var(--transition);
+    font-size: 16px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+.go-back-button:hover, #scrollToTop:hover {
+    background-color: var(--color-hover);
+    transform: scale(1.05);
+}
+
+/* 모바일 반응형 스타일 */
+@media (max-width: 768px) {
+    .go-back-button {
+        top: 15px;
+        left: 15px;
+        padding: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+/* 구매 수량 컨트롤 */
+.buy-button-count {
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 100;
+    margin-top: 5px;
+}
+
+.count-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 10px;
+}
+
+.count-control button {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.purchase-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.purchase-actions button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.confirm-purchase {
+    background: #4CAF50;
+    color: white;
+}
+
+.cancel-purchase {
+    background: #f44336;
+    color: white;
+}
+
+/* 옵션 선택 확인 영역 */
+.selected-option-info {
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.selected-option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.remove-option {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #666;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+}
+
+.quantity-input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.option-price {
+    margin-left: auto;
+    font-weight: bold;
+}
+
+/* 구매 횟수 스타일 */
+.buy-count {
+    color: #666;
+    font-size: 12px;
+    padding: 5px 0;
+    text-align: right;
 }
 
 

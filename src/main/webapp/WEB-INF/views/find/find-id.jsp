@@ -21,7 +21,12 @@
 		<div class="form-container">
 			<form id="find-id-form">
 
-				<!-- 이메일 입력 -->
+				<!-- 이름 입력 -->
+				<div class="input-with-btn">
+					<input id="name" name="name" type="text" placeholder="이름" required/>
+				</div>
+
+				<!-- 이메일 입력 --> 
 				<div class="input-with-btn">
 					<input id="email" name="email" type="email" placeholder="이메일" required/>
 				</div>

@@ -6,6 +6,7 @@ public class User {
 	private String img_url = null;
 	private String id = null;
 	private String pw = null;
+	private String name = null;
 	private String nick = null;
 	private String address = null;
 	private String detail_address = null;
@@ -52,6 +53,14 @@ public class User {
 
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getNick() {
