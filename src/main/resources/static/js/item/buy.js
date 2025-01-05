@@ -37,7 +37,7 @@ $(document).ready(function(){
                     
                     // 선택된 모든 옵션에 대해 구매 처리
                     selectedOptions.forEach((optionData, optionKey) => {
-                        buyAdd(item_code, optionData.quantity, optionData.color, optionData.size, buy_code);
+                        buyAdd(item_code, optionData.quantity, optionData.color, optionData.size, buy_code, 'ACTIVE');
                     });
                     alert("구매가 완료되었습니다.");
                     location.reload();
@@ -56,7 +56,7 @@ $(document).ready(function(){
     $('#color').change(function() {
         selectedColor = $(this).val();
         checkOptionsSelected();
-    });
+    }); 
 
     // 사이즈 선택 이벤트
     $('#size').change(function() {
@@ -95,16 +95,17 @@ $(document).ready(function(){
 /////////////////////////////// 구매 ///////////////////////////////////
 
 // 구매 생성
-function buyAdd(item_code, quantity, color, size, buy_code) {
+function buyAdd(item_code, quantity, color, size, buy_code, status) {
     $.ajax({
         url: './api/item/buyAdd',
         type: 'POST',
-        data: {
+        data: { 
             item_code: item_code,
             quantity: quantity,
             color: color,
             size: size,
-            buy_code: buy_code
+            buy_code: buy_code,
+            status: status
         },
         success: function(response) {
             if(response === "not-login") {
@@ -381,10 +382,14 @@ function updateTotalPrice() {
     let totalPrice = 0;
 
     selectedOptions.forEach((optionData) => {
-        totalPrice += optionData.price * optionData.quantity;
+        totalPrice += optionData.price * optionData.quantity; // 각 옵션의 가격과 수량을 곱하여 총 가격에 더함
     });
 
-    $('.total-price').text(`${totalPrice.toLocaleString()}원`);
+    // 할인 적용
+    const discountRate = 0.4; // 예시: 40% 할인
+    totalPrice *= (1 - discountRate); // 할인 적용
+
+    $('.total-price').text(`${totalPrice.toLocaleString()}원`); // 총 금액 표시
 }
 
 // 가격 업데이트 함수

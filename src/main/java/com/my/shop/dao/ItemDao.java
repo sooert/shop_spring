@@ -34,5 +34,5 @@ public class ItemDao {
         return sqlSession.selectOne("ItemMapper.detail-item", item_code);
     }
 
-
+    
 }

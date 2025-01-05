@@ -30,7 +30,7 @@
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/my-page.css">
+    <link rel="stylesheet" href="./css/sells.css">
 </head>
 <body>
     <div class="container">
@@ -40,18 +40,7 @@
                 <h1>몌뉴</h1>
             </div>
             <ul class="menu">
-                <ul class="menu">
-                    <li><button id="home" onclick="location.href='./index'">🏠 홈</button></li>
-                    <li><button id="my" onclick="location.href='./my'">✔ 내정보 관리</button>
-                        <button id="call" style="display: none;">📞 전화번호 변경</button>
-                    </li>
-                    <li><button id="buy" onclick="location.href='./buys'">📊 구매 내역</button></li>
-
-                    <li><button id="sell" onclick="location.href='./sells'" 
-                        style="background-color: var(--color-hover);">👤 판매 내역</button>
-                    </li>
-                    <li><button id="review" onclick="location.href='./reviews'">✏️ 리뷰</button></li>
-                </ul>
+                <li><button id="home" onclick="location.href='./index'">🏠 홈</button></li>
             </ul>
         </div>
 

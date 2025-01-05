@@ -50,32 +50,18 @@ function loadLikes() {
     });
 }
 
-// 찜 취소 함수
-function cancelLike(itemCode) {
-    
-    if (!confirm('찜을 취소하시겠습니까?')) {
-        return;
-    }
-    
+// 찜 삭제 함수
+function cancelLike(item_code) {
     $.ajax({
-        url: './api/item/likeMinus',
+        url: './api/item/likeDelete',
         type: 'POST',
-        data: { item_code: itemCode },
-        success: function(response) {
-            if (response === 'not-login') {
-                alert('로그인이 필요합니다.');
-                return;
-            }
-            if (response === 'ok') {
-                alert('찜이 취소되었습니다.');
-                loadLikes(); // 목록 새로고침
-            } else {
-                alert('찜 취소에 실패했습니다.');
-            }
+        data: { item_code: item_code },
+        success: function() {
+            loadLikes();
         },
-        error: function(error) {
-            console.error('찜 취소 실패:', error);
-            alert('찜 취소에 실패했습니다. 다시 시도해주세요.');
+        error: function(xhr, status, error) {
+            console.error("찜 삭제 실패:", error);
+            alert("찜 삭제 중 오류가 발생했습니다.");
         }
     });
 }

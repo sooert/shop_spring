@@ -35,17 +35,10 @@
             </div>
             <ul class="menu">
                 <li><button id="home" onclick="location.href='./index'">🏠 홈</button></li>
-
-                <li><button id="my" onclick="location.href='./my'" 
-                    style="background-color: var(--color-hover);">✔ 내정보 관리</button>
-
+                <li><button id="my" onclick="location.href='./my'">✔ 내정보 관리</button>
                     <button id="call" 
                     onclick="location.href='./call'" style="font-size: 13px; margin-left: 10px;">📞 전화번호 변경</button>
                 </li>
-
-                <li><button id="buy" onclick="location.href='./buys'">📊 구매 내역</button></li>
-                <li><button id="sell" onclick="location.href='./sells'">👤 판매 내역</button></li>
-                <li><button id="review" onclick="location.href='./reviews'">✏️ 리뷰</button></li>
             </ul>
         </div>
 

@@ -3,6 +3,7 @@ package com.my.shop.service;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +22,6 @@ public class ItemLikeService {
         itemLike.setItem_code(item_code);
         itemLike.setUser_nick(user_nick);
         itemLikeDao.itemLikeCreate(itemLike);
-    }
-
-    // 아이템 좋아요 조회
-    public ItemLike itemLikeRead(String item_code) {
-        return itemLikeDao.itemLikeRead(item_code);
     }
 
     // 아이템 좋아요 증가
@@ -55,6 +51,14 @@ public class ItemLikeService {
     // 사용자별 찜 목록 조회
     public List<Map<String, Object>> findByUserNick(String user_nick) {
         return itemLikeDao.findByUserNick(user_nick);
+    }
+
+    // 좋아요 상태 확인
+    public boolean checkLikeStatus(String item_code, String user_nick) {
+        ItemLike itemLike = new ItemLike();
+        itemLike.setItem_code(item_code);
+        itemLike.setUser_nick(user_nick);
+        return itemLikeDao.checkLikeStatus(itemLike) > 0;
     }
 
 }

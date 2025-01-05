@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	/*날씨받아오기*/
-	weather();
+	weather(); 
 	
     // 홈 버튼
 	$('.go-home, .htop-left').on('click', function () {
@@ -9,12 +9,17 @@ $(document).ready(function () {
 
     // 상품 등록 버튼
     $('#register-btn').on('click', function () {
-        window.location.href = './save-item';
+        window.location.href = './save-item'; 
+    });
+
+    // 장바구니 버튼
+    $('#cart-btn').on('click', function () {
+        window.location.href = './cart';
     });
  
-    // 장바구니 버튼
-    $('#cart-btn, .go-cart').on('click', function () {
-        window.location.href = './cart';
+    // 주문내역 버튼
+    $('.go-buy-history').on('click', function () {
+        window.location.href = './buy-history';
     });
 
     // 마이페이지 버튼
@@ -24,7 +29,7 @@ $(document).ready(function () {
 
     // 찜 버튼
     $('.go-like').on('click', function () {
-        window.location.href = './loves';
+        window.location.href = './lovers';
     });
 
     // 찜 버튼(비회원)

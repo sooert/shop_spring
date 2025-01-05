@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.my.shop.entity.Item;
 import com.my.shop.entity.ItemImg;
-import com.my.shop.entity.ItemLike;
 import com.my.shop.entity.User;
 import com.my.shop.entity.Buy;
+import com.my.shop.entity.Cart;
 import com.my.shop.service.ItemImgService;
 import com.my.shop.service.ItemService;
 import com.my.shop.service.ItemLikeService;
 import com.my.shop.service.UserService;
 import com.my.shop.service.BuyService;
+import com.my.shop.service.CartService;
 
 @RestController
 @RequestMapping("api/item")
@@ -43,6 +44,9 @@ public class ItemController {
 
 	@Autowired
 	BuyService buyService;
+
+	@Autowired
+	CartService cartService;
 
 	///////////////////////////// 상품 등록 ///////////////////////////
 
@@ -197,17 +201,6 @@ public class ItemController {
 		return "ok";
 	}
 
-	// 상품 좋아요 조회
-	@GetMapping("likes")
-	public ItemLike likes(@RequestParam(value = "item_code") String item_code, 
-							HttpSession session) {
-		User me = (User) session.getAttribute("me");
-		if (me == null) {
-			return null;
-		}
-		return itemLikeService.itemLikeRead(item_code);
-	}
-
 	// 상품 좋아요 감소
 	@PostMapping("likeMinus")
 	public String likeMinus(@RequestParam(value = "item_code") String item_code, HttpSession session) {
@@ -215,19 +208,32 @@ public class ItemController {
 		if (me == null) {
 			return "not-login";
 		}
-		try {
-			// 좋아요 카운트 감소
-			itemLikeService.itemLikeMinus(item_code, me.getNick());
-			// 좋아요 기록 삭제
-			itemLikeService.itemLikeDelete(item_code, me.getNick());
-			return "ok";
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "error";
-		}
+		itemLikeService.itemLikeDelete(item_code, me.getNick());
+		itemLikeService.itemLikeMinus(item_code, me.getNick());
+		return "ok";
 	}
 
+	// 상품 좋아요 삭제
+	@PostMapping("likeDelete")
+	public String likeDelete(@RequestParam(value = "item_code") String item_code, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		itemLikeService.itemLikeMinus(item_code, me.getNick());
+		itemLikeService.itemLikeDelete(item_code, me.getNick());
+		return "ok";
+	}
 
+	// 좋아요 상태 확인
+	@GetMapping("checkLikeStatus")
+	public boolean checkLikeStatus(@RequestParam(value = "item_code") String item_code, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return false;
+		}
+		return itemLikeService.checkLikeStatus(item_code, me.getNick());
+	}
 
 	///////////////////////////// 상품 구매 생성 ///////////////////////////
 
@@ -239,6 +245,7 @@ public class ItemController {
 		@RequestParam(value = "color") String color,
 		@RequestParam(value = "size") String size,
 		@RequestParam(value = "buy_code") String buy_code,
+		@RequestParam(value = "status") String status,
 		HttpSession session) {
 		
 		User me = (User) session.getAttribute("me");
@@ -255,6 +262,7 @@ public class ItemController {
 			buy.setQuantity(quantity);
 			buy.setColor(color);
 			buy.setSize(size);
+			buy.setStatus(status);
 			buyService.buyAdd(buy);
 			return "ok";
 		} catch(Exception e) {
@@ -289,18 +297,6 @@ public class ItemController {
 		return buyService.getItemBuyCount(item_code);
 	}
 
-	///////////////////////////// 상품 구매 전체 조회 ///////////////////////////
-
-	// 상품 구매 전체 조회
-	@GetMapping("buyCount")
-	public int buyCount(HttpSession session) {
-		User me = (User) session.getAttribute("me");
-		if (me == null) {
-			return 0;
-		}
-		return buyService.buyCount();
-	}
-
 	///////////////////////////// 회원 구매 목록 상세 조회 ///////////////////////////	
 	
 	// 회원 구매 목록 상세 조회
@@ -323,6 +319,166 @@ public class ItemController {
 		return itemLikeService.findByUserNick(me.getNick());
 	}
 
+	// 주문 취소 처리
+	@PostMapping("orderCancel")
+	public Map<String, Object> orderCancel(@RequestParam(value = "item_codes[]") List<String> itemCodes, HttpSession session) {
+		Map<String, Object> response = new HashMap<>();
+		
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			response.put("status", "error");
+			response.put("message", "로그인이 필요합니다.");
+			return response;
+		}
+		
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("itemCodes", itemCodes);
+			map.put("userIdx", me.getUser_idx());
+			
+			// 각 아이템의 구매 수량을 가져와서 buy_count 감소
+			for (String itemCode : itemCodes) {
+				Buy buy = buyService.findByItemCodeAndUserIdx(itemCode, me.getUser_idx());
+				if (buy != null) {
+					Map<String, Object> countMap = new HashMap<>();
+					countMap.put("item_code", itemCode);
+					countMap.put("quantity", -buy.getQuantity()); // 음수로 전달하여 감소
+					buyService.buyCountUpdate(countMap);
+				}
+			}
+			
+			buyService.orderCancel(map);
+			
+			response.put("status", "success");
+			response.put("message", "주문이 성공적으로 취소되었습니다.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.put("status", "error");
+			response.put("message", "주문 취소 중 오류가 발생했습니다.");
+		}
+		
+		return response;
+	}
+
+	///////////////////////////// 장바구니 생성 ///////////////////////////
+
+	// 장바구니 생성
+	@PostMapping("cartCreate")
+	public String cartCreate(
+		@RequestParam(value = "item_code") String item_code,
+		@RequestParam(value = "cart_count") int cart_count,
+		@RequestParam(value = "item_name") String item_name,
+		@RequestParam(value = "item_img_url") String item_img_url,
+		@RequestParam(value = "item_color") String item_color,
+		@RequestParam(value = "item_size") String item_size,
+		@RequestParam(value = "total_price") int total_price,
+		HttpSession session) {
+		
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		
+		try {
+			String user_code = me.getUser_code();
+			String cart_code = RandomStringUtils.randomAlphanumeric(10);
+			
+			Cart cart = new Cart();
+			cart.setCart_code(cart_code);
+			cart.setUser_code(user_code);
+			cart.setItem_code(item_code);
+			cart.setItem_name(item_name);
+			cart.setItem_img_url(item_img_url);
+			cart.setItem_color(item_color);
+			cart.setItem_size(item_size);
+			cart.setTotal_price(total_price);
+			cart.setCart_count(cart_count);
+			
+			cartService.cartCreate(cart);
+			return "ok";
+		} catch(Exception e) {
+			e.printStackTrace();
+			return "error";
+		}
+	}
+
+	///////////////////////////// 장바구니 조회 ///////////////////////////
+
+	// 장바구니 조회
+	@GetMapping("cartList")
+	public List<Cart> cartList(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return null;
+		}
+		return cartService.cartList(me.getUser_code());
+	}
+
+	///////////////////////////// 장바구니 수량 증가 & 감소 ///////////////////////////
+
+	// 장바구니 수량 증가
+	@PostMapping("cartUpdatePlus")
+	public String cartUpdatePlus(@RequestParam(value = "cart_idx") int cart_idx, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		Cart cart = new Cart();
+		cart.setCart_idx(cart_idx);
+		cartService.cartUpdatePlus(cart);
+		return "ok";
+	}
+
+	// 장바구니 수량 감소
+	@PostMapping("cartUpdateMinus")
+	public String cartUpdateMinus(@RequestParam(value = "cart_idx") int cart_idx, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		Cart cart = new Cart();
+		cart.setCart_idx(cart_idx);
+		cartService.cartUpdateMinus(cart);
+		return "ok";
+	}
+
+	// 장바구니 삭제
+	@PostMapping("cartDelete")
+	public String cartDelete(@RequestParam(value = "cart_idx") int cart_idx, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		Cart cart = new Cart();
+		cart.setCart_idx(cart_idx);
+		cartService.cartDelete(cart);
+		return "ok";
+	}
+
+	///////////////////////////// 장바구니 구매 ///////////////////////////
+
+	// 장바구니 구매
+	@PostMapping("cartBuy")
+	public String cartBuy(@RequestParam(value = "cart_idx") int cart_idx, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		Cart cart = new Cart();
+		cart.setCart_idx(cart_idx);
+		Buy buy = new Buy();
+		buy.setBuy_code(cart.getCart_code());
+		buy.setItem_code(cart.getItem_code());
+		buy.setUser_idx(me.getUser_idx());
+		buy.setQuantity(cart.getCart_count());
+		buy.setColor(cart.getItem_color());
+		buy.setSize(cart.getItem_size());
+		buyService.buyAdd(buy);
+		cartService.cartDelete(cart);
+		return "ok";
+	}
+
 
 
 }
+

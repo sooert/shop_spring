@@ -1,5 +1,18 @@
 $(document).ready(function(){
 
+    // 시즌 할인과 특가 할인 체크박스 중 하나만 선택 가능
+    $('#season_discount, #special_sale').on('change', function() {
+        if ($(this).is(':checked')) {
+            // 선택된 체크박스가 체크되면 다른 체크박스를 비활성화
+            if ($(this).attr('id') === 'season_discount') {
+                $('#special_sale').prop('checked', false);
+            } else {
+                $('#season_discount').prop('checked', false);
+            }
+        }
+    });
+
+    // 상세 이미지 미리보기
     var detail_img_urls = ['http1','http2','http3'];
 
     $.ajax({
@@ -92,16 +105,35 @@ $(document).ready(function(){
             .css('background-size','cover');
     });
 
+    // 상품 등록 버튼 
     $('#submit-btn').click(async function(){
-        var name = $('#name').val();
+        var name = $('#name').val().trim();
         var content = $('#content').val();
         var price = $('#price').val();
+
+        ////////////////////////////////////////////////////////////////////
+
         var discount = $('#discount').val(); 
+        // discount가 입력되지 않았을 경우 0으로 설정
+        discount = discount.length == 0 ? 0 : parseFloat(discount);
+
+        ////////////////////////////////////////////////////////////////////
+
+        // 기본 할인율 설정
+        var season_discount_rate = 25; // 시즌 할인 25%
+        var special_sale_rate = 40; // 특가 할인 40%
+        // 할인 종류(시즌할인, 특가할인)
+        var season_discount = $('#season_discount').is(':checked') ? season_discount_rate : 0;
+        var special_sale = $('#special_sale').is(':checked') ? special_sale_rate : 0;
+
+        ////////////////////////////////////////////////////////////////////
+
         var category = $('#category').val();
         var company = $('#company').val();
         
         if(name.length == 0){
             alert('상품명을 채워주세요.');
+            $('#name').focus();
             return;
         }
 
@@ -124,9 +156,10 @@ $(document).ready(function(){
             alert('유효한 할인율을 채워주세요.');
             return;
         }
-
+ 
         if(selectedMainImgBase64.length == 0){
             alert('대표 상품 이미지를 등록해주세요.');
+            $('#img-upload-box').focus();
             return;
         }   
 
@@ -157,16 +190,20 @@ $(document).ready(function(){
                 content: content,
                 price: parseInt(price),
                 discount: parseFloat(discount) / 100,
+                point: parseInt(price) * 0.01,
+                season_discount: parseInt(season_discount),
+                special_sale: parseInt(special_sale),
                 company: company,
                 item_img_url: item_img_url,
                 detail_img_urls: detail_img_urls
             };
 
+            console.log("전송할 데이터:", itemData);
+
             $.ajax({
                 url: './api/item/create',
-                type: 'post',
-                contentType: 'application/json',
-                data: JSON.stringify(itemData),
+                type: 'POST',
+                data: itemData,
                 success: function(data){ 
                     $('#loader').css('display', 'none');
                     if(data === 'ok'){
@@ -174,6 +211,7 @@ $(document).ready(function(){
                         location.href = './index';
                     } else {
                         alert('상품 등록에 실패하였습니다.');
+                        console.log(data);
                     }
                 },
                 error: function(e){
@@ -188,5 +226,7 @@ $(document).ready(function(){
             alert('이미지 업로드 중 오류가 발생했습니다.');
         }
     });
+
+
 
 });

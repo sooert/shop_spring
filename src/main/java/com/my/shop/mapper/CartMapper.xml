@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CartMapper">
+	
+   <!-- 장바구니 생성  -->
+	<insert id="cartCreate" parameterType="Cart" useGeneratedKeys="true" keyProperty="cart_idx">
+		INSERT INTO cart
+		(
+			cart_code,
+			user_code,
+			item_code,
+			item_name,
+			item_img_url,
+			item_color,
+			item_size,
+			total_price,
+			cart_count
+		)
+		VALUES
+		(
+			#{cart_code},
+			#{user_code},
+			#{item_code},
+			#{item_name},
+			#{item_img_url},
+			#{item_color},
+			#{item_size},
+			#{total_price},
+			#{cart_count}
+		)
+	</insert>
+	
+	<!-- 장바구니 조회 -->
+	<select id="cartList" parameterType="String" resultType="Cart">
+		SELECT * FROM cart 
+		WHERE user_code = #{user_code}
+		ORDER BY cart_idx DESC
+	</select>
+
+	<!-- 장바구니 수량 증가 -->
+	<update id="cartUpdatePlus" parameterType="Cart">
+		UPDATE cart SET cart_count = cart_count + 1 WHERE cart_idx = #{cart_idx}
+	</update>
+
+	<!-- 장바구니 수량 감소 -->
+	<update id="cartUpdateMinus" parameterType="Cart">
+		UPDATE cart SET cart_count = cart_count - 1 WHERE cart_idx = #{cart_idx}
+	</update>
+
+	<!-- 장바구니 삭제 -->
+	<delete id="cartDelete" parameterType="Cart">
+		DELETE FROM cart WHERE cart_idx = #{cart_idx}
+	</delete>
+	
+
+
+</mapper>

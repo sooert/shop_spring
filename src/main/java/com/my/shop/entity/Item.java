@@ -12,6 +12,8 @@ public class Item {
     private String company = null;
     private int price = 0;
     private double discount = 0;
+    private double season_discount = 0;
+    private double special_sale = 0;
     private double point = 0;
     private int buy_count = 0;
     private int like_count = 0;
@@ -96,6 +98,22 @@ public class Item {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public double getSeason_discount() {
+        return season_discount;
+    }
+
+    public void setSeason_discount(double season_discount) {
+        this.season_discount = season_discount;
+    }
+
+    public double getSpecial_sale() {
+        return special_sale;
+    }
+
+    public void setSpecial_sale(double special_sale) {
+        this.special_sale = special_sale;
     }
 
     public double getPoint() {

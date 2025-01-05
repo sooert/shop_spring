@@ -2,6 +2,7 @@ package com.my.shop.dao;
 
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,6 @@ public class BuyDao {
     // 구매 목록 생성
     public void buyAdd(Buy buy) {
         sqlSession.insert("BuyMapper.buyAdd", buy);
-    }
-
-    ///////////////// 구매 횟수 전체 조회 /////////////////////
-
-    // 구매 횟수 전체 조회
-    public int buyCount() {
-        return sqlSession.selectOne("BuyMapper.buyCount");
     }
 
     ///////////////// 구매 횟수 증가 /////////////////////
@@ -51,4 +45,18 @@ public class BuyDao {
         return sqlSession.selectOne("BuyMapper.getItemBuyCount", item_code);
     }
 
+    ////////////// 주문 취소 ///////////////////////////
+
+    // 주문 취소 처리
+    public void orderCancel(Map<String, Object> map) {
+        sqlSession.update("BuyMapper.orderCancel", map);
+    }
+
+    // 상품 코드와 사용자 인덱스로 구매 정보 조회
+    public Buy findByItemCodeAndUserIdx(String itemCode, int userIdx) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("itemCode", itemCode);
+        params.put("userIdx", userIdx);
+        return sqlSession.selectOne("BuyMapper.findByItemCodeAndUserIdx", params);
+    }
 }

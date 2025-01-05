@@ -16,7 +16,7 @@
     <!-- jQuery UI 자바스크립트 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     
-    <script src="./js/my-page/loves.js"></script>
+    <script src="./js/love/lovers.js"></script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -30,19 +30,14 @@
                 <h1>몌뉴</h1>
             </div>
             <ul class="menu">
-                <ul class="menu">
-                    <li><button id="home" onclick="location.href='./index'">🏠 홈</button></li>
-                    <li><button id="love" onclick="location.href='./loves'" 
-                        style="background-color: var(--color-hover);">💖 찜</button>
-                    </li>
-                </ul>
+                <li><button id="home" onclick="location.href='./index'">🏠 홈</button></li>
+                <li><button id="my" onclick="location.href='./my'">✔ 내정보 관리</button></li>
             </ul>
         </div>
-
+ 
         <!-- 메인 콘텐츠 -->
         <div class="content" id="content-area">
-            <h2>좋아요 관리</h2>
-            <p>좋아요 관리할 수 있습니다.</p>
+            <h2>좋아요</h2>
             <div class="loves-list">
                 <!-- 좋아요 목록 조회 -->
             </div>  

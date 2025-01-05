@@ -7,10 +7,11 @@ public class Buy {
     private int buy_idx;
     private String buy_code;
     private String item_code;
-    private int user_idx;
+    private int user_idx; 
     private int quantity;
     private String color;
     private String size;
+    private String status = "ACTIVE";
     private Date buy_date;
 
 
@@ -78,4 +79,11 @@ public class Buy {
         this.buy_date = buy_date;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }   
 }

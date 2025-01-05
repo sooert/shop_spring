@@ -16,7 +16,7 @@
     <!-- jQuery UI 자바스크립트 -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     
-    <script src="./js/my-page/loves.js"></script>
+    <script src="./js/my-page/buystory.js"></script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -25,30 +25,27 @@
 <body>
     <div class="container">
         <!-- 좌측 네비게이션 바 -->
-        <div class="sidebar-left"> 
+        <div class="sidebar-left">
             <div class="logo">
                 <h1>몌뉴</h1>
             </div>
             <ul class="menu">
-                <ul class="menu">
-                    <li><button id="home" onclick="location.href='./index'">🏠 홈</button></li>
-                    <li><button id="love" onclick="location.href='./nouser-lovers'" 
-                        style="background-color: var(--color-hover);">💖 찜</button>
-                    </li>
-                </ul>
+                <li><button id="home" onclick="location.href='./index'">🏠 홈</button></li>
+                <li><button id="my" onclick="location.href='./my'">✔ 내정보 관리</button></li>
             </ul>
         </div>
 
         <!-- 메인 콘텐츠 -->
         <div class="content" id="content-area">
-            <h2>좋아요 관리</h2>
-            <p>좋아요 관리할 수 있습니다.</p>
-
+            <h2>주문 내역</h2>
+            <div class="purchase-history" style="width:88%;">
+                <!-- 주문 내역 출력 -->
+            </div>
         </div>
 
-       <!-- 우측 사이드바 -->
-       <%@ include file="./include/sider.jsp" %>
-       
+        <!-- 우측 사이드바 -->
+        <%@ include file="../include/sider.jsp" %>
+
     </div>
 </body>
 </html>

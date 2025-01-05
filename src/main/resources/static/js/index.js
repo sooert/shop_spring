@@ -46,7 +46,6 @@ function scrolltop() {
        method:"GET", 
        success:function(response){ 
            var items = response;
-           console.log(items);
            $.each(items, function(index, item){
               var discount_price = item.price * (1-item.discount);
               $('.item-container').append(`
@@ -56,11 +55,13 @@ function scrolltop() {
                         </button>
                         <img src="${item.item_img_url}" class="product-image" onclick="location.href='./detail-item?item_code=${item.item_code}'" />
                         <div class="product-info">
-                           <span class="product-discount" style="color:red;">${item.discount*100}%</span>
+                           <span class="product-discount" style="color:red;">
+                           ${(item.discount * 100).toFixed(0) > 0 ? `${(item.discount * 100).toFixed(0)}%` : ''}
+                           </span>
                            <span class="product-discount-price">${discount_price.toLocaleString()} 원</span>
                         </div>
-                        <div class="product-company">
-                           <span style="color:#999;font-size:13px;">${item.company}</span>
+                        <div class="product-name">
+                           <span style="color:#999;font-size:13px;">${item.name}</span>
                         </div>
                         <div class="product-detail">
                            <span style="color:#999;font-size:13px;">${item.content}</span>
@@ -92,7 +93,7 @@ function updateBuyCount(itemCode) {
                 buyCountElement.show();
             } else {
                 buyCountElement.hide();
-            }
+            } 
         }
     });
 }

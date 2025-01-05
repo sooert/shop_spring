@@ -358,7 +358,7 @@ header{
 .nav-menu ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1rem;
     margin-bottom: 0;
 }
 

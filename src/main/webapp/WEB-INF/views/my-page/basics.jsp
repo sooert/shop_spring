@@ -32,8 +32,8 @@
                 <li><button id="my" onclick="location.href='./my'">✔ 내정보 관리</button>
                     <button id="call" style="display: none;">📞 전화번호 변경</button>
                 </li>
-                <li><button id="buy" onclick="location.href='./buys'">📊 구매 내역</button></li>
-                <li><button id="sell" onclick="location.href='./sells'">👤 판매 내역</button></li>
+                <li><button id="buy" onclick="location.href='./buy-history'">📊 주문 내역</button></li>
+                <li><button id="sell" onclick="location.href='./sell-history'">👤 판매 내역</button></li>
                 <li><button id="review" onclick="location.href='./reviews'">✏️ 리뷰</button></li>
             </ul>
         </div>

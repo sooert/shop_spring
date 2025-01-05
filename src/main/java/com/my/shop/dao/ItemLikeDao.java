@@ -20,11 +20,6 @@ public class ItemLikeDao {
         sqlSession.insert("ItemLikeMapper.itemLikeCreate", itemLike);
     }
 
-    // 아이템 좋아요 조회
-    public ItemLike itemLikeRead(String item_code) {
-        return sqlSession.selectOne("ItemLikeMapper.itemLikeRead", item_code);
-    }
-
     // 아이템 좋아요 증가
     public void itemLikePlus(ItemLike itemLike) {
         sqlSession.update("ItemLikeMapper.itemLikePlus", itemLike);
@@ -44,5 +39,11 @@ public class ItemLikeDao {
     public List<Map<String, Object>> findByUserNick(String user_nick) {
         return sqlSession.selectList("ItemLikeMapper.findByUserNick", user_nick);
     }
+
+    // 좋아요 상태 확인
+    public int checkLikeStatus(ItemLike itemLike) {
+        return sqlSession.selectOne("ItemLikeMapper.checkLikeStatus", itemLike);
+    }
+    
 
 }

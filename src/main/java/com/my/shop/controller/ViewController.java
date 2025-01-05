@@ -39,32 +39,51 @@ public class ViewController {
 		return "my-page/call";
 	}
 
-	// 구매 내역 페이지 이동
-	@GetMapping("buys")
-	public String buys() {
+	// 좋아요 페이지 이동 (회원)
+	@GetMapping("lovers")
+	public String lovers() {
 
-		return "my-page/buys";
+		return "love/lovers";
 	}
 
-	// 판매 내역 페이지 이동
-	@GetMapping("sells")
-	public String sells() {
+	// 좋아요 페이지 이동 (비회원)
+	@GetMapping("nouser-lovers")
+	public String noUserLover() {
 
-		return "my-page/sells";
+		return "love/nouser-lovers";
 	}
+
+
+	//////////////////////////// 리뷰 ////////////////////////////////
 
 	// 리뷰 페이지 이동
 	@GetMapping("reviews")
 	public String review() {
 
-		return "my-page/reviews";
+		return "reviews/reviews";
 	}
 
-	// 좋아요 페이지 이동
-	@GetMapping("loves")
-	public String love() {
+	// 리뷰 작성 페이지 이동
+	@GetMapping("reviews-write")
+	public String reviewsWrite() {
 
-		return "my-page/loves";
+		return "reviews/reviews-write";
+	}
+
+	//////////////////////////// 판매 내역 ////////////////////////////////
+
+	// 판매 내역 페이지 이동
+	@GetMapping("sell-history")
+	public String sellHistory() {	
+
+		return "sell/sell-history";
+	}
+
+	// 리뷰 관리 페이지 이동
+	@GetMapping("sell-reviews")
+	public String sellReviews() {
+
+		return "sell/sell-reviews";
 	}
 
 	//////////////////////////// 메인 & 로그인 ////////////////////////////////
@@ -102,11 +121,10 @@ public class ViewController {
 
 	//////////////////////////// 구매 & 장바구니 ////////////////////////////////
 
-	// 구매 페이지
-	// 비회원도 구매 가능 (단, 로그인 시도 요청)
-	@GetMapping("buy")
-	public String buy() {
-		return "item/buy";
+	// 주문내역 페이지 (회원)
+	@GetMapping("buy-history")
+	public String buyHistory() {
+		return "item-buy/buy-history";
 	}
 
 	// 장바구니 페이지

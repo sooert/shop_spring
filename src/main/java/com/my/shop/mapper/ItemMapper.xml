@@ -38,6 +38,8 @@
 			company,
 			price,
 			discount,
+			season_discount,
+			special_sale,
 			point,
 			buy_count,
 			like_count,
@@ -54,12 +56,15 @@
 			#{company},
 			#{price},
 			#{discount},
+			#{season_discount},
+			#{special_sale},
 			#{point},
 			0,
 			0,
 			NOW()
 		)
 	</insert>
+	
 
 
 </mapper>

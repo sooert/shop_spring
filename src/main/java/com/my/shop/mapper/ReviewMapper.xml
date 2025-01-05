@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReviewMapper">
+
+   <!-- 리뷰 생성  -->
+	<insert id="reviewAdd" parameterType="Reviews">
+		INSERT INTO reviews (
+			review_idx,
+			review_code,
+			item_code,
+			user_nick,
+			title,
+			content,
+			item_category,
+			item_price,
+			review_img_url,
+			star,
+			date
+		) VALUES (
+			#{review_idx},
+			#{item_code},
+			#{user_nick},
+			#{title},
+			#{content},
+			#{item_category},
+			#{item_price},
+			#{review_img_url},
+			#{star},
+			NOW()
+		)
+	</insert>
+
+
+
+</mapper>
+

@@ -57,10 +57,9 @@
             <!-- 혜택 정보 -->
             <div class="user-benefit">
                 <p>혜택가: <strong class="user-benefit-price"></strong></p>
-                <ul>
-                    <li>오늘 추가 10% 상품 할인</li>
-                    <li>적립금 최대 6% 적립</li>
-                </ul>
+                <p>계절 할인: <strong class="season-discount"></strong></p>
+                <p>특가 할인: <strong class="special-sale"></strong></p>
+                <p>적립금: <strong class="point-benefit"></strong></p>
             </div>
       
             <!-- 상품 옵션 선택 -->
@@ -97,7 +96,7 @@
                     <span id="like-count">0</span>
                 </button>
                 <button class="buy-button">구매하기</button>
-                <button class="cart-button">장바구니</button>
+                <button class="cart-button" data-item-code="${item_code}">장바구니</button>
             </div>
       
             <!-- 배송 정보 -->

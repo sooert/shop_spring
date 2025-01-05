@@ -11,6 +11,7 @@
 			quantity,
 			color,
 			size,
+			status,
 			date
 		) VALUES (
 			#{buy_code},
@@ -19,14 +20,10 @@
 			#{quantity},
 			#{color},
 			#{size},
+			'ACTIVE',
 			NOW()
 		)
 	</insert>
-
-		<!-- 구매 횟수 전체 조회 -->
-	<select id="buyCount" resultType="int">
-			SELECT COUNT(*) FROM buy
-	</select>
 
 	<!-- 구매 횟수 증가 -->
 	<update id="buyCountUpdate" parameterType="map">
@@ -37,22 +34,11 @@
 
 	<!-- 회원 구매 목록 상세 조회 -->
 	<select id="buyListDetail" parameterType="int" resultType="map">
-		SELECT 
-			b.buy_idx,
-			b.buy_code,
-			b.color,
-			b.size,
-			b.quantity,
-			b.date,
-			i.item_code,
-			i.name as item_name,
-			i.price,
-			i.discount,
-			i.item_img_url,
-			(i.price * (1-i.discount) * b.quantity) as total_price
+		SELECT b.*, i.name as item_name, i.item_img_url, i.price * b.quantity as total_price
 		FROM buy b
 		JOIN item i ON b.item_code = i.item_code
 		WHERE b.user_idx = #{user_idx}
+		AND b.status = 'ACTIVE'
 		ORDER BY b.date DESC
 	</select>
 
@@ -63,7 +49,27 @@
 		WHERE item_code = #{item_code}
 	</select>
 
+	<!-- 주문 취소 -->
+	<update id="orderCancel" parameterType="map">
+		UPDATE buy 
+		SET status = 'CANCELLED'
+		WHERE item_code IN 
+		<foreach item="itemCode" collection="itemCodes" open="(" separator="," close=")">
+			#{itemCode}
+		</foreach>
+		AND user_idx = #{userIdx}
+	</update>
+
+	<!-- item_code와 user_idx로 구매 정보 조회 -->
+	<select id="findByItemCodeAndUserIdx" resultType="com.my.shop.entity.Buy">
+		SELECT *
+		FROM buy
+		WHERE item_code = #{itemCode}
+		AND user_idx = #{userIdx}
+		AND status != 'CANCELLED'
+		ORDER BY buy_idx DESC
+		LIMIT 1
+	</select>
 
 </mapper>
-
 

@@ -2,6 +2,7 @@ package com.my.shop.service;
 
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +19,6 @@ public class BuyService {
     // 구매 목록 생성
     public void buyAdd(Buy buy) {
         buyDao.buyAdd(buy);
-    }
-    
-    ///////////////// 구매 횟수 전체 조회 /////////////////////
-
-    // 구매 횟수 전체 조회
-    public int buyCount() {
-        return buyDao.buyCount();
     }
 
     ///////////////// 구매 횟수 증가 /////////////////////
@@ -46,5 +40,17 @@ public class BuyService {
     // 상품별 구매 횟수 조회
     public int getItemBuyCount(String item_code) {
         return buyDao.getItemBuyCount(item_code);
+    }
+
+    ///////////////// 주문 취소 /////////////////////
+
+    // 주문 취소 처리
+    public void orderCancel(Map<String, Object> map) {
+        buyDao.orderCancel(map);
+    }
+
+    // 상품 코드와 사용자 인덱스로 구매 정보 조회
+    public Buy findByItemCodeAndUserIdx(String item_code, int user_idx) {
+        return buyDao.findByItemCodeAndUserIdx(item_code, user_idx);
     }
 }

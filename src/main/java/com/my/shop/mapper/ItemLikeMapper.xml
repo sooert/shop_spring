@@ -32,7 +32,12 @@
 		ORDER BY il.date DESC
 	</select>
 
-
+	<!-- 좋아요 상태 확인 -->
+	<select id="checkLikeStatus" parameterType="ItemLike" resultType="int">
+		SELECT COUNT(*) 
+		FROM item_like 
+		WHERE item_code = #{item_code} AND user_nick = #{user_nick}
+	</select>
 
 </mapper>
 

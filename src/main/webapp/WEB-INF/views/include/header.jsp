@@ -19,12 +19,13 @@
                 <!-- 로그인 상태 -->
                 <c:if test="${not empty sessionScope.me}"> 
                     <li><a id="register-btn">상품 등록</a></li>
-                    <li><a id="cart-btn" style="margin-left:-15px">장바구니</a></li>
-                    <li><a id="log-out-btn" style="margin-left:-15px">로그아웃</a></li>
+                    <li><a id="cart-btn">장바구니</a></li>
+                    <li><a id="log-out-btn">로그아웃</a></li>
                 </c:if> 
  
                 <!-- 로그아웃 상태 -->
                 <c:if test="${empty sessionScope.me}">
+                    <li><a id="cart-btn">장바구니</a></li>
                     <li><a id="login-btn">로그인</a></li>
                 </c:if>
             </ul>
@@ -99,7 +100,7 @@
                             <li class="menu-item go-home">홈</li>
                             <li class="menu-item go-my-page">마이페이지</li>
                             <li class="menu-item go-like">찜</li>
-                            <li class="menu-item go-cart">장바구니</li>
+                            <li class="menu-item go-buy-history">주문 내역</li>
                             <li class="menu-item go-board">문의사항</li>
                         </ul>
                      </c:if>
