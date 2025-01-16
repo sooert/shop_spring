@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BodySpecsMapper">
+
+	<!-- 바디 치수 생성 -->
+	<insert id="bodySpecsCreate" parameterType="BodySpecs">
+		INSERT INTO `body_specs`
+		(
+			user_code,
+			height,
+			pants_size,
+			top_size,
+			shoes_size,
+			created_at
+		)
+		values
+		(	
+			#{user_code},
+			#{height},
+			#{pants_size},
+			#{top_size},
+			#{shoes_size},
+			now()
+		)
+	
+	</insert>
+
+	<!-- 바디 치수 조회 -->
+	<select id="bodySpecsSelect" parameterType="String" resultType="BodySpecs">
+		SELECT * FROM `body_specs` WHERE `user_code` = #{user_code}
+	</select>
+
+	<!-- 바디 치수 수정 -->
+	<update id="bodySpecsUpdate" parameterType="BodySpecs">
+		UPDATE `body_specs` 
+		SET `height` = #{height}, 
+		`pants_size` = #{pants_size}, 
+		`top_size` = #{top_size}, 
+		`shoes_size` = #{shoes_size},
+		`updated_at` = NOW()
+		WHERE `user_code` = #{user_code}
+	</update>
+	
+	
+
+</mapper>
+

@@ -3,7 +3,7 @@
 <mapper namespace="ReviewMapper">
 
    <!-- 리뷰 생성  -->
-	<insert id="reviewAdd" parameterType="Reviews">
+	<insert id="reviewAdd" parameterType="Review">
 		INSERT INTO reviews (
 			review_idx,
 			review_code,

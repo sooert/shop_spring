@@ -38,7 +38,7 @@
 		FROM buy b
 		JOIN item i ON b.item_code = i.item_code
 		WHERE b.user_idx = #{user_idx}
-		AND b.status = 'ACTIVE'
+		AND b.status IN ('ACTIVE', 'CONFIRMED', 'CANCELLED')
 		ORDER BY b.date DESC
 	</select>
 
@@ -50,26 +50,39 @@
 	</select>
 
 	<!-- 주문 취소 -->
-	<update id="orderCancel" parameterType="map">
+	<update id="orderCancel" parameterType="string">
 		UPDATE buy 
 		SET status = 'CANCELLED'
-		WHERE item_code IN 
-		<foreach item="itemCode" collection="itemCodes" open="(" separator="," close=")">
-			#{itemCode}
-		</foreach>
-		AND user_idx = #{userIdx}
+		WHERE buy_code = #{value}
 	</update>
 
-	<!-- item_code와 user_idx로 구매 정보 조회 -->
-	<select id="findByItemCodeAndUserIdx" resultType="com.my.shop.entity.Buy">
+	<!-- buy_code로 주문 정보 조회 -->
+	<select id="findByBuyCode" parameterType="string" resultType="Buy">
 		SELECT *
 		FROM buy
-		WHERE item_code = #{itemCode}
-		AND user_idx = #{userIdx}
-		AND status != 'CANCELLED'
-		ORDER BY buy_idx DESC
-		LIMIT 1
+		WHERE buy_code = #{value}
 	</select>
+
+	<!-- 주문 확정 -->
+	<update id="orderConfirm" parameterType="string">
+		UPDATE buy 
+		SET status = 'CONFIRMED'
+		WHERE buy_code = #{value}
+	</update>
+
+	<!-- 주문 삭제 -->
+	<delete id="deleteBuy" parameterType="string">
+		DELETE FROM buy 
+		WHERE buy_code = #{value}
+	</delete>
+
+	<!-- 구매 상품 정보 로드 -->
+	<select id="buyItemDetail" parameterType="string" resultType="Buy">
+		SELECT *
+		FROM buy
+		WHERE buy_code = #{value}
+	</select>
+
 
 </mapper>
 

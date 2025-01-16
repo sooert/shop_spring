@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
 import com.my.shop.entity.Buy;
 
 @Repository
@@ -48,8 +47,8 @@ public class BuyDao {
     ////////////// 주문 취소 ///////////////////////////
 
     // 주문 취소 처리
-    public void orderCancel(Map<String, Object> map) {
-        sqlSession.update("BuyMapper.orderCancel", map);
+    public void orderCancel(String buyCode) {
+        sqlSession.update("BuyMapper.orderCancel", buyCode);
     }
 
     // 상품 코드와 사용자 인덱스로 구매 정보 조회
@@ -58,5 +57,31 @@ public class BuyDao {
         params.put("itemCode", itemCode);
         params.put("userIdx", userIdx);
         return sqlSession.selectOne("BuyMapper.findByItemCodeAndUserIdx", params);
+    }
+
+    ////////////// 주문 확정 ///////////////////////////
+
+    // 주문 확정
+    public void orderConfirm(String buy_code) {
+        sqlSession.update("BuyMapper.orderConfirm", buy_code);
+    }
+
+    ////////////// 주문 삭제 ///////////////////////////
+
+    // 주문 삭제
+    public void deleteBuy(String buy_code) {
+        sqlSession.delete("BuyMapper.deleteBuy", buy_code);
+    }
+
+    // buy_code로 주문 정보 조회
+    public Buy findByBuyCode(String buyCode) {
+        return sqlSession.selectOne("BuyMapper.findByBuyCode", buyCode);
+    }
+
+    ////////////// 구매 상품 정보 로드 ///////////////////////////
+
+    // 구매 상품 정보 로드
+    public Buy buyItemDetail(String buyCode) {
+        return sqlSession.selectOne("BuyMapper.buyItemDetail", buyCode);
     }
 }

@@ -1,11 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyAjMo161z8lVauMCOAiynyo2xcK_SHwlxI",
-    authDomain: "open-market-801f0.firebaseapp.com",
-    projectId: "open-market-801f0",
-    storageBucket: "open-market-801f0.firebasestorage.app",
-    messagingSenderId: "486349643801",
-    appId: "1:486349643801:web:bf1543d2dda44d06668a88",
-    measurementId: "G-ZDKCZ2PVN5"
+    apiKey: "AIzaSyD0qbd50bRKylrlXfyInH73euD3qqwdCBI",
+    authDomain: "open-market-82ccb.firebaseapp.com",
+    projectId: "open-market-82ccb",
+    storageBucket: "open-market-82ccb.firebasestorage.app",
+    messagingSenderId: "153123476480",
+    appId: "1:153123476480:web:a627a0fdaaeb6d01efb4e5",
+    measurementId: "G-YPHBM9TV1S"
 };
 
 // 프로필 이미지 업로드

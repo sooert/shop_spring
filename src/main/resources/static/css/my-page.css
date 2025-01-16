@@ -1,4 +1,4 @@
-/* 기본 스타일 */
+/* ===== 기본 변수 설정 ===== */
 :root {
   --primary-color: #e0dddc;
   --secondary-color: #F5F7FA;
@@ -10,7 +10,23 @@
   --shadow-soft: 0 2px 15px rgba(0, 0, 0, 0.08);
   --transition: all 0.3s ease;
 }
-/* 버튼 스타일 */
+
+/* ===== 기본 레이아웃 스타일 ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #f9fafb;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+/* ===== 버튼 기본 스타일 ===== */
 button {
     border: none;
     padding: 10px 15px;
@@ -25,30 +41,8 @@ button:hover {
     background-color: var(--color-hover);
     color: #000;
 }
-/* 메인 콘텐츠 */
-#content-area {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    margin-top: 10px;
-}
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    height: 100vh;
-    background-color: #f9fafb;
-}
-/* 컨테이너 */
-.container {
-    display: flex;
-    width: 100%;
-}
-
-/* 좌측 네비게이션 바 */
+/* ===== 좌측 사이드바 스타일 ===== */
 .sidebar-left {
     width: 300px;
     background: var(--secondary-color);
@@ -60,7 +54,8 @@ body {
     align-items: center;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
-/* 로고 */
+
+/* 로고 스타일 */
 .sidebar-left .logo h1 {
     font-size: 24px;
     margin-bottom: 30px;
@@ -68,17 +63,18 @@ body {
     font-weight: bold;
     letter-spacing: 1px;
 }
-/* 메뉴 */
+
+/* 메뉴 스타일 */
 .sidebar-left .menu {
     list-style: none;
     padding: 0;
     width: 100%;
 }
-/* 메뉴 리스트 */
+
 .sidebar-left .menu li {
     margin: 8px 0;
 }
-/* 메뉴 버튼 */
+
 .sidebar-left .menu li button {
     width: 100%;
     padding: 12px 20px;
@@ -99,7 +95,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* 메인 콘텐츠 */
+/* ===== 메인 콘텐츠 영역 ===== */
 .content {
     flex: 1;
     padding: 40px;
@@ -113,14 +109,16 @@ body {
     flex-direction: column;
     align-items: center;
 }
-/* 제목 */
+
+/* 콘텐츠 영역 제목 */
 .content h2 {
     font-size: 28px;
     margin-bottom: 15px;
     color: var(--text-primary);
     font-weight: 600;
 }
-/* 설명 */
+
+/* 콘텐츠 영역 설명 텍스트 */
 .content p {
     padding-top: 20px;
     font-size: 16px;
@@ -130,13 +128,13 @@ body {
     margin-bottom: 30px;
 }
 
-/* 아이디 입력, 비밀번호 입력 등 입력 필드 스타일 */
+/* ===== 입력 필드 스타일 ===== */
 .input-with-btn {
     margin-bottom: 10px;
     width: 80%;
     max-width: 600px;
 }
-/* 입력 필드 */
+
 .input-with-btn input {
     width: 100%;
     padding: 12px 15px;
@@ -272,106 +270,120 @@ body {
     height: 16px;
 }
 
-/* 전화 스타일 */
+/* ===== 전화번호 입력 스타일 ===== */
 .input-call-btn {
-    width: 80%;
-    max-width: 600px;
+    width: 60%;
+    max-width: 400px;
     margin-bottom: 20px;
-    margin-left: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
 }
 
 .input-call-btn input {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid var(--color-gray);
-    border-radius: 5px;
-    box-sizing: border-box;
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
 }
 
-/* 버튼 스타일 */
+/* 전화번호 버튼 */
 .input-call-btn button {
-    background: var(--primary-color);
+    padding: 12px 20px;
+    background-color: var(--primary-color);
     color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 500;
-    transition: var(--transition);
+    white-space: nowrap;
+    min-width: 100px;
 }
 
 .input-call-btn button:hover {
-    background: var(--hover-color);
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
 }
 
-/* 전화번호 인증 관련 스타일 추가 */
+/* ===== 타이머 스타일 ===== */
 .timer {
-    color: var(--primary-color);
-    margin-left: 10px;
-    font-size: 14px;
-    min-width: 60px;
-    text-align: center;
+    color: #E74C3C;
+    font-size: 15px;
     font-weight: 600;
+    min-width: 70px;
+    text-align: center;
 }
 
 .input-calls-btn {
+    width: 60%;
+    max-width: 400px;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 10px;
+    gap: 10px;
+}
+
+/* 전화번호 입력 필드 포커스 스타일 수정 */
+.input-call-btn input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(224, 221, 220, 0.2);
+}
+
+/* 인증번호 입력 필드 포커스 스타일도 동일하게 수정 */
+.input-calls-btn input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(224, 221, 220, 0.2);
 }
 
 .number-check {
-    padding: 8px 15px;
-    margin-left: 10px;
-    background-color: var(--color-gray);
+    padding: 12px 20px;
+    background-color: var(--primary-color);
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 56px;
-    height: 32px;
-    font-size: 11px;
+    border-radius: 10px;
+    font-weight: 500;
+    min-width: 80px;
+    font-size: 15px;
 }
 
-.number:hover, .number-check:hover {
-    background-color: var(--color-hover);
+.number-check:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
 }
 
 /* 전화번호 인증 코드 스타일 */
 #number-auth-code {
-    width: 222px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-align: left;
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 15px;
+    text-align: center;
 }
 
-#number:focus,
-#number-auth-code:focus{
+#number-auth-code:focus {
     outline: none;
-    border-color: var(--color-gray);
-    box-shadow: 0 0 0 2px rgba(115, 70, 243, 0.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(224, 221, 220, 0.2);
 }
 
 /* 버튼 스타일 */
 #number-change-btn {
-    width: 300px;
-    padding: 12px 0;
+    width: 60%;
+    max-width: 400px;
+    padding: 15px 0;
     margin-top: 20px;
-    background-color: var(--color-gray);
-    border-radius: 5px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
     color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: var(--transition);
 }
 
 #number-change-btn:hover {
-    background-color: var(--color-hover);
-    color: #fff;
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
 }
 
 /* 수정 버튼 스타일 수정 */
@@ -398,159 +410,6 @@ body {
     color: #E74C3C;
 }
 
-/* 구매 내역 스타일 */
-.purchase-item {
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
-    background: white;
-    overflow: hidden;
-}
-
-.purchase-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.purchase-header {
-    background-color: #f8f9fa;
-    padding: 12px 20px;
-    border-bottom: 1px solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    color: #666;
-    font-size: 0.9em;
-}
-
-.purchase-content {
-    display: flex;
-    padding: 20px;
-    align-items: center;
-    gap: 20px;
-}
-
-.purchase-image img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.purchase-info {
-    flex: 1;
-}
-
-.item-name {
-    font-size: 1.2em;
-    margin: 0 0 12px 0;
-    color: #333;
-}
-
-.item-details {
-    display: flex;
-    gap: 20px;
-    color: #666;
-    margin-bottom: 12px;
-}
-
-.price-info {
-    margin-top: 10px;
-}
-
-.total-price {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-.purchase-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.btn-cancel, .btn-review {
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.9em;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-cancel {
-    background-color: #fff;
-    border: 1px solid #dc3545;
-    color: #dc3545;
-}
-
-.btn-cancel:hover {
-    background-color: #dc3545;
-    color: white;
-}
-
-.btn-review {
-    background-color: #fff;
-    border: 1px solid #007bff;
-    color: #007bff;
-}
-
-.btn-review:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-/* 찜 목록 */
-.loves-list {
-    padding: 20px;
-}
-
-.love-item {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-    gap: 20px;
-}
-
-.love-item img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-}
-
-.item-info {
-    flex: 1;
-}
-
-.item-info h3 {
-    margin: 0 0 10px 0;
-}
-
-.item-info p {
-    margin: 5px 0;
-    color: #666;
-}
-
-.cancel-like {
-    padding: 8px 15px;
-    background-color: #ff4444;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.cancel-like:hover {
-    background-color: #cc0000;
-}
-
-.purchase-header {
-    display: flex;
-    align-items: center;
-}
-
 /* 반응형 디자인  */
 @media (max-width: 768px) {
     .container {
@@ -571,3 +430,5 @@ body {
         width: 100%;
     }
 }
+
+

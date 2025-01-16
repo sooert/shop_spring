@@ -8,7 +8,7 @@
 	</select>
 
    <!-- 리뷰 이미지 추가  -->
-	<insert id="create" parameterType="ReviewImg">
+	<insert id="reviewImgAdd" parameterType="ReviewImg">
 		insert into `review_img`
 		(	
 			review_img_idx,

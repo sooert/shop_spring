@@ -11,7 +11,7 @@ public class Review {
     private String item_category;
     private int item_price;
     private String review_img_url;
-    private int review_star;
+    private int star;
     private String date;
 
     public int getReview_idx() {
@@ -86,12 +86,12 @@ public class Review {
         this.review_img_url = review_img_url;
     }
 
-    public int getReview_star() {
-        return review_star;
+    public int getStar() {
+        return star;
     }
 
-    public void setReview_star(int review_star) {
-        this.review_star = review_star;
+    public void setStar(int star) {
+        this.star = star;
     }
 
     public String getDate() {

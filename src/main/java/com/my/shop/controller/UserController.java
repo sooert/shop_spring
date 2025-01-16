@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.my.shop.entity.User;
 import com.my.shop.service.UserService;
+import com.my.shop.service.BodySpecsService;
+import com.my.shop.entity.BodySpecs;
 
 @RestController
 @RequestMapping("api/user")
@@ -22,6 +24,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	BodySpecsService bodySpecsService;
 
 	// 인증번호 발송
 	@PostMapping("send")
@@ -270,5 +275,49 @@ public class UserController {
 		userService.delete(user_code);
 	}
 
+	///////////////////////////// 바디 치수  /////////////////////////////////
 
+	// 바디 치수 생성
+	@PostMapping("bodySpecsCreate")
+	public void bodySpecsCreate(@RequestParam(value = "height") int height, 
+								@RequestParam(value = "pants_size") int pants_size, 
+								@RequestParam(value = "top_size") String top_size, 
+								@RequestParam(value = "shoes_size") String shoes_size, 
+								HttpSession session) {
+
+		User user = (User) session.getAttribute("me");
+
+		BodySpecs bodySpecs = new BodySpecs();
+		bodySpecs.setHeight(height);
+		bodySpecs.setPants_size(pants_size);
+		bodySpecs.setTop_size(top_size);
+		bodySpecs.setShoes_size(shoes_size);
+		bodySpecs.setUser_code(user.getUser_code());
+		bodySpecsService.bodySpecsCreate(bodySpecs);
+	}
+
+	// 바디 치수 수정	
+	@PostMapping("bodySpecsUpdate")
+	public void bodySpecsUpdate(@RequestParam(value = "height") int height, 
+								@RequestParam(value = "pants_size") int pants_size, 
+								@RequestParam(value = "top_size") String top_size, 
+								@RequestParam(value = "shoes_size") String shoes_size, 
+								HttpSession session) {
+		User user = (User) session.getAttribute("me");
+		BodySpecs bodySpecs = new BodySpecs();
+		bodySpecs.setHeight(height);
+		bodySpecs.setPants_size(pants_size);
+		bodySpecs.setTop_size(top_size);
+		bodySpecs.setShoes_size(shoes_size);
+		bodySpecs.setUser_code(user.getUser_code());
+		bodySpecsService.bodySpecsUpdate(bodySpecs);
+	}
+
+
+	// 바디 치수 조회
+	@GetMapping("bodySpecsSelect")
+	public BodySpecs bodySpecsSelect(HttpSession session) {
+		User user = (User) session.getAttribute("me");
+		return bodySpecsService.bodySpecsSelect(user.getUser_code());
+	}
 }

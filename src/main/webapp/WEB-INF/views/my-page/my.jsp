@@ -39,13 +39,13 @@
                     <button id="call" 
                     onclick="location.href='./call'" style="font-size: 13px; margin-left: 10px;">📞 전화번호 변경</button>
                 </li>
+                <li><button id="body specs" onclick="location.href='./body-specs'">📊 바디 치수</button></li>
             </ul>
         </div>
 
         <!-- 메인 콘텐츠 -->
         <div class="content" id="content-area">
             <h2>내 정보 관리</h2>
-            <p>내 정보를 관리할 수 있습니다.</p>
                 
             <!-- 아이디 확인만 가능 -->
             <div class="input-with-btn">

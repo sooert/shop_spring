@@ -17,8 +17,8 @@ $(document).ready(function(){
                 
                 // 로그인 되어있다면 장바구니 추가 로직 실행
                 // 선택된 옵션 가져오기
-                const selectedColor = $cartButton.attr('selected-color');
-                const selectedSize = $cartButton.attr('selected-size');
+                const selectedColor = $cartButton.attr('selected-color').toLowerCase();
+                const selectedSize = $cartButton.attr('selected-size').toUpperCase();
                 
                 const cart_count = 1;
                 const item_code = $cartButton.attr('item-code');
@@ -121,8 +121,8 @@ function cartList() {
                             <h3>${cart.item_name}</h3>
                             <div class="cart-details">
                                 <p class="cart-option">
-                                    <span class="label">색상:</span> ${cart.item_color} / 
-                                    <span class="label">사이즈:</span> ${cart.item_size}
+                                    <span class="label">색상:</span> ${cart.item_color.toUpperCase()} / 
+                                    <span class="label">사이즈:</span> ${cart.item_size.toUpperCase()}
                                 </p>
                                 <p class="cart-price">
                                     <span class="label">가격:</span> 

@@ -1,11 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyAjMo161z8lVauMCOAiynyo2xcK_SHwlxI",
-    authDomain: "open-market-801f0.firebaseapp.com",
-    projectId: "open-market-801f0",
-    storageBucket: "open-market-801f0.firebasestorage.app",
-    messagingSenderId: "486349643801",
-    appId: "1:486349643801:web:bf1543d2dda44d06668a88",
-    measurementId: "G-ZDKCZ2PVN5"
+    apiKey: "AIzaSyD0qbd50bRKylrlXfyInH73euD3qqwdCBI",
+    authDomain: "open-market-82ccb.firebaseapp.com",
+    projectId: "open-market-82ccb",
+    storageBucket: "open-market-82ccb.firebasestorage.app",
+    messagingSenderId: "153123476480",
+    appId: "1:153123476480:web:a627a0fdaaeb6d01efb4e5",
+    measurementId: "G-YPHBM9TV1S"
 };
 
 // 프로필 이미지 업로드
@@ -22,40 +22,12 @@ var firebaseUtil = {
             };
         });
     },
-    uploadUserImage: async function(storage, base64, userId) {
-        return new Promise(function(resolve, reject) {
-            try {
-                const userFolder = userId || 'temp_' + Date.now();
-                const timestamp = Date.now();
-                var ref = storage.ref('users').child(userFolder).child(timestamp + ".png");
-                
-                // base64 데이터에서 실제 이미지 데이터만 추출
-                const imageData = base64.split(',')[1];
-                
-                ref.putString(imageData, 'base64', {contentType: 'image/png'})
-                    .then(function(snapshot) {
-                        return snapshot.ref.getDownloadURL();
-                    })
-                    .then(function(url) {
-                        console.log("Firebase 업로드 성공:", url);
-                        resolve(url);
-                    })
-                    .catch(function(err) {
-                        console.error("Firebase 업로드 실패:", err);
-                        reject(err);
-                    });
-            } catch (error) {
-                console.error("Firebase 업로드 중 오류:", error);
-                reject(error);
-            }
-        });
-    },
-    uploadItemImage: async function(storage, base64) {
+    uploadBuyImage: async function(storage, base64) {
         return new Promise(function(resolve, reject) {
             try {
                 const userFolder = 'temp_' + Date.now();
                 const timestamp = Date.now();
-                var ref = storage.ref('items').child(userFolder).child(timestamp + ".png");
+                var ref = storage.ref('buys').child(userFolder).child(timestamp + ".png");
                 
                 // base64 데이터에서 실제 이미지 데이터만 추출
                 const imageData = base64.split(',')[1];
@@ -109,11 +81,9 @@ $(document).ready(function() {
             // Firebase에 이미지 업로드
             try {
                 const base64 = await firebaseUtil.getBase64(file);
-                const signupData = JSON.parse(sessionStorage.getItem('signupData') || '{}');
-                const downloadUrl = await firebaseUtil.uploadUserImage(storage, base64, signupData.id);
+                const downloadUrl = await firebaseUtil.uploadBuyImage(storage, base64);
                 
-                signupData.img_url = downloadUrl;
-                sessionStorage.setItem('signupData', JSON.stringify(signupData));
+                sessionStorage.setItem('buyData', JSON.stringify(buyData));
 
             } catch (error) {
                 console.error('이미지 업로드 오류:', error);

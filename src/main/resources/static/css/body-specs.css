@@ -1,0 +1,144 @@
+/* 신체 치수 입력 폼의 메인 컨테이너 */
+.body-specs-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow-soft);
+}
+
+/* 각 신체 치수 입력 그룹의 스타일 */
+.specs-group {
+    margin-bottom: 20px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+/* 그룹 제목 스타일 */
+.specs-group h3 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+/* 라벨 텍스트 스타일 */
+.specs-label {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* 슬라이더 컨테이너 스타일 */
+.range-container {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+/* 드롭다운 선택 메뉴 스타일 */
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* 슬라이더 기본 스타일 */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    outline: none;
+    transition: all 0.2s ease-out;
+    margin-right: 10px;
+}
+
+/* Webkit 브라우저용 슬라이더 썸네일 스타일 */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Firefox 브라우저용 슬라이더 썸네일 스타일 */
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* 슬라이더 값 표시 스타일 */
+.range-value {
+    position: absolute;
+    top: -25px;
+    left: 0;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: all 0.15s ease;
+}
+
+/* 값 표시 말풍선 화살표 추가 */
+.range-value::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--primary-color) transparent transparent transparent;
+}
+
+/* 수정 버튼 스타일 수정 */
+.save-button {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 10px;
+    display: block;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--primary-color);
+}
+/* 수정 버튼 호버 */
+.save-button:hover {
+    background-color: var(--hover-color);
+}
+
+@media (max-width: 768px) {
+    .body-specs-container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .specs-group {
+        padding: 15px;
+    }
+}

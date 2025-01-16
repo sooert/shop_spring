@@ -1,0 +1,113 @@
+/* 구매 내역 스타일 */
+.purchase-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    background: white;
+    overflow: hidden;
+}
+
+.purchase-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.purchase-header {
+    background-color: #f8f9fa;
+    padding: 12px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.purchase-content {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    gap: 20px;
+}
+
+.purchase-image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.purchase-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 1.2em;
+    margin: 0 0 12px 0;
+    color: #333;
+}
+
+.item-details {
+    display: flex;
+    gap: 20px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.price-info {
+    margin-top: 10px;
+}
+
+.total-price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.purchase-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn-cancel, .btn-confirm, .btn-review, .btn-delete {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel, .btn-delete {
+    background-color: #fff;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+}
+
+.btn-cancel:hover, .btn-delete:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-confirm{
+    background-color: #fff;
+    border: 1px solid #007bff;
+    color: #007bff;
+}
+
+.btn-confirm:hover{
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-review {
+    background-color: #fff;
+    border: 1px solid #007bff;
+    color: #007bff;
+}
+
+.btn-review:hover {
+    background-color: #007bff;
+    color: white;
+}

@@ -1,11 +1,10 @@
 package com.my.shop.entity;
 
-public class Review_img {
+public class ReviewImg {
 
     private int review_img_idx;
     private int review_idx;
     private String review_img_url;
-    private String create_date = " ";
 
     public int getReview_img_idx() {
         return review_img_idx;
@@ -30,9 +29,4 @@ public class Review_img {
     public void setReview_img_url(String review_img_url) {
         this.review_img_url = review_img_url;
     }
-
-    public String getCreate_date() {
-        return create_date;
-    }
-
 }

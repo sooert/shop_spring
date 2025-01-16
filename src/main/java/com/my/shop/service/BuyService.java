@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.my.shop.dao.BuyDao;
 import com.my.shop.entity.Buy;
+
 @Service
 public class BuyService {
 
@@ -45,12 +46,38 @@ public class BuyService {
     ///////////////// 주문 취소 /////////////////////
 
     // 주문 취소 처리
-    public void orderCancel(Map<String, Object> map) {
-        buyDao.orderCancel(map);
+    public void orderCancel(String buyCode) {
+        buyDao.orderCancel(buyCode);
     }
 
     // 상품 코드와 사용자 인덱스로 구매 정보 조회
     public Buy findByItemCodeAndUserIdx(String item_code, int user_idx) {
         return buyDao.findByItemCodeAndUserIdx(item_code, user_idx);
+    }
+
+    ////////////// 주문 확정 /////////////////////
+
+    // 주문 확정
+    public void orderConfirm(String buy_code) {
+        buyDao.orderConfirm(buy_code);
+    }
+
+    ////////////// 주문 삭제 /////////////////////
+
+    // 주문 삭제
+    public void deleteBuy(String buy_code) {
+        buyDao.deleteBuy(buy_code);
+    }
+
+    // buy_code로 주문 정보 조회
+    public Buy findByBuyCode(String buyCode) {
+        return buyDao.findByBuyCode(buyCode);
+    }
+
+    ////////////// 구매 상품 정보 로드 /////////////////////
+
+    // 구매 상품 정보 로드
+    public Buy buyItemDetail(String buyCode) {
+        return buyDao.buyItemDetail(buyCode);
     }
 }

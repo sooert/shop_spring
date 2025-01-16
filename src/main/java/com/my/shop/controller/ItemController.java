@@ -51,7 +51,7 @@ public class ItemController {
 	///////////////////////////// 상품 등록 ///////////////////////////
 
 	// 상품 생성
-	@PostMapping("/api/item/create")
+	@PostMapping("create")
 	public String create(@RequestParam(value = "name") String name, 
                          @RequestParam(value = "category") String category,
                          @RequestParam(value = "content") String content,
@@ -321,7 +321,7 @@ public class ItemController {
 
 	// 주문 취소 처리
 	@PostMapping("orderCancel")
-	public Map<String, Object> orderCancel(@RequestParam(value = "item_codes[]") List<String> itemCodes, HttpSession session) {
+	public Map<String, Object> orderCancel(@RequestParam(value = "buy_code") String buyCode, HttpSession session) {
 		Map<String, Object> response = new HashMap<>();
 		
 		User me = (User) session.getAttribute("me");
@@ -332,29 +332,70 @@ public class ItemController {
 		}
 		
 		try {
-			Map<String, Object> map = new HashMap<>();
-			map.put("itemCodes", itemCodes);
-			map.put("userIdx", me.getUser_idx());
-			
-			// 각 아이템의 구매 수량을 가져와서 buy_count 감소
-			for (String itemCode : itemCodes) {
-				Buy buy = buyService.findByItemCodeAndUserIdx(itemCode, me.getUser_idx());
-				if (buy != null) {
-					Map<String, Object> countMap = new HashMap<>();
-					countMap.put("item_code", itemCode);
-					countMap.put("quantity", -buy.getQuantity()); // 음수로 전달하여 감소
-					buyService.buyCountUpdate(countMap);
-				}
+			// 취소할 주문 정보 조회
+			Buy buy = buyService.findByBuyCode(buyCode);
+			if (buy != null && buy.getUser_idx() == me.getUser_idx()) {
+				// buy_count 감소를 위한 데이터 준비
+				Map<String, Object> countMap = new HashMap<>();
+				countMap.put("item_code", buy.getItem_code());
+				countMap.put("quantity", -buy.getQuantity()); // 음수로 전달하여 감소
+				
+				// buy_count 감소
+				buyService.buyCountUpdate(countMap);
+				
+				// 주문 상태를 취소로 변경
+				buyService.orderCancel(buyCode);
+				
+				response.put("status", "success");
+				response.put("message", "주문이 성공적으로 취소되었습니다.");
+			} else {
+				response.put("status", "error");
+				response.put("message", "주문을 찾을 수 없거나 권한이 없습니다.");
 			}
-			
-			buyService.orderCancel(map);
-			
-			response.put("status", "success");
-			response.put("message", "주문이 성공적으로 취소되었습니다.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.put("status", "error");
 			response.put("message", "주문 취소 중 오류가 발생했습니다.");
+		}
+		
+		return response;
+	}
+
+	///////////////////////////// 주문 확정 ///////////////////////////
+
+	// 주문 확정
+	@PostMapping("orderConfirm")
+	public String orderConfirm(@RequestParam(value = "buy_code") String buy_code, HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "not-login";
+		}
+		buyService.orderConfirm(buy_code);
+		return "ok";
+	}
+
+	///////////////////////////// 주문 삭제 ///////////////////////////
+
+	// 주문 삭제
+	@PostMapping("orderDelete")
+	public Map<String, Object> orderDelete(@RequestParam(value = "buy_code") String buy_code, HttpSession session) {
+		Map<String, Object> response = new HashMap<>();
+		
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			response.put("status", "error");
+			response.put("message", "로그인이 필요합니다.");
+			return response;
+		}
+		
+		try {
+			buyService.deleteBuy(buy_code);
+			response.put("status", "success");
+			response.put("message", "주문이 성공적으로 삭제되었습니다.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.put("status", "error");
+			response.put("message", "주문 삭제 중 오류가 발생했습니다.");
 		}
 		
 		return response;
@@ -478,7 +519,17 @@ public class ItemController {
 		return "ok";
 	}
 
+	///////////////////////////// 구매 상품 정보 로드 ///////////////////////////
 
+	// 구매 상품 정보 로드
+	@GetMapping("buyItemDetail")
+	public Buy buyItemDetail(@RequestParam(value = "buy_code") String buy_code) {
+		Buy buy = buyService.buyItemDetail(buy_code);
+		if (buy == null) {
+			throw new RuntimeException("상품을 찾을 수 없습니다.");
+		}
+		return buy;
+	}
 
 }
 

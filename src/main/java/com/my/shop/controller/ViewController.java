@@ -14,8 +14,11 @@ public class ViewController {
 
 	// 마이페이지 페이지 이동
 	@GetMapping("basics")
-	public String basics() {
-
+	public String basics(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "redirect:/login";
+		}
 		return "my-page/basics";
 	}
 
@@ -41,9 +44,22 @@ public class ViewController {
 
 	// 좋아요 페이지 이동 (회원)
 	@GetMapping("lovers")
-	public String lovers() {
-
+	public String lovers(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "redirect:/login";
+		}
 		return "love/lovers";
+	}
+
+	// 신체 치수 페이지 이동 (회원)
+	@GetMapping("body-specs")
+	public String bodySpecs(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "redirect:/login";
+		}
+		return "my-page/body-specs";
 	}
 
 	// 좋아요 페이지 이동 (비회원)
@@ -53,20 +69,21 @@ public class ViewController {
 		return "love/nouser-lovers";
 	}
 
-
 	//////////////////////////// 리뷰 ////////////////////////////////
 
 	// 리뷰 페이지 이동
 	@GetMapping("reviews")
-	public String review() {
-
+	public String review(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "redirect:/login";
+		}
 		return "reviews/reviews";
 	}
 
 	// 리뷰 작성 페이지 이동
 	@GetMapping("reviews-write")
 	public String reviewsWrite() {
-
 		return "reviews/reviews-write";
 	}
 
@@ -123,10 +140,14 @@ public class ViewController {
 
 	// 주문내역 페이지 (회원)
 	@GetMapping("buy-history")
-	public String buyHistory() {
+	public String buyHistory(HttpSession session) {
+		User me = (User) session.getAttribute("me");
+		if (me == null) {
+			return "redirect:/login";
+		}
 		return "item-buy/buy-history";
 	}
-
+	
 	// 장바구니 페이지
 	// 비회원도 장바구니 이동 가능
 	@GetMapping("cart")
