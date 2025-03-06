@@ -83,6 +83,12 @@
 		WHERE buy_code = #{value}
 	</select>
 
+	<!-- buy_code로 item_code 조회 -->
+	<select id="getItemCodeByBuyCode" resultType="String">
+		SELECT item_code 
+		FROM buy 
+		WHERE buy_code = #{buyCode}
+	</select>
 
 </mapper>
 

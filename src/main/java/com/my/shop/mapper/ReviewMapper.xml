@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ReviewMapper">
+	
+	<!-- 유저 닉네임으로 리뷰 조회 -->
+	<select id="findByUserNick" parameterType="Review" resultType="Review">
+		SELECT * FROM review WHERE user_nick = #{user_nick}
+	</select>
+	
+	<!-- 상품 코드로 리뷰 조회 -->
+	<select id="findByItemCode" parameterType="Review" resultType="Review">
+		SELECT * FROM review WHERE item_code = #{item_code}
+	</select>
 
    <!-- 리뷰 생성  -->
-	<insert id="reviewAdd" parameterType="Review">
-		INSERT INTO reviews (
-			review_idx,
+	<insert id="reviewAdd" parameterType="Review" useGeneratedKeys="true" keyProperty="review_idx">
+		INSERT INTO review (
 			review_code,
 			item_code,
+			buy_code,
 			user_nick,
-			title,
+			satisfaction,
+			colors,
+			sizes,
 			content,
-			item_category,
-			item_price,
 			review_img_url,
-			star,
 			date
 		) VALUES (
-			#{review_idx},
+			#{review_code},
 			#{item_code},
+			#{buy_code},
 			#{user_nick},
-			#{title},
+			#{satisfaction},
+			#{colors},
+			#{sizes},
 			#{content},
-			#{item_category},
-			#{item_price},
 			#{review_img_url},
-			#{star},
 			NOW()
 		)
 	</insert>

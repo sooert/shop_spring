@@ -1,7 +1,6 @@
 /* 기본 스타일 */
 :root {
     --color-hover: #c6c6c6;
-    --color-gray: #e0dddc;
     --text-light: #fff;
     --text-dark: #333;
     --gray-light: #f4f4f4;
@@ -9,7 +8,7 @@
     --container-width: 1200px;
     --shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     --transition: all 0.3s ease;
-    --primary-color: #3498db;
+    --primary-color: #e0dddc;
     --secondary-color: #2ecc71;
     --error-color: #e74c3c;
     --border-radius: 8px;
@@ -58,22 +57,77 @@ textarea:focus {
 }
 
 /* 이미지 업로드 박스 스타일 */
-.img-upload-box {
-    background: #f8f9fa;
-    border: 2px dashed #dee2e6;
-    border-radius: var(--border-radius);
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.img-upload-box{
+	width:400px;
+	height:380px;
+	background: var(--gray-light);
+	border:1px solid var(--color-gray);
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size:30px;
+	cursor: pointer;
+	color:var(--color-gray);
+	margin : 20px 0 20px 18%;
+	flex-direction: column;
+    transition: background 0.3s;
 }
 
 .img-upload-box:hover {
-    border-color: var(--primary-color);
-    background: #f1f3f5;
+    background: var(--color-hover);
 }
 
-/* 체크박스 스타일 */
+.img-upload-box.small{
+	width: 100px;
+	height: 100px;
+	margin-top:12px;
+	margin-left: 12px;
+}
+
+
+.images-group {
+	display: flex;
+	margin-top:10px;
+	flex-wrap: wrap;
+	margin-left:-12px;
+}
+
+.images-group .img-box{
+	width: 100px;
+	height: 100px;
+	border-radius: 15px;
+	margin-left: 12px;
+	margin-top:12px;
+	position: relative;
+}
+
+
+.images-group .img-box > img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 15px;
+}
+
+.images-group .img-box > .del-btn{
+	width: 24px;
+	height: 24px;
+	background: var(--gray-light);
+	color: #e74c3c;
+	font-size: 13px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border-radius: 50%;
+	border: 1px solid var(--color-gray);
+	position: absolute;
+	bottom: 4px;
+	right: 4px;
+}
+
+/* 체크박스 스타일 추가 */
 input[type="checkbox"] {
     display: none; /* 기본 체크박스 숨기기 */
 }
@@ -81,6 +135,7 @@ input[type="checkbox"] {
 input[type="checkbox"] + .custom-checkbox {
     width: 30px; /* 체크박스 크기 */
     height: 30px; /* 체크박스 크기 */
+	margin : 10px 0 0 20px;
     border: 2px solid var(--color-gray); /* 테두리 색상 */
     border-radius: 4px; /* 모서리 둥글게 */
     display: inline-block;
@@ -92,26 +147,16 @@ input[type="checkbox"]:checked + .custom-checkbox {
     background-color: var(--color-hover); /* 체크된 상태 배경색 */
 }
 
-/* 별점 입력 스타일 */
-.star-rating {
-    display: flex;
-    gap: 5px;
-}
-
-.star-rating i {
-    font-size: 24px;
-    cursor: pointer;
-    color: #ddd;
-    transition: color 0.2s ease;
-}
-
-.star-rating i.fas {
-    color: #ffd700;
-}
-
-.star-rating i:hover,
-.star-rating i:hover ~ i.far {
-    color: #ffd700;
+input[type="checkbox"]:checked + .custom-checkbox:after {
+    content: ''; /* 체크 표시 */
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    width: 5px;
+    height: 10px;
+    border: solid white; /* 체크 표시 색상 */
+    border-width: 0 2px 2px 0; /* 체크 표시 모양 */
+    transform: rotate(45deg); /* 체크 표시 회전 */
 }
 
 /* 추가 스타일 */

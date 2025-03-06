@@ -32,7 +32,7 @@
                 <li><button id="my" onclick="location.href='./my'">✔ 내정보 관리</button>
                     <button id="call" style="display: none;">📞 전화번호 변경</button>
                 </li>
-                <li><button id="body specs" onclick="location.href='./body-specs'">📊 바디 치수</button></li>
+                <li><button id="body-specs" onclick="location.href='./body-specs'">📊 바디 치수</button></li>
             </ul>
         </div>
 

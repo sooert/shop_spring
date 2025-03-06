@@ -84,4 +84,9 @@ public class BuyDao {
     public Buy buyItemDetail(String buyCode) {
         return sqlSession.selectOne("BuyMapper.buyItemDetail", buyCode);
     }
+
+    // buy_code로 item_code 조회
+    public String getItemCodeByBuyCode(String buyCode) {
+        return sqlSession.selectOne("BuyMapper.getItemCodeByBuyCode", buyCode);
+    }
 }

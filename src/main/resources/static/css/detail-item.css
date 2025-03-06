@@ -206,10 +206,13 @@ body {
 }
 
 .description-notice {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
     color: #666;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    text-align: center;
+    font-size: 0.9em;
+    border-left: 3px solid #007bff;
 }
 
 /* 반응형 디자인 */
@@ -464,6 +467,73 @@ body {
     font-size: 12px;
     padding: 5px 0;
     text-align: right;
+}
+
+/* 상품 설명 컨텐츠 */
+.description-content {
+    display: none;
+}
+
+.description-content.active {
+    display: block;
+}
+
+.review-item {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.review-item:hover {
+    background-color: #f1f1f1;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.review-author {
+    color: #333;
+}
+
+.review-date {
+    color: #666;
+}
+
+.review-rating {
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.review-content {
+    margin-bottom: 15px;
+}
+
+.review-image img {
+    max-width: 200px;
+    border-radius: 4px;
+}
+
+/* 좋아요 버튼 스타일 */
+.review-like-count {
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: #f8f8f8;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.review-like-count:hover {
+    background-color: #e0e0e0;
 }
 
 

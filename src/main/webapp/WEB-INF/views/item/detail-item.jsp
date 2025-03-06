@@ -113,15 +113,14 @@
         <div class="description-tabs">
             <button class="tab-button active">상세 설명</button>
             <button class="tab-button">상품 사이즈</button>
-            <button class="tab-button">
+            <button class="tab-button" id="review-tab">
                 <span id="review-count">리뷰 0</span>
             </button>
         </div>
 
-        <p class="description-notice">판매자가 작성한 상품 상세 설명입니다.</p>
-
         <!-- 상세 설명 내용 -->
-        <div class="description-content">
+        <div class="description-content active">
+            <p class="description-notice">판매자가 작성한 상품 상세 설명입니다.</p>
             <h2 class="content-title">상품 상세 설명</h2>
             <h3 class="item-title"></h3>
             <p class="item-content"></p>
@@ -138,6 +137,20 @@
             <div class="usage">
                 <h3>사용 방법</h3>
                 <p>상품 사용 방법에 대한 설명이 들어갑니다.</p>
+            </div>
+        </div>
+
+        <!-- 상품 사이즈 내용 -->
+        <div class="description-content">
+            <h2>상품 사이즈 정보</h2>
+            // ... 사이즈 정보 내용 ...
+        </div>
+
+        <!-- 리뷰 내용 -->
+        <div class="description-content" id="review-content">
+            <h2>상품 리뷰</h2>
+            <div class="review-list">
+                <!-- 리뷰가 여기에 동적으로 추가됨 -->
             </div>
         </div>
     </div>

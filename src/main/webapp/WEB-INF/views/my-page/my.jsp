@@ -39,7 +39,7 @@
                     <button id="call" 
                     onclick="location.href='./call'" style="font-size: 13px; margin-left: 10px;">📞 전화번호 변경</button>
                 </li>
-                <li><button id="body specs" onclick="location.href='./body-specs'">📊 바디 치수</button></li>
+                <li><button id="body-specs" onclick="location.href='./body-specs'">📊 바디 치수</button></li>
             </ul>
         </div>
 

@@ -12,7 +12,7 @@ public class ReviewImg {
 
     public void setReview_img_idx(int review_img_idx) {
         this.review_img_idx = review_img_idx;
-    }
+    } 
 
     public int getReview_idx() {
         return review_idx;

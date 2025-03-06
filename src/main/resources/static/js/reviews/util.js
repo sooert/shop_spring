@@ -8,8 +8,16 @@ const firebaseConfig = {
     measurementId: "G-YPHBM9TV1S"
 };
 
-// 프로필 이미지 업로드
-var firebaseUtil = {
+// Firebase 관련 코드를 하나의 객체로 통합
+const firebaseService = {
+    init() {
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        return firebase.storage();
+    },
+    
+    // firebaseUtil의 메서드들 통합
     getBase64: async function(file) {
         return new Promise(function(resolve, reject) {
             var reader = new FileReader();
@@ -22,12 +30,12 @@ var firebaseUtil = {
             };
         });
     },
-    uploadBuyImage: async function(storage, base64) {
+    uploadReviewImage: async function(storage, base64) {
         return new Promise(function(resolve, reject) {
             try {
                 const userFolder = 'temp_' + Date.now();
                 const timestamp = Date.now();
-                var ref = storage.ref('buys').child(userFolder).child(timestamp + ".png");
+                var ref = storage.ref('reviews').child(userFolder).child(timestamp + ".png");
                 
                 // base64 데이터에서 실제 이미지 데이터만 추출
                 const imageData = base64.split(',')[1];
@@ -42,11 +50,11 @@ var firebaseUtil = {
                     })
                     .catch(function(err) {
                         console.error("Firebase 업로드 실패:", err);
-                        reject(err);
+                        reject('Firebase 업로드 실패: ' + err.message);
                     });
             } catch (error) {
                 console.error("Firebase 업로드 중 오류:", error);
-                reject(error);
+                reject('업로드 중 오류 발생: ' + error.message);
             }
         });
     }
@@ -54,14 +62,11 @@ var firebaseUtil = {
 
 $(document).ready(function() {
     // Firebase 초기화
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
-    const storage = firebase.storage();
+    const storage = firebaseService.init();
 
     // DOM 요소 가져오기
     const fileInput = document.getElementById("file");
-    const profileImg = document.getElementById("profile-img");
+    const reviewImg = document.getElementById("review-img");
 
     // 파일 입력이 존재할 경우에만 이벤트 리스너 추가
     if (fileInput) {
@@ -72,22 +77,22 @@ $(document).ready(function() {
             // 이미지 미리보기 설정
             const reader = new FileReader();
             reader.onload = function(e) {
-                if (profileImg) {
-                    profileImg.src = e.target.result;
+                if (reviewImg) {
+                    reviewImg.src = e.target.result;
                 }
             };
             reader.readAsDataURL(file);
 
             // Firebase에 이미지 업로드
             try {
-                const base64 = await firebaseUtil.getBase64(file);
-                const downloadUrl = await firebaseUtil.uploadBuyImage(storage, base64);
+                const base64 = await firebaseService.getBase64(file);
+                const downloadUrl = await firebaseService.uploadReviewImage(storage, base64);
                 
-                sessionStorage.setItem('buyData', JSON.stringify(buyData));
+                sessionStorage.setItem('reviewData', JSON.stringify(reviewData));
 
             } catch (error) {
                 console.error('이미지 업로드 오류:', error);
-                alert("프로필 이미지 업로드 실패. 다시 시도해주세요.");
+                alert("리뷰 이미지 업로드 실패. 다시 시도해주세요.");
             }
         });
     }

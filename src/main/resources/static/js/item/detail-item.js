@@ -16,6 +16,9 @@ $(document).ready(function() {
     // 스크롤 버튼 기능 추가
     handleScrollButtons();
 
+    // 리뷰 불러오기
+    loadReview(item_code);
+
     //좋아요 버튼
     $('.love-button').on('click',function(){
         const isLiked = $(this).hasClass('liked');
@@ -38,7 +41,141 @@ $(document).ready(function() {
         selectedSize = $(this).val();
         updateSelectedOptions();
     });
+
+    // 탭 클릭 이벤트 처리
+    $('.tab-button').on('click', function() {
+        const index = $(this).index();
+        
+        // 모든 탭과 콘텐츠에서 active 클래스 제거
+        $('.tab-button').removeClass('active');
+        $('.description-content').removeClass('active');
+        
+        // 클릭된 탭과 해당 콘텐츠에 active 클래스 추가
+        $(this).addClass('active');
+        $('.description-content').eq(index).addClass('active');
+    });
+
+    
 });
+/////////////////////////////// 리뷰 ///////////////////////////////////
+
+// 리뷰 불러오기
+function loadReview(item_code) {
+    $.ajax({
+        url: './api/review/reviewListByItemCode',
+        type: 'GET',
+        data: { 
+            item_code: item_code 
+        },
+        success: function(reviews) {
+            // 리뷰 카운트 업데이트
+            $('#review-count').text(`리뷰 ${reviews.length}`);
+            
+            // 리뷰 목록 초기화
+            const reviewList = $('.review-list');
+            reviewList.empty();
+            
+            // 각 리뷰 렌더링
+            reviews.forEach(review => {
+                const likeCount = review.review_like_count || 0; // null 체크
+                const reviewElement = `
+                    <div class="review-item">
+                        <div class="review-header" style="margin-left: 10px;">
+                            <span class="review-author">${review.user_nick}</span>
+                            <span class="review-date" style="margin-right: 10px;">${formatDate(review.date)}</span>
+                        </div>
+                        <div class="review-info" style="margin-left: 10px;">
+                            <div class="review-satisfaction">${review.satisfaction}</div>
+                            <div class="review-colors">${review.colors}</div>
+                            <div class="review-sizes">${review.sizes}</div>
+                        </div>
+                        <div class="review-content" style="margin-left: 10px;">
+                            <p>${review.content}</p>
+                        </div>
+                        ${review.review_img_url ? ` 
+                            <div class="review-image" style="margin-left: 10px; margin-bottom: 10px;">
+                                <img src="${review.review_img_url}" alt="리뷰 이미지">
+                            </div>
+                        ` : ''}
+                        <button class="review-like-count ${review.is_liked ? 'thumbs-up' : ''}" 
+                                data-review-code="${review.review_code}" 
+                                data-like-count="${likeCount}">
+                            <span class="like-count-number">${likeCount}</span>
+                            <i class="fa-regular fa-thumbs-up" style="margin-right: 5px; color: #f5adad;"></i> 
+                        </button>
+                    </div>
+                `;
+                reviewList.append(reviewElement);
+            });
+
+            // 리뷰 좋아요 이벤트 핸들러
+            $('.review-like-count').off('click').on('click', function(e) {
+                e.preventDefault();
+                const $button = $(this);
+                
+                // 이미 처리 중인 경우 중복 클릭 방지
+                if ($button.hasClass('processing')) {
+                    return;
+                }
+                
+                const review_code = $button.data('review-code');
+                const isLiked = $button.hasClass('thumbs-up');
+                
+                $button.addClass('processing');
+                
+                // 좋아요 상태에 따라 적절한 API 호출
+                const apiEndpoint = isLiked ? './api/review/reviewLikeCancel' : './api/review/reviewLikePlus';
+                
+                $.ajax({
+                    url: apiEndpoint,
+                    type: 'POST',
+                    data: {
+                        review_code: review_code
+                    },
+                    success: function(response) {
+                        if(response === "not-login") {
+                            alert("로그인이 필요한 서비스입니다.");
+                            window.location.href = './login';
+                            return;
+                        }
+                        
+                        const $countSpan = $button.find('.like-count-number');
+                        const currentCount = parseInt($countSpan.text());
+                        
+                        if (isLiked) {
+                            // 좋아요 취소
+                            $countSpan.text(Math.max(0, currentCount - 1));
+                            $button.removeClass('thumbs-up');
+                        } else {
+                            // 좋아요 추가
+                            $countSpan.text(currentCount + 1);
+                            $button.addClass('thumbs-up');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("좋아요 처리 중 오류가 발생했습니다:", error);
+                        alert("좋아요 처리 중 오류가 발생했습니다.");
+                    },
+                    complete: function() {
+                        $button.removeClass('processing');
+                    }
+                });
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("리뷰 불러오기 실패:", error);
+        }
+    });
+}
+
+// 날짜 포맷 함수
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
 
 /////////////////////////////// 좋아요 ///////////////////////////////////
 
@@ -66,7 +203,7 @@ function likeCreate(item_code, user_nick) {
         }
     });
 }
-
+ 
 // 좋아요 버튼 클릭시 좋아요 증가 
 function likePlus(item_code) {
     $.ajax({
@@ -81,11 +218,12 @@ function likePlus(item_code) {
                 window.location.href = './login';
                 return;
             }
-            // 좋아요 생성 API 호출
-            likeCreate(item_code);
-            $('.love-button').addClass('liked');
-            const currentCount = parseInt($('#like-count').text());
-            $('#like-count').text(currentCount + 1);
+            
+            if(response === "success") {
+                $('.love-button').addClass('liked');
+                const currentCount = parseInt($('#like-count').text());
+                $('#like-count').text(currentCount + 1);
+            }
         },
         error: function(xhr, status, error) {
             console.error("좋아요 증가 실패:", error);
@@ -108,7 +246,6 @@ function likeMinus(item_code) {
                 window.location.href = './login';
                 return;
             }
-            
             // 좋아요 상태와 카운트 업데이트
             $('.love-button').removeClass('liked');
             const currentCount = parseInt($('#like-count').text());

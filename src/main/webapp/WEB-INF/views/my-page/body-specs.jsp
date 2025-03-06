@@ -35,10 +35,11 @@
                 <h1>몌뉴</h1>
             </div>
             <ul class="menu">
-                <li><button onclick="location.href='./index'">🏠 홈</button></li>
-                <li><button onclick="location.href='./my'">✔ 내 정보 관리</button></li>
-                <li><button onclick="location.href='./call'">📞 전화번호 변경</button></li>
-                <li><button onclick="location.href='./body-specs'" 
+                <li><button id="home" onclick="location.href='./index'">🏠 홈</button></li>
+                <li><button id="my" onclick="location.href='./my'">✔ 내정보 관리</button>
+                    <button id="call" style="display: none;">📞 전화번호 변경</button>
+                </li>
+                <li><button id="body-specs" onclick="location.href='./body-specs'" 
                     style="background: var(--primary-color); color: white;">📊 바디 치수</button></li>
             </ul>
         </div>

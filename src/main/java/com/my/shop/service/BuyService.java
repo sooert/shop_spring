@@ -80,4 +80,9 @@ public class BuyService {
     public Buy buyItemDetail(String buyCode) {
         return buyDao.buyItemDetail(buyCode);
     }
+
+    // buy_code로 item_code 조회
+    public String getItemCodeByBuyCode(String buyCode) {
+        return buyDao.getItemCodeByBuyCode(buyCode);
+    }
 }

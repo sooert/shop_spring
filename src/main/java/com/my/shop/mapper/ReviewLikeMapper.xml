@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReviewLikeMapper">
+
+	<!-- 좋아요 생성 -->
+	<insert id="reviewLikeAdd" parameterType="ReviewLike">
+		INSERT INTO review_like (review_code, review_like_count, date)
+		VALUES (#{review_code}, 0, NOW())
+	</insert>
+
+	<!-- 좋아요 증가 -->
+	<update id="reviewLikePlus" parameterType="String">
+		UPDATE review_like SET review_like_count = review_like_count + 1 WHERE review_code = #{review_code}
+	</update>
+
+	<!-- 좋아요 취소 -->
+	<update id="reviewLikeCancel" parameterType="String">
+		UPDATE review_like SET review_like_count = review_like_count - 1 WHERE review_code = #{review_code}
+	</update>
+
+</mapper>
+

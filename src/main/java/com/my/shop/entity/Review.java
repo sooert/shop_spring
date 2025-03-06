@@ -5,13 +5,13 @@ public class Review {
     private int review_idx;
     private String review_code;
     private String item_code;
+    private String buy_code;
     private String user_nick;
-    private String title;
+    private String satisfaction;
+    private String colors;
+    private String sizes;
     private String content;
-    private String item_category;
-    private int item_price;
     private String review_img_url;
-    private int star;
     private String date;
 
     public int getReview_idx() {
@@ -38,6 +38,14 @@ public class Review {
         this.item_code = item_code;
     }
 
+    public String getBuy_code() {
+        return buy_code;
+    }
+
+    public void setBuy_code(String buy_code) {
+        this.buy_code = buy_code;
+    }
+
     public String getUser_nick() {
         return user_nick;
     }
@@ -46,12 +54,12 @@ public class Review {
         this.user_nick = user_nick;
     }
 
-    public String getTitle() {
-        return title;
+    public String getSatisfaction() {
+        return satisfaction;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setSatisfaction(String satisfaction) {
+        this.satisfaction = satisfaction;
     }
 
     public String getContent() {
@@ -62,20 +70,20 @@ public class Review {
         this.content = content;
     }
 
-    public String getItem_category() {
-        return item_category;
+    public String getColors() {
+        return colors;
     }
 
-    public void setItem_category(String item_category) {
-        this.item_category = item_category;
+    public void setColors(String colors) {
+        this.colors = colors;
     }
 
-    public int getItem_price() {
-        return item_price;
+    public String getSizes() {
+        return sizes;
     }
 
-    public void setItem_price(int item_price) {
-        this.item_price = item_price;
+    public void setSizes(String sizes) {
+        this.sizes = sizes;
     }
 
     public String getReview_img_url() {
@@ -84,14 +92,6 @@ public class Review {
 
     public void setReview_img_url(String review_img_url) {
         this.review_img_url = review_img_url;
-    }
-
-    public int getStar() {
-        return star;
-    }
-
-    public void setStar(int star) {
-        this.star = star;
     }
 
     public String getDate() {

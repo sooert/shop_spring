@@ -30,53 +30,54 @@
         <!-- 구매한 상품 정보 -->
         <div class="form-box">
             <div class="title">구매한 상품</div>
-            <div class="content">
+            <!-- <div class="content">
                 <img src="${buy.item_img_url}" alt="상품 이미지" style="width: 100px; height: 100px;">
                 <div>${buy.item_name}</div>
-            </div>
+            </div> -->
         </div>
 
-        <div class="form-box">
-            <div class="title">상품은 어떤가요?</div>
+        <div class="form-box-satisfaction">
+            <div id="satisfaction">상품은 어떤가요?</div>
             <button>만족해요</button>
             <button>별로예요</button>
         </div>
-        
-        <div class="form-box">
-            <div class="title">색상은 어떤가요?</div>
+
+        <div class="form-box-colors">
+            <div id="colors">색상은 어떤가요?</div>
             <button>어두워요</button>
             <button>사진과 같아요</button>
             <button>밝아요</button>
         </div>
 
-        <div class="form-box">
-            <div class="title">사이즈는 어떤가요?</div>
+        <div class="form-box-sizes">
+            <div id="sizes">사이즈는 어떤가요?</div>
             <button>작아요</button>
             <button>적당해요</button>
             <button>커요</button>
         </div>
         
         <div class="form-box">
-            <div class="title">텍스트 리뷰</div>
-            <textarea></textarea>
-        </div>
+			<div class="reviews-title">구매 후기<font style="color:red;">*</font></div>
+			<div class="reviews-content">구매하신 상품에 대한 후기를 작성해주세요.</div>
+			<textarea  id="content"  placeholder="상세히 적어주세요."></textarea>
+		</div>
         
         <div class="form-box">
             <div class="title">상세 리뷰 이미지<font style="color:red;">*</font></div>
             <div class="content bg">
 				1. 첫번째 이미지가 대표 리뷰 이미지로 등록됩니다.<br/>
-                2. 이미지 사이즈 500*500 권장<br/>
+                2. 이미지는 쵀대 5개까지 등록 가능합니다.<br/>
                 3. 리뷰 이미지가 포함된 이미지.<br/>
                 4. 불법, 광고성 이미지 금지.<br/>
             </div>
             
             
-            <input id="detail-img-file" type="file" style="display: none;"/>
-            <div id="detail-img-list" class="images-group">
-                <div id="detail-img-upload-box" class="img-upload-box small">
+            <input id="review-img-file" type="file" style="display: none;"/>
+            <div id="review-img-list" class="images-group">
+                <div id="review-img-upload-box" class="img-upload-box small">
                     <i class="fa-solid fa-plus" style="margin-top:10px;"></i>
                     <div style="font-size:13px;color:#585858;">
-                        <font id="detail-img-count" style="color:var(--color-main);font-weight:700">0</font>/<font id="max-cnt"></font>
+                        <font id="review-img-count" style="color:var(--color-main);font-weight:700">0</font>/<font id="max-cnt"></font>
                     </div>
                 </div>
 
